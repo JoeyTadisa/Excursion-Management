@@ -1,0 +1,148 @@
+Vision Document for Excursion Management System 
+Defining Stakeholders, Goals and Product Requirements
+
+ Team Members
+
+Revision History
+Table Of Contents
+
+
+
+
+Introduction
+1.1 Purpose
+The purpose of the document is to focus on the needs of the stakeholders(for example, the organisers) and the target users (a student enrolled at the THU), and why these needs exist. Furthermore, it aims to identify any constraints and predict the possible risks associated with the project, along with the probable effects.
+
+1.2 Scope
+The scope of the project will be limited to the experiences of users (students) and organisers (faculties or lecturers) based at the THU and/or partnered institutions.
+
+1.3 Definitions, Acronyms, and Abbreviations
+THU - Technische Hochschule Ulm
+Admin - Administrator
+
+ Positioning
+ Business Opportunity
+Excursions offer students a way of becoming familiar with possible job/internship prospects and the working environments, thus making a more informed student. While offering a way to explore Germany and the surrounding regions as means of leisure. The service will make what is normally a complex and confusing process, much easier for the primary user, the student. 
+2.2. Problem Statement
+[Provide a statement summarising the problem being solved by this project. The following format may be used:]
+
+
+ Product Position Statement
+[Provide an overall statement summarising, at the highest level, the unique position the product intends to fill in the marketplace. The following format may be used:]
+
+[A product position statement communicates the intent of the application and the importance of the project to all concerned personnel.]
+ Stakeholder Descriptions
+ Stakeholder Summaries
+
+
+ User Environment
+[Detail the working environment of the target user. Here are some suggestions:
+Number of people involved in completing the task? Is this changing?
+Administrator
+They involve the main organiser(spokesperson/representative from the company/faculty). Hence, 2 parties are involved.
+The admin act as moderator in terms of publishing or approving excursions. This requires only one party.
+Student 
+Registration - Single party
+Payment - 2 party (Admin and Student)
+Book - single party
+How long is a task cycle? Amount of time spent in each activity? Is this changing?
+Approving - Ideally, the organiser will submit a pitch proposal describing the intentions and purpose of the excursion. Assuming the admin, requires further clarity, the process will obviously be longer. We estimate that it may take 1-2 weeks.
+Paying - 1 to 3 working days for the processing of the transfer. Assuming, timezones, business hours and that a transaction could be international.
+Any unique environmental constraints: mobile, outdoors, in-flight, and so on?
+All users will require any internet-capable device with a good, stable connection in order to make use of the service.
+Which system platforms are in use today? Future platforms?
+Android
+Future: Web, MacOS X, Linux and Windows
+What other applications are in use? Does your application need to integrate with them?
+Email
+Weather
+Calendar
+Maps
+Camera
+This is where extracts from the Business Model could be included to outline the task and roles involved, and so on.]
+ Product Overview
+ Needs and Features
+[Avoid design. Keep feature descriptions at a general level. Focus on capabilities needed and why (not how)	 they should be implemented. Capture the stakeholder priority and planned release for each feature.]
+
+4.2. Product Features
+Allow the international department/hosting (external) department [organiser] to create a post to advertise their excursion with the following details:
+Title
+Organiser/Host
+Available spots
+Bank Transfer Details
+Description
+Disclaimers
+Activities
+Requirement and Costs
+Time and Date
+Contact Details
+Location
+Before an excursion post is published, a preview of the posting is displayed so that the publisher may verify the details before submitting.
+Reschedule an excursion
+Delete an excursion
+Modify an excursion
+After a post has successfully been created, send a receipt confirmation.
+Display an appropriate error message when an excursion post is unsuccessful.
+Students may create an account with which they map apply to random excursions of interest
+First & Last name(s) 
+Student ID
+Interest (predefined categories)
+Contact Details
+E-mail (mandatory)
+Cellphone (optional) 
+Student should be able to modify and save their details.
+Student should be able to delete their account.
+Use of excursion categories/tags to help filter excursions by interest.
+Students can make excursion suggestions via a form. 
+Organisers may produce a list of participants of students/guests.
+Persist student and excursion data in a database
+Provide a platform to ask questions, which will be directly forwarded to the respective organiser.
+When you place a booking for an excursion, email notification will be sent to the student.
+In the event of an unsuccessful booking (overbooking, network error etc), the student will be notified appropriately.
+Image recognition when “exploring” 
+Rating system and comments under excursion posts 
+ Other Product Requirements
+[At a high level, list applicable standards, hardware, or platform requirements; performance requirements; and environmental requirements.
+Define the quality ranges for performance, robustness, fault tolerance, usability, and similar characteristics that are not captured in the Feature Set.
+Note any design constraints, external constraints, assumptions or other dependencies that, if changed, will alter the Vision document. For example, an assumption may state that a specific operating system will be available for the hardware designated for the software product. If the operating system is not available, the Vision document will need to change.
+Define any specific documentation requirements, including user manuals, online help, installation, labelling, and packaging requirements.
+Define the priority of these other product requirements. Include, if useful, attributes such as stability, benefit, effort, and risk.
+5.1. Assumptions
+It is assumed that the device being used on the service is internet capable
+It is assumed that the default language will be in English
+5.2. Design Constraints
+Usability
+Ease of use
+Security
+The team plan to include measures such as access control, data integrity and data privacy.
+Users shall be authenticated using a unique identifier, the student ID and a password of their choice.
+The password will contain at least 6 alphanumeric characters and must contain at least 2 special characters.
+Organisers can monitor and change excursions
+Transmission of data should be encrypted for privacy.***
+5.3. Risk Analysis
+Predetermined requirements could be set but the requirements could constantly be changing
+Our initial goals for the project may not seem clear until implementation occurs
+Lack of familiarity with the different types of software needed to implement features
+Internet connection problems on the users part
+5.4. Software Requirements
+Operating Systems: 
+Android 5.0+
+(Windows 7 up to Windows 10) ***FUTURE
+(MacOS X) *** FUTURE
+Database:
+MySQL
+Servers: 
+Apache (Tomcat)
+5.6. Hardware Requirements
+Processor: Intel Pentium 2 or higher (Desktops)
+RAM:
+2GB or more (Overall)
+5.7. Environmental Requirements
+At least a 1Mbps internet connection
+5.8. Documentation Requirements
+Installation Guides
+Online Help
+Instructions for the usage of the services
+Frequently Asked Questions
+Read Me Files
+These will detail any installation processes on our GitHub repository
