@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/excursionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Explore Augsburg"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/excursionDescriptionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        android:text="Description" />
+
+    <TextView
+        android:id="@+id/excursionDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:text="You will learn about: Augsburg’s golden age in the 16th and 17th century ...\nCost: Euro 20 (Payable to International Office latest 07.11.21)..."
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/excursionTimeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        android:text="When?" />
+
+    <TextView
+        android:id="@+id/excursionTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="13.11.2021"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/excursionLocationTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        android:text="Where?" />
+
+    <TextView
+        android:id="@+id/excursionLocationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hochschule Ulm Parking Lot\nPrittwitzstraße"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/registrationDeadlineText"
+        android:background="@drawable/registrationborder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="6dp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:text="registration until 30.10.2021\nderegistration until 05.11.2021"
+        android:textSize="19dp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#0054a3"
+        android:paddingStart="40dp"
+
+        android:paddingEnd="40dp"
+        android:text="Register" />
+
+
+</LinearLayout>
