@@ -1,0 +1,6 @@
+1. Scalability - Allow for new features and platforms to added onto the code base
+2. Maintainability 
+3. Data Integrity
+4. Availability
+5. Usability
+

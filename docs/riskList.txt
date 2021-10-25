@@ -1,0 +1,1 @@
+Predetermined requirements could be set but the requirements could constantly be changing• Our initial goals for the project may not seem clear until implementation occurs• Lack of familiarity with the different types of software needed to implement features• Internet connection problems on the users part
