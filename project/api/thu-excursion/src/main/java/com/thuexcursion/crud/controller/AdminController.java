@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.Admin;
 import com.thuexcursion.crud.service.AdminService;
 
+/*
+ * Controller contains all the endpoints related to the associated entity/model
+ * 
+ * */
+
 @RestController
 public class AdminController {
 
