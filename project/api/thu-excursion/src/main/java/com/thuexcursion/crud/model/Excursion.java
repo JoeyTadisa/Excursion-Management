@@ -5,9 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 
@@ -26,8 +31,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "excursion")
+@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
+//@SecondaryTable(name="excursionapproval")
 public class Excursion {
 	
+/*
+ * ======= EXCURSION TABLE: private variables ========
+ * */
 	@Id
 	@GeneratedValue
 	@Column(name = "idexcursion")
@@ -65,12 +75,28 @@ public class Excursion {
 	@Basic
 	private int requested_by;
 	
+
+	/*@Embedded
+	ExcursionApproval excursionapprovals;*/
+	
+	 
+	@Column(name = "is_approved", table="excursionapproval",columnDefinition = "TINYINT default 0")
+	private boolean is_approved; 
+	
+	@Column(name = "datereviewed", table="excursionapproval")
+	private Date date_reviewed;
+	
+	@Column(name = "reviewedby", table="excursionapproval")
+	private int reviewed_by;
+
+	
 	public Excursion() {
 		
 	}
 	
 	public Excursion(int id, String description, Date date_written, int max_participants, Date reg_deadline,
-			Date dereg_deadline, String meeting_details, String title, int requested_by) {
+			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved) {
+
 		
 			this.id = id;
 			this.description = description;
@@ -80,7 +106,14 @@ public class Excursion {
 			this.dereg_deadline = dereg_deadline;
 			this.meeting_details = meeting_details;
 			this.title = title;
-			this.requested_by = requested_by;
+			this.requested_by = 1;
+			
+			
+			
+			this.is_approved = false;
+			this.date_reviewed = null;
+			this.reviewed_by = requested_by;
+			
 	}
 
 	
@@ -210,9 +243,87 @@ public class Excursion {
 	public void setRequested_by(int requested_by) {
 		this.requested_by = requested_by;
 	}
+	
+	
+	@Column(table="excursionapproval")
+	public boolean getIs_approved() {
+		return is_approved;
+	}
 
 	
+	@Column(table="excursionapproval")
+	public void setIs_approved(boolean is_approved) {
+		this.is_approved = is_approved;
+	}
 	
+	@Column(table="excursionapproval")
+	public Date getDate_reviewed() {
+		return date_reviewed;
+	}
 	
+	@Column(table="excursionapproval")
+	public void setDate_reviewed(Date date_reviewed) {
+		this.date_reviewed = date_reviewed;
+	}
+	
+	@Column(table="excursionapproval")
+	public int getReviewed_by() {
+		return reviewed_by;
+	}
+	
+	@Column(table="excursionapproval")
+	public void setReviewed_by(int reviewed_by) {
+		this.reviewed_by = reviewed_by;
+	}
 
+	
 }
+
+/*@Embeddable
+class ExcursionApproval {
+	
+	
+	
+	@Column(name = "isapproved", table="excursionapproval")
+	private boolean is_approved;
+	
+	@Column(name = "datereviewed", table="excursionapproval")
+	private Date date_reviewed;
+	
+	@Column(name = "reviewedby", table="excursionapproval")
+	private int reviewed_by;
+
+	
+	@Column(table="excursionapproval")
+	public boolean getIs_approved() {
+		return is_approved;
+	}
+
+	@Column(table="excursionapproval")
+	public void setIs_approved(boolean is_approved) {
+		this.is_approved = is_approved;
+	}
+	
+	@Column(table="excursionapproval")
+	public Date getDate_reviewed() {
+		return date_reviewed;
+	}
+	
+	@Column(table="excursionapproval")
+	public void setDate_reviewed(Date date_reviewed) {
+		this.date_reviewed = date_reviewed;
+	}
+	
+	@Column(table="excursionapproval")
+	public int getReviewed_by() {
+		return reviewed_by;
+	}
+	
+	@Column(table="excursionapproval")
+	public void setReviewed_by(int reviewed_by) {
+		this.reviewed_by = reviewed_by;
+	} 
+
+}*/
+
+	

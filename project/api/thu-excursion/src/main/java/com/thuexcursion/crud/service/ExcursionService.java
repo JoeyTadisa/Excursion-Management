@@ -29,6 +29,10 @@ public class ExcursionService {
 		return repository.findAll();
 	}
 	
+	/*public List<Excursion> getApprovedExcursions(boolean is_approved){
+		return repository.findByApprovalStatus(is_approved);
+	}*/
+	
 	public Excursion getExcursionById(int id){
 		return repository.findById(id).orElse(null);
 	}
@@ -55,6 +59,12 @@ public class ExcursionService {
 		 existingExcursion.setTitle(excursion.getTitle());
 		 existingExcursion.setMeeting_details(excursion.getMeeting_details());
 		 existingExcursion.setRequested_by(excursion.getRequested_by());
+		 return repository.save(existingExcursion);
+	}
+	
+	public Excursion approveExcursion(Excursion excursion) {
+		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
+		  existingExcursion.setIs_approved(excursion.getIs_approved());
 		 return repository.save(existingExcursion);
 	}
 	

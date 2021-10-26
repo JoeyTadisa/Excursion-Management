@@ -34,6 +34,11 @@ public class ExcursionController {
 	public List<Excursion> findAllExcursions() {
 		return service.getExcursions();
 	}
+	
+	/*@GetMapping("/approvedExcursions/{is_approved}")
+	public List<Excursion> getApprovedExcursions(@PathVariable boolean is_approved) {
+		return service.getApprovedExcursions();
+	}*/
 
 	@GetMapping("/excursion/{id}")
 	public Excursion getExcursionById(@PathVariable int id) {
@@ -48,6 +53,11 @@ public class ExcursionController {
 	@PutMapping("/updateExcursion")
 	public Excursion updateExcursion(@RequestBody Excursion excursion) {
 		return service.updateExcursion(excursion);
+	}
+	
+	@PutMapping("/approveExcursion")
+	public Excursion approveExcursion(@RequestBody Excursion excursion) {
+		return service.approveExcursion(excursion);
 	}
 
 	@DeleteMapping("/deleteExcursion/{id}")
