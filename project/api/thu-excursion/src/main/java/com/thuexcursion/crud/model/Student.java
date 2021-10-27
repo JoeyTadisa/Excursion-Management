@@ -15,26 +15,26 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+//@Getter
+//@Setter
+//
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
+@Table(name = "student")
+public class Student {
 	
 	
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "idadmin")
+	@Column(name = "idstudent")
 	private int id;
 
-	@Column(name = "employeenumber")
+	@Column(name = "matriculationnumber")
 	@Basic
-	private int employee_no;
+	private int matriculation_no;
 
 	@Column(name = "firstname")
 	@Basic
@@ -53,18 +53,18 @@ public class Admin {
 	private String address;
 	
 	
-	public Admin() {
+	public Student() {
 		
 	}
 	
-	public Admin(int id,
-				int employee_no,
+	public Student(int id,
+				int matriculation_no,
 				 String name_first,
 				 String name_last,
 				 String email,
 				 String address) {
 		this.id = id;
-		this.employee_no = employee_no;
+		this.matriculation_no = matriculation_no;
 		this.name_first = name_first;
 		this.name_last = name_last;
 		this.email = email;
@@ -81,11 +81,11 @@ public class Admin {
 	  public void setId(int id) { 
 		  this.id = id; 
 	  }
-	  public int getEmployee_no() { 
-		  return employee_no;
+	  public int getMatriculation_no() { 
+		  return matriculation_no;
 	  }
-	  public void setEmployee_no(int employee_no) { 
-		  this.employee_no = employee_no; 
+	  public void setMatriculation_no(int matriculation_no) { 
+		  this.matriculation_no = matriculation_no; 
 	  } 
 	  
 	  public String getName_first() { 

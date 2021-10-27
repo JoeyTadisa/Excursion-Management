@@ -15,21 +15,20 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+//@Getter
+//@Setter
+//
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
-	
-	
-	
+@Table(name = "organizer")
+public class Organizer {
+
+
 	@Id
 	@GeneratedValue
-	@Column(name = "idadmin")
+	@Column(name = "idorganizer")
 	private int id;
 
 	@Column(name = "employeenumber")
@@ -53,11 +52,11 @@ public class Admin {
 	private String address;
 	
 	
-	public Admin() {
+	public Organizer() {
 		
 	}
 	
-	public Admin(int id,
+	public Organizer(int id,
 				int employee_no,
 				 String name_first,
 				 String name_last,
@@ -74,6 +73,7 @@ public class Admin {
 	}
 
 	
+
 	  public int getId() { 
 		  return id; 
 	  }
@@ -113,6 +113,5 @@ public class Admin {
 		  this.address = address; 
 	  } 
 	 
-	 
-
+	
 }
