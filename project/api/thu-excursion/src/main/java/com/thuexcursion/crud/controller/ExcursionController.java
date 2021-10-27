@@ -35,10 +35,10 @@ public class ExcursionController {
 		return service.getExcursions();
 	}
 	
-	/*@GetMapping("/approvedExcursions/{is_approved}")
+	@GetMapping("/approvedExcursions/{is_approved}")
 	public List<Excursion> getApprovedExcursions(@PathVariable boolean is_approved) {
-		return service.getApprovedExcursions();
-	}*/
+		return service.getApprovedExcursions(is_approved);
+	}
 
 	@GetMapping("/excursion/{id}")
 	public Excursion getExcursionById(@PathVariable int id) {

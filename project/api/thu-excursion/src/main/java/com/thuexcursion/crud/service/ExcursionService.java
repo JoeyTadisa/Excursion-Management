@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thuexcursion.crud.model.Excursion;
-import com.thuexcursion.crud.model.Excursion;
-import com.thuexcursion.crud.repository.ExcursionRepository;
 import com.thuexcursion.crud.repository.ExcursionRepository;
 
 @Service
@@ -29,9 +27,9 @@ public class ExcursionService {
 		return repository.findAll();
 	}
 	
-	/*public List<Excursion> getApprovedExcursions(boolean is_approved){
-		return repository.findByApprovalStatus(is_approved);
-	}*/
+	public List<Excursion> getApprovedExcursions(boolean is_approved){
+		return repository.findByApprovedExcursion(is_approved);
+	}
 	
 	public Excursion getExcursionById(int id){
 		return repository.findById(id).orElse(null);
