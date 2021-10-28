@@ -12,7 +12,7 @@ import com.thuexcursion.crud.service.ExcursionService;
  * Controller contains all the endpoints related to the associated entity/model
  * 
  * */
-
+@CrossOrigin
 @RestController
 public class ExcursionController {
 

@@ -23,6 +23,7 @@ public class AdminService {
 	}
 	
 	public List<Admin> getAdmins(){
+		
 		return repository.findAll();
 	}
 	

@@ -14,6 +14,7 @@ import com.thuexcursion.crud.service.AdminService;
  * 
  * */
 
+@CrossOrigin
 @RestController
 public class AdminController {
 
@@ -28,11 +29,13 @@ public class AdminController {
 
 	@PostMapping("/addAdmins")
 	public List<Admin> addAdmins(@RequestBody List<Admin> admins) {
+		
 		return service.saveAdmins(admins);
 	}
 
 	@GetMapping("/admins")
 	public List<Admin> findAllAdmins() {
+		
 		return service.getAdmins();
 	}
 
