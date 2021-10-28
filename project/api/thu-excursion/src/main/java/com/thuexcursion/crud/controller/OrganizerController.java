@@ -14,7 +14,7 @@ import com.thuexcursion.crud.service.OrganizerService;
  * Controller contains all the endpoints related to the associated entity/model
  * 
  * */
-
+@CrossOrigin
 @RestController
 public class OrganizerController {
 

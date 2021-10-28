@@ -23,6 +23,7 @@ public class AdminService {
 	}
 	
 	public List<Admin> getAdmins(){
+		
 		return repository.findAll();
 	}
 	
@@ -31,9 +32,9 @@ public class AdminService {
 	}
 
 	//login
-	/*public Admin getAdminByUsername(String username){
-		return repository.findByUsername(username);
-	}*/
+	public Admin login(String username,String password){
+		return repository.findLoginCredentials(username,password);
+	}
 	
 	public String deleteAdmin(int id) {
 		 repository.deleteById(id);

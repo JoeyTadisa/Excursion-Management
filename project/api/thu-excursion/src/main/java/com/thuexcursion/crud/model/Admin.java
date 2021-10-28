@@ -51,6 +51,14 @@ public class Admin {
 	@Column(name = "address")
 	@Basic
 	private String address;
+
+	@Column(name = "username")
+	@Basic
+	private String username;
+
+	@Column(name = "password")
+	@Basic
+	private String password;
 	
 	
 	public Admin() {
@@ -62,13 +70,17 @@ public class Admin {
 				 String name_first,
 				 String name_last,
 				 String email,
-				 String address) {
+				 String address,
+				 String username,
+				 String password) {
 		this.id = id;
 		this.employee_no = employee_no;
 		this.name_first = name_first;
 		this.name_last = name_last;
 		this.email = email;
 		this.address = address;
+		this.username = username;
+		this.password = password;
 		
 		
 	}
@@ -111,6 +123,22 @@ public class Admin {
 	  } 
 	  public void setAddress(String address) { 
 		  this.address = address; 
+	  } 
+
+	  public String getUsername() { 
+		return username; 
+	  } 
+
+	  public void setUsername(String username) { 
+		this.username = username; 
+	  } 
+
+	  public String getPassword() { 
+		return password; 
+	  } 
+
+	  public void setPassword(String password) { 
+		this.password = password; 
 	  } 
 	 
 	 
