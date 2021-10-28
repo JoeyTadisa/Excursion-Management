@@ -41,6 +41,11 @@ public class AdminController {
 		return service.getAdminById(id);
 	}
 
+	@GetMapping("/login/{username}/{password}")
+	public Admin login(@PathVariable String username,@PathVariable String password) {
+		return service.login(username,password);
+	}
+
 	/*@GetMapping("/admin/{username}")
 	public Admin getAdminByUsername(@PathVariable String username) {
 		return service.getAdminByUsername(username);
