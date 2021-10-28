@@ -16,8 +16,8 @@ import com.thuexcursion.crud.model.Admin;
 
 public interface AdminRepository extends JpaRepository<Admin,Integer> {
 
-	@Query(value="select l from login l where username = :username and password = :password", nativeQuery = true)
-    Admin login(String username, String password);
+	@Query(value="select a.idAdmin, a.employeeNumber, a.firstName, a.lastName, a.email, a.address, a.username, a.password, a.isActive from admin a where username = :username and password = :password", nativeQuery = true)
+    Admin findLoginCredentials(String username, String password);
 
 	//Admin findByUsername(String username);
 

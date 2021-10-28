@@ -33,7 +33,7 @@ public class AdminService {
 
 	//login
 	public Admin login(String username,String password){
-		return repository.login(username,password);
+		return repository.findLoginCredentials(username,password);
 	}
 	
 	public String deleteAdmin(int id) {
