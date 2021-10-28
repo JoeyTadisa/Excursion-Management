@@ -1,2 +1,8 @@
 # Ignore Mac system files
 .DS_store
+project/THUExcursionApp/.project
+project/THUExcursionApp/.settings/org.eclipse.buildship.core.prefs
+project/THUExcursionApp/app/.classpath
+project/THUExcursionApp/app/.project
+project/api/.DS_Store
+project/api/thu-excursion/.DS_Store 
