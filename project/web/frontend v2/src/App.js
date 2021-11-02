@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import UserStore from "./stores/UserStore";
 import LoginForm from "./LoginForm";
 import SubmitButton from "./SubmitButton";
+import ExcursionForm from "./ExcursionForm";
 import "./App.css";
 
 class App extends React.Component {
@@ -73,14 +74,11 @@ class App extends React.Component {
       }
       return (
         <div className="app">
-          <div className="row">
-            <div className="col-3">
-              <img src={logo} className="App-logo" alt="logo" />
-            </div>
-            <div className="col-9">Welcome to THU excursions</div>
-          </div>
           <div className="container">
-            <LoginForm />
+            <img src={logo} className="App-logo" alt="logo" />
+            <h3>Welcome to THU excursions</h3>
+            <ExcursionForm />
+            {/* <LoginForm /> */}
           </div>
         </div>
       );
