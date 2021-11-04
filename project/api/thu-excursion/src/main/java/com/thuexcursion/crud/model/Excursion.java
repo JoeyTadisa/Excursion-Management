@@ -46,6 +46,10 @@ public class Excursion {
 	@Column(name = "description")
 	@Basic
 	private String description;
+
+	@Column(name = "destination")
+	@Basic
+	private String destination;
 	
 	@Column(name = "dateadded")
 	@Basic
@@ -89,34 +93,7 @@ public class Excursion {
 	@Column(name = "reviewedby", table="excursionapproval")
 	private int reviewed_by;
 
-	
-	public Excursion() {
-		
-	}
-	
-	public Excursion(int id, String description, Date date_written, int max_participants, Date reg_deadline,
-			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved) {
 
-		
-			this.id = id;
-			this.description = description;
-			this.date_added = date_written;
-			this.max_participants = max_participants;
-			this.reg_deadline = reg_deadline;
-			this.dereg_deadline = dereg_deadline;
-			this.meeting_details = meeting_details;
-			this.title = title;
-			this.requested_by = 1;
-			
-			
-			
-			this.is_approved = false;
-			this.date_reviewed = null;
-			this.reviewed_by = requested_by;
-			
-	}
-
-	
 	
 	/**
 	 * @return the id
@@ -144,6 +121,20 @@ public class Excursion {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the destination
+	 */
+	public String getDestination() {
+		return destination;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class AdminController {
 
 	@GetMapping("/login/{username}/{password}")
 	public Admin login(@PathVariable String username,@PathVariable String password) {
-		return service.login(username,password);
+		return service.findLoginCredentials(username,password);
 	}
 
 	/*@GetMapping("/admin/{username}")

@@ -32,7 +32,7 @@ public class AdminService {
 	}
 
 	//login
-	public Admin login(String username,String password){
+	public Admin findLoginCredentials(String username,String password){
 		return repository.findLoginCredentials(username,password);
 	}
 	

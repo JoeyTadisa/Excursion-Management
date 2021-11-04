@@ -61,31 +61,6 @@ public class Admin {
 	private String password;
 	
 	
-	public Admin() {
-		
-	}
-	
-	public Admin(int id,
-				int employee_no,
-				 String name_first,
-				 String name_last,
-				 String email,
-				 String address,
-				 String username,
-				 String password) {
-		this.id = id;
-		this.employee_no = employee_no;
-		this.name_first = name_first;
-		this.name_last = name_last;
-		this.email = email;
-		this.address = address;
-		this.username = username;
-		this.password = password;
-		
-		
-	}
-
-	
 	  public int getId() { 
 		  return id; 
 	  }

@@ -40,7 +40,6 @@ public class Booking {
 	@Column(name = "bookedby")
 	private int booked_by;
 
-	
 	public Booking() {
 		
 	}

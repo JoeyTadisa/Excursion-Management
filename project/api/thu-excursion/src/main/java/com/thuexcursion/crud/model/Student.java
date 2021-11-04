@@ -51,27 +51,6 @@ public class Student {
 	@Column(name = "address")
 	@Basic
 	private String address;
-	
-	
-	public Student() {
-		
-	}
-	
-	public Student(int id,
-				int matriculation_no,
-				 String name_first,
-				 String name_last,
-				 String email,
-				 String address) {
-		this.id = id;
-		this.matriculation_no = matriculation_no;
-		this.name_first = name_first;
-		this.name_last = name_last;
-		this.email = email;
-		this.address = address;
-		
-		
-	}
 
 	
 	  public int getId() { 
