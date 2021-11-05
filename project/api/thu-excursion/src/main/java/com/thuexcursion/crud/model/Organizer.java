@@ -15,21 +15,20 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+//@Getter
+//@Setter
+//
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
-	
-	
-	
+@Table(name = "organizer")
+public class Organizer {
+
+
 	@Id
 	@GeneratedValue
-	@Column(name = "idadmin")
+	@Column(name = "idorganizer")
 	private int id;
 
 	@Column(name = "employeenumber")
@@ -51,41 +50,30 @@ public class Admin {
 	@Column(name = "address")
 	@Basic
 	private String address;
-
-	@Column(name = "username")
-	@Basic
-	private String username;
-
-	@Column(name = "password")
-	@Basic
-	private String password;
 	
 	
-	public Admin() {
+	public Organizer() {
 		
 	}
 	
-	public Admin(int id,
+	public Organizer(int id,
 				int employee_no,
 				 String name_first,
 				 String name_last,
 				 String email,
-				 String address,
-				 String username,
-				 String password) {
+				 String address) {
 		this.id = id;
 		this.employee_no = employee_no;
 		this.name_first = name_first;
 		this.name_last = name_last;
 		this.email = email;
 		this.address = address;
-		this.username = username;
-		this.password = password;
 		
 		
 	}
 
 	
+
 	  public int getId() { 
 		  return id; 
 	  }
@@ -124,23 +112,6 @@ public class Admin {
 	  public void setAddress(String address) { 
 		  this.address = address; 
 	  } 
-
-	  public String getUsername() { 
-		return username; 
-	  } 
-
-	  public void setUsername(String username) { 
-		this.username = username; 
-	  } 
-
-	  public String getPassword() { 
-		return password; 
-	  } 
-
-	  public void setPassword(String password) { 
-		this.password = password; 
-	  } 
 	 
-	 
-
+	
 }
