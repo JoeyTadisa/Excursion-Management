@@ -3,25 +3,28 @@ import logo from "./thu_logo.png";
 import { observer } from "mobx-react";
 import UserStore from "./stores/UserStore";
 import LoginForm from "./LoginForm";
-import SubmitButton from "./SubmitButton";
-import ExcursionForm from "./ExcursionForm";
 import "./App.css";
+import LoggedInView from "./LoggedInView";
 
 class App extends React.Component {
+  //fetching the data from the database for the login
   async componentDidMount() {
     try {
-      let res = await fetch("/isLoggedIn", {
-        method: "post",
+      //API call that expects json
+      let res = await fetch("http://localhost:9191/admin/6", {
+        method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
       let result = await res.json();
+      console.log(result);
+      //if the user loggedin successefully
       if (result && result.success) {
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
-        UserStore.userName = result.userName;
+        UserStore.username = result.username;
       } else {
         UserStore.loading = false;
         UserStore.isLoggedIn = false;
@@ -31,7 +34,7 @@ class App extends React.Component {
       UserStore.isLoggedIn = false;
     }
   }
-
+  //define logout function
   async doLogout() {
     try {
       let res = await fetch("/logout", {
@@ -44,7 +47,7 @@ class App extends React.Component {
       let result = await res.json();
       if (result && result.success) {
         UserStore.isLoggedIn = false;
-        UserStore.userName = "";
+        UserStore.username = "";
       }
     } catch (e) {
       console.log(e);
@@ -58,27 +61,24 @@ class App extends React.Component {
         </div>
       );
     } else {
+      //if the login is successful
       if (UserStore.isLoggedIn) {
         return (
           <div className="app">
             <div className="container">
-              Welcome {UserStore.userName}
-              <SubmitButton
-                text={"Log out"}
-                disabled={false}
-                onClick={() => this.doLogout()}
-              />
+              <LoggedInView />
             </div>
           </div>
         );
       }
       return (
+        //the main page of the app where the login form is displayed
         <div className="app">
           <div className="container">
             <img src={logo} className="App-logo" alt="logo" />
             <h3>Welcome to THU excursions</h3>
-            <ExcursionForm />
-            {/* <LoginForm /> */}
+            {/*<ExcursionForm />*/}
+            <LoginForm />
           </div>
         </div>
       );
