@@ -75,7 +75,6 @@ public class Excursion {
 	@Basic
 	private int requested_by;
 	
-
 	/*@Embedded
 	ExcursionApproval excursionapprovals;*/
 	
