@@ -1,4 +1,10 @@
 
 # Ignore Mac system files
 .DS_store
+<<<<<<< HEAD
 .idea
+=======
+
+project/web/frontend/node_modules
+project/web/frontend/build
+>>>>>>> main
