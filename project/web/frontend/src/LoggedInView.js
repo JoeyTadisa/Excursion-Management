@@ -3,7 +3,8 @@ import "./App.css";
 import SubmitButton from "./SubmitButton";
 import UserStore from "./stores/UserStore";
 import ExcursionForm from "./ExcursionForm";
-import ExcursionData from "./stores/ExcursionData";
+import { observer } from "mobx-react";
+import ExcursionDataStore from "./stores/ExcursionDataStore";
 
 class LoggedInView extends React.Component {
   async componentDidMount() {
@@ -18,17 +19,17 @@ class LoggedInView extends React.Component {
       });
       let result = await res.json();
       console.log(result);
-      //if the excursion fetch from database successefull, excursion data is available
+      //if the excursion fetch from database successfull, excursion data is available
       if (result && result.success) {
-        ExcursionData.loading = false;
-        ExcursionData.isReady = true;
+        ExcursionDataStore.loading = false;
+        ExcursionDataStore.isReady = true;
       } else {
-        ExcursionData.loading = false;
-        ExcursionData.isReady = false;
+        ExcursionDataStore.loading = false;
+        ExcursionDataStore.isReady = false;
       }
     } catch (e) {
-      ExcursionData.loading = false;
-      ExcursionData.isReady = false;
+      ExcursionDataStore.loading = false;
+      ExcursionDataStore.isReady = false;
     }
   }
 
@@ -65,7 +66,9 @@ class LoggedInView extends React.Component {
           <div className="app">
             <div className="container">
               {/* welcome the user with the name of the user*/}
-              <h2>Welcome {UserStore.username}!</h2>
+              <h2>
+                Welcome {UserStore.name_first} {UserStore.name_last}!
+              </h2>
               <h4>Available Excursions</h4>
               {/* <div className="title-and-date">
                 {this.state.titles.map(function (title, index) {

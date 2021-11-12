@@ -70,11 +70,15 @@ class LoginForm extends React.Component {
 
       let result = await res.json();
       //store the capitalized name returned from database
-      UserStore.username =
-        result.username.charAt(0).toUpperCase() + result.username.slice(1);
+      UserStore.name_first =
+        result.name_first.charAt(0).toUpperCase() + result.name_first.slice(1);
+      UserStore.name_last =
+        result.name_last.charAt(0).toUpperCase() + result.name_last.slice(1);
+      UserStore.id = result.id;
 
-      console.log(result.email);
-      console.log(result.success);
+      console.log(result.name_first);
+      console.log(result.name_last);
+      console.log(result.id);
       //result && result.success
       if (result) {
         UserStore.isLoggedIn = true;
