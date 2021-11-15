@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import InputField from "./InputField";
-import SubmitButton from "./SubmitButton";
+import InputField from "../InputField";
+import SubmitButton from "../SubmitButton";
 
-function ExcursionForm(props) {
+const ExcursionForm = (props) => {
+  //new enetered values will be stored in excursionData
+
   const [enteredExcursionName, setEnteredExcursionName] = useState("");
   const [enteredExcursionDate, setEnteredExcursionDate] = useState("");
   const [enteredExcursionDestination, setEnteredExcursionDestination] =
@@ -15,37 +17,36 @@ function ExcursionForm(props) {
   const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState("");
   const [enteredMeetingDetails, setEnteredMeetingDetails] = useState("");
 
-  //a new value is past via event
+  //a new value is past via event (user input)
   const excursionNameChangeHamdler = (event) => {
-    setEnteredExcursionName(event.target.value);
+    setEnteredExcursionName(event);
   };
   const excursionDateChangeHandler = (event) => {
-    setEnteredExcursionDate(event.target.value);
+    setEnteredExcursionDate(event);
   };
   const destionationChangeHandler = (event) => {
-    setEnteredExcursionDestination(event.target.value);
+    setEnteredExcursionDestination(event);
   };
   const descriptionChangeHandler = (event) => {
-    setEnteredExcursionDescription(event.target.value);
+    setEnteredExcursionDescription(event);
   };
   const maxNumParticipantsChangeHandler = (event) => {
-    setEnteredMaxNumParticipants(event.target.value);
+    setEnteredMaxNumParticipants(event);
   };
   const registrDeadlineChangeHandler = (event) => {
-    setEnteredRegistrDeadline(event.target.value);
+    setEnteredRegistrDeadline(event);
   };
   const deregistrDeadlineChangeHandler = (event) => {
-    setEnteredDeregistrDeadline(event.target.value);
+    setEnteredDeregistrDeadline(event);
   };
   const meetingDetailsChangeHandler = (event) => {
-    setEnteredMeetingDetails(event.target.value);
+    setEnteredMeetingDetails(event);
   };
 
   // the whole form is will react on submit
   const submitHandler = (event) => {
     event.preventDefault();
 
-    //new enetered values will be stored in excursionData
     const excursionData = {
       title: enteredExcursionName,
       excursion_date: new Date(enteredExcursionDate),
@@ -77,7 +78,8 @@ function ExcursionForm(props) {
     <div className="excursionForm">
       <h4>Excursion Form</h4>
       <form onSubmit={submitHandler}>
-        <label for="excursionName">Excursion name</label>
+        {/*<label for="meeting-details">Meeting details</label>*/}
+        <label>Excursion name</label>
         <InputField
           type="text"
           class="form-excursion"
@@ -86,10 +88,10 @@ function ExcursionForm(props) {
           value={enteredExcursionName}
           onChange={excursionNameChangeHamdler}
         />
-        <label for="excursionDate">Date of excursion</label>
+        <label>Date of excursion</label>
         <InputField
           type="date"
-          min="01-01-2022"
+          min="01-01-2021"
           max="01-01-2030"
           class="form-excursion"
           id="excursionDate"
@@ -97,7 +99,7 @@ function ExcursionForm(props) {
           value={enteredExcursionDate}
           onChange={excursionDateChangeHandler}
         />
-        <label for="destination">Destination</label>
+        <label>Destination</label>
         <InputField
           type="text"
           class="form-excursion"
@@ -106,7 +108,7 @@ function ExcursionForm(props) {
           value={enteredExcursionDestination}
           onChange={destionationChangeHandler}
         />
-        <label for="description">Description</label>
+        <label>Description</label>
         <InputField
           type="text"
           className="form-excursion"
@@ -115,7 +117,7 @@ function ExcursionForm(props) {
           value={enteredExcursionDescription}
           onChange={descriptionChangeHandler}
         />
-        <label for="max-num-participants">Max number of students</label>
+        <label>Max number of students</label>
         <InputField
           type="text"
           className="form-excursion"
@@ -124,10 +126,10 @@ function ExcursionForm(props) {
           value={enteredMaxNumParticipants}
           onChange={maxNumParticipantsChangeHandler}
         />
-        <label for="register-deadline">Registration deadline</label>
+        <label>Registration deadline</label>
         <InputField
           type="date"
-          min="01-01-2022"
+          min="01-01-2021"
           max="01-01-2030"
           className="form-excursion"
           id="register-deadline"
@@ -135,16 +137,18 @@ function ExcursionForm(props) {
           value={enteredRegistrDeadline}
           onChange={registrDeadlineChangeHandler}
         />
-        <label for="deregister-deadline">Deregistration deadline</label>
+        <label>Deregistration deadline</label>
         <InputField
-          type="text"
+          type="date"
+          min="01-01-2021"
+          max="01-01-2030"
           className="form-excursion"
           id="deregister-deadline"
           placeholder="Deregistration deadline"
           value={enteredDeregistrDeadline}
           onChange={deregistrDeadlineChangeHandler}
         />
-        <label for="meeting-details">Meeting details</label>
+        <label>Meeting details</label>
         <InputField
           type="text"
           className="form-excursion"
@@ -153,9 +157,16 @@ function ExcursionForm(props) {
           value={enteredMeetingDetails}
           onChange={meetingDetailsChangeHandler}
         />
-        <SubmitButton lassName="btn btn-primary" type="submit" text="Save" />
+        <button className="btn btn-primary" type="submit">
+          Add New Excursion
+        </button>
+        <SubmitButton
+          type="button"
+          text="Back to Excursion"
+          onClick={props.onBackToExcursionView}
+        />
       </form>
-      <SubmitButton type="submit" text="Clear" />
+
       <SubmitButton
         className="logout-btn"
         text={"Log out"}
@@ -164,6 +175,6 @@ function ExcursionForm(props) {
       />
     </div>
   );
-}
+};
 
 export default ExcursionForm;
