@@ -23,3 +23,26 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 5. Make sure your code lints. Refer to this link for more infomation on linting: https://www.perforce.com/blog/qac/what-lint-code-and-why-linting-important
 6. Issue a new pull request for reviewing and merging.
 7. You're all done! :)
+
+##Fixing the internal server error from the API
+
+To apply on the branch:
+    1.Run the following commands i) "git checkout main" ... ii)"git pull" to update your local repositories
+    2.Open MySQL Workbench
+    3.Open the localhost connection
+    4.Go to Administration/Server and Click 'Data Import/Restore'
+    5.Go to Import to Disk
+    6.Choose Import from Self-Contained File
+    7.Import Excursion-Management/project/database/bdbarmr9bpoyjedn4yyi v4.sql (found on the gitHub repo)
+    8.Create a new database by clicking "new". But if you do not want to create a new database, just choose a database to replaced to and proceed to the next step.  However, creating a new database is recommended to preserve a backup and for tracing purposes.
+    9.Make sure that the dropdown on the bottom part of the window before the start import button is set to Dump Structure and Data
+    10.Click Start Import
+    11.If you want to modify your changes (i.e. Related to steps 13,14 & 15): please create a branch out of the update main branch using git checkout -b (your_branch_name_here)
+    12.Go to Excursion-Management/project/api/thu-excursion/src/main/resources/application.properties
+    13.Modify spring.datasource.url by changing: jdbc:mysql://localhost:3306/(name of newly imported database here)?allowPublicKeyRetrieval=true&useSSL=false
+    14.Modify spring.datasource.username (only if applicable)
+    15.Modify spring.datasource.password (only if applicable)
+    16.Save application.properties.
+    17.Open the file :Excursion-Management/project/api/thu-excursion/src/main/java/com/thuexcursion/crud/SpringBootThuexcursionCrudApplication.java in any IDE
+    18.Run the program
+    19.Launch PostMan and test the endpoint
