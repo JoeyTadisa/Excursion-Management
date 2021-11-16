@@ -1,7 +1,7 @@
 import { extendObservable } from "mobx";
 
 //store some data for currently logged user
-class ExcursionData {
+class ExcursionDataStore {
   constructor() {
     //contains properties for this store
     extendObservable(this, {
@@ -20,4 +20,4 @@ class ExcursionData {
   }
 }
 
-export default new ExcursionData();
+export default new ExcursionDataStore();

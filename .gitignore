@@ -1,6 +1,6 @@
 
 # Ignore Mac system files
 .DS_store
-
+.idea
 project/web/frontend/node_modules
 project/web/frontend/build
