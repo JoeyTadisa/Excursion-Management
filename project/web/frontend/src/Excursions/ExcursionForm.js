@@ -60,7 +60,7 @@ const ExcursionForm = (props) => {
 
     // pass generated here excursionData as argument and newExcursionEntry
     // component (parent) will receive enteredExcursionData as a parameter
-
+    console.log(excursionData);
     props.onSaveExcursionData(excursionData);
 
     //after submit form, reset the form with empty strings
@@ -162,7 +162,7 @@ const ExcursionForm = (props) => {
         </button>
         <SubmitButton
           type="button"
-          text="Back to Excursion"
+          text="Back to Excursions"
           onClick={props.onBackToExcursionView}
         />
       </form>
