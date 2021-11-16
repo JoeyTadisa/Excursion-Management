@@ -34,17 +34,9 @@ public class AdminControllerLayerTest {
     /**
      * This test is currently disabled since POST requests aren't being done at the moment.
      * 
-     * This tests whether a new Admin can successfully be saved with an HTTP Status 200 (OK).
-     * 
-     * Actual results of the test are 405 Method Not Allowed:
-     * The HyperText Transfer Protocol (HTTP) 405 Method Not Allowed response status code indicates 
-     * that the request method is known by the server but is not supported by the target resource.
-     * The server must generate an Allow header field in a 405 response containing a list of the 
-     * target resource's currently supported methods.
-     * 
+     * This tests whether a new Admin can successfully be saved with an HTTP Status 200 (OK). 
      * @throws Exception
      */
-    @Disabled
     @Test
     @WithMockUser(username = "user1", password = "pwd", roles = "USER")
     public void testSaveAdmin() throws Exception {
