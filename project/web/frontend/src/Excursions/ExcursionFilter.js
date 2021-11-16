@@ -4,6 +4,7 @@ import "./ExcursionFilter.css";
 
 const ExcursionFilter = (props) => {
   const dropDownChangeHandler = (event) => {
+    console.log(event.target.value);
     props.onChangeFilter(event.target.value);
   };
 

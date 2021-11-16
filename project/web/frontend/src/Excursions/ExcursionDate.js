@@ -3,12 +3,12 @@ import "./ExcursionDate.css";
 
 const ExcursionDate = (props) => {
   const month = props.excursion_date.toLocaleString("en-US", {
-    month: "2-digit",
+    month: "long",
   });
   const day = props.excursion_date.toLocaleString("en-US", {
     day: "2-digit",
   });
-  const year = props.excursion_date.getFullYear();
+  const year = props.excursion_date.getFullYear().toString();
 
   return (
     <div className="excursion-date">

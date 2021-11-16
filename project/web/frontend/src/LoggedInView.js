@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 import SubmitButton from "./SubmitButton";
 import UserStore from "./stores/UserStore";
-import ExcursionForm from "./Excursions/ExcursionForm";
-//import { observer } from "mobx-react";
-import ExcursionDataStore from "./stores/ExcursionDataStore";
 import ExcursionList from "./Excursions/ExcursionList";
 import NewExcursionEntry from "./NewExcursionEntry";
-import { set } from "mobx";
 
-const excursionDataList = [
+const DUMMY = [
   {
     id: " 1",
     title: " Munchen",
@@ -93,30 +89,32 @@ const excursionDataList = [
   }*/
 
 const LoggedInView = () => {
-  const [excursions, setExcursions] = useState(excursionDataList);
+  const [excursions, setExcursions] = useState(DUMMY);
 
-  // once loggedin the logout button is set to be visible
+  // once loggedin the excursion list is set to be visible
   const [state, setState] = useState({
     visible: true,
-    whichComponentToShow: "SubmitButton",
+    whichComponentToShow: "ExcursionList",
   });
 
   // changing state of excursions if a new excursion is added,
   // need to use prev in order to receive the latest state snapshot
-  // clean way to update a statee when it is based on older snapshot of the same state
+  // clean way to update a state when it is based on older snapshot of the same state
   const addExcursionHandler = (excursion) => {
+    console.log(excursion);
     setExcursions((prevExcursions) => {
       return [excursion, ...prevExcursions];
     });
   };
-
+  // the function that is triggered when 'Back to Excursions' button
+  // is clicked in the 'ExcursionForm' that brings back the excursion list view
   const BackToExcursionViewHandler = () => {
-    setState({ whichComponentToShow: "SubmitButton" });
+    setState({ whichComponentToShow: "ExcursionList" });
   };
 
   //render() {
-  //user is loggedin and logout button is visible, greet the user by the name
-  if (state.whichComponentToShow === "SubmitButton") {
+  //user is loggedin, the excursion list & logout button is visible, greet the user by the name
+  if (state.whichComponentToShow === "ExcursionList") {
     return (
       <div className="loggedInView">
         <div className="app">
@@ -144,12 +142,12 @@ const LoggedInView = () => {
             <br />
             <h4>Available Excursions</h4>
             {/* <NewExcursionEntry onAddExcursion={addExcursionHandler} />*/}
-            <ExcursionList excursions={excursionDataList} />
+            <ExcursionList items={excursions} />
           </div>
         </div>
       </div>
     );
-    // data is still loading, message shown "Loading..."
+
     //Excursion form will be displayed with logout button
   } else if (state.whichComponentToShow === "NewExcursionEntry") {
     return (
