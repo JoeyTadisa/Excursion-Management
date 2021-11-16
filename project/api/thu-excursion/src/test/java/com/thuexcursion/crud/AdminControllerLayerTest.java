@@ -1,5 +1,6 @@
 package com.thuexcursion.crud;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -12,14 +13,17 @@ import com.thuexcursion.crud.controller.AdminController;
 import com.thuexcursion.crud.model.Admin;
 import com.thuexcursion.crud.service.AdminService;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @WebMvcTest({AdminController.class})
@@ -32,8 +36,6 @@ public class AdminControllerLayerTest {
     AdminService adminService;
 
     /**
-     * This test is currently disabled since POST requests aren't being done at the moment.
-     * 
      * This tests whether a new Admin can successfully be saved with an HTTP Status 200 (OK). 
      * @throws Exception
      */
@@ -43,16 +45,16 @@ public class AdminControllerLayerTest {
 
         Admin admin = new Admin(1, 123, "Max", "Mann", "mann@gmx.de", "Olgastr. 2", "username1", "password1");
 
-        //when(adminService.updateAdmin(any())).thenReturn(Boolean.TRUE);
+        when(adminService.saveAdmin(admin)).thenReturn(admin);
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/admin/saveAdmins")
+        RequestBuilder requestBuilder = 
+                MockMvcRequestBuilders.post("/addAdmin")
                         .content(asJsonString(admin))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(status().isOk())
-                .andExpect(content().string("Admin update complete"));
+                        .accept(MediaType.APPLICATION_JSON);
+                MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+                MockHttpServletResponse response = result.getResponse();
+                assertEquals(HttpStatus.OK.value(),response.getStatus());
     }
 
     /**
