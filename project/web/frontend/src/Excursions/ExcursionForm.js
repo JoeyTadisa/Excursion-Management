@@ -1,3 +1,4 @@
+//import { set } from "mobx";
 import React, { useState } from "react";
 import InputField from "../InputField";
 import SubmitButton from "../SubmitButton";
@@ -50,7 +51,7 @@ const ExcursionForm = (props) => {
     const excursionData = {
       title: enteredExcursionName,
       excursion_date: new Date(enteredExcursionDate),
-      destination: enteredExcursionDestination,
+      //destination: enteredExcursionDestination,
       description: enteredExcursionDescription,
       max_participants: enteredMaxNumParticipants,
       reg_deadline: new Date(enteredRegistrDeadline),
@@ -78,93 +79,95 @@ const ExcursionForm = (props) => {
     <div className="excursionForm">
       <h4>Excursion Form</h4>
       <form onSubmit={submitHandler}>
-        {/*<label for="meeting-details">Meeting details</label>*/}
-        <label>Excursion name</label>
-        <InputField
-          type="text"
-          class="form-excursion"
-          id="excursionName"
-          placeholder="Excursion name"
-          value={enteredExcursionName}
-          onChange={excursionNameChangeHamdler}
-        />
-        <label>Date of excursion</label>
-        <InputField
-          type="date"
-          min="01-01-2021"
-          max="01-01-2030"
-          class="form-excursion"
-          id="excursionDate"
-          placeholder="Excursion date"
-          value={enteredExcursionDate}
-          onChange={excursionDateChangeHandler}
-        />
-        <label>Destination</label>
-        <InputField
-          type="text"
-          class="form-excursion"
-          id="destination"
-          placeholder="Destination"
-          value={enteredExcursionDestination}
-          onChange={destionationChangeHandler}
-        />
-        <label>Description</label>
-        <InputField
-          type="text"
-          className="form-excursion"
-          id="description"
-          placeholder="Description"
-          value={enteredExcursionDescription}
-          onChange={descriptionChangeHandler}
-        />
-        <label>Max number of students</label>
-        <InputField
-          type="text"
-          className="form-excursion"
-          id="max-num-participants"
-          placeholder="Maximum number of students"
-          value={enteredMaxNumParticipants}
-          onChange={maxNumParticipantsChangeHandler}
-        />
-        <label>Registration deadline</label>
-        <InputField
-          type="date"
-          min="01-01-2021"
-          max="01-01-2030"
-          className="form-excursion"
-          id="register-deadline"
-          placeholder="Registration deadline"
-          value={enteredRegistrDeadline}
-          onChange={registrDeadlineChangeHandler}
-        />
-        <label>Deregistration deadline</label>
-        <InputField
-          type="date"
-          min="01-01-2021"
-          max="01-01-2030"
-          className="form-excursion"
-          id="deregister-deadline"
-          placeholder="Deregistration deadline"
-          value={enteredDeregistrDeadline}
-          onChange={deregistrDeadlineChangeHandler}
-        />
-        <label>Meeting details</label>
-        <InputField
-          type="text"
-          className="form-excursion"
-          id="meeting-details"
-          placeholder="Meeting details"
-          value={enteredMeetingDetails}
-          onChange={meetingDetailsChangeHandler}
-        />
-        <button className="btn btn-primary" type="submit">
-          Add New Excursion
-        </button>
-        <SubmitButton
-          type="button"
-          text="Back to Excursions"
-          onClick={props.onBackToExcursionView}
-        />
+        <div className="excursionFormF">
+          {/*<label for="meeting-details">Meeting details</label>*/}
+          <label>Excursion name</label>
+          <InputField
+            type="text"
+            class="form-excursion"
+            id="excursionName"
+            placeholder="Excursion name"
+            value={enteredExcursionName}
+            onChange={excursionNameChangeHamdler}
+          />
+          <label>Date of excursion</label>
+          <InputField
+            type="date"
+            min="01-01-2021"
+            max="01-01-2025"
+            class="form-excursion"
+            id="excursionDate"
+            placeholder="Excursion date"
+            value={enteredExcursionDate}
+            onChange={excursionDateChangeHandler}
+          />
+          <label>Destination</label>
+          <InputField
+            type="text"
+            class="form-excursion"
+            id="destination"
+            placeholder="Destination"
+            value={enteredExcursionDestination}
+            onChange={destionationChangeHandler}
+          />
+          <label>Description</label>
+          <InputField
+            type="text"
+            className="form-excursion"
+            id="description"
+            placeholder="Description"
+            value={enteredExcursionDescription}
+            onChange={descriptionChangeHandler}
+          />
+          <label>Max number of students</label>
+          <InputField
+            type="text"
+            className="form-excursion"
+            id="max-num-participants"
+            placeholder="Maximum number of students"
+            value={enteredMaxNumParticipants}
+            onChange={maxNumParticipantsChangeHandler}
+          />
+          <label>Registration deadline</label>
+          <InputField
+            type="date"
+            min="01-01-2021"
+            max="01-01-2025"
+            className="form-excursion"
+            id="register-deadline"
+            placeholder="Registration deadline"
+            value={enteredRegistrDeadline}
+            onChange={registrDeadlineChangeHandler}
+          />
+          <label>Deregistration deadline</label>
+          <InputField
+            type="date"
+            min="01-01-2021"
+            max="01-01-2025"
+            className="form-excursion"
+            id="deregister-deadline"
+            placeholder="Deregistration deadline"
+            value={enteredDeregistrDeadline}
+            onChange={deregistrDeadlineChangeHandler}
+          />
+          <label>Meeting details</label>
+          <InputField
+            type="text"
+            className="form-excursion"
+            id="meeting-details"
+            placeholder="Meeting details"
+            value={enteredMeetingDetails}
+            onChange={meetingDetailsChangeHandler}
+          />
+          <button className="btn btn-primary" type="submit">
+            Add New Excursion
+          </button>
+          <SubmitButton
+            type="button"
+            text="Back to Excursions"
+            onClick={props.onBackToExcursionView}
+          />
+        </div>
       </form>
 
       <SubmitButton

@@ -7,7 +7,7 @@ const ExcursionItem = (props) => {
   return (
     <li>
       <Card className="excursion-item">
-        <ExcursionDate excursion_date={props.date} />
+        <ExcursionDate date={props.date} />
         <div className="excursion-item__title">
           <h2>{props.title}</h2>
         </div>

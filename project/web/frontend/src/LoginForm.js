@@ -48,8 +48,6 @@ class LoginForm extends React.Component {
 
     try {
       // "http:localhost:3307/admin/1"   "/login"
-      console.log(this.state.username);
-      console.log(this.state.password);
       let url =
         "http://localhost:9191/login/" +
         this.state.username +
@@ -62,35 +60,34 @@ class LoginForm extends React.Component {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        /*body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password,
-        }),*/
       });
 
       let result = await res.json();
       //store the capitalized name returned from database
+
       UserStore.name_first =
         result.name_first.charAt(0).toUpperCase() + result.name_first.slice(1);
       UserStore.name_last =
         result.name_last.charAt(0).toUpperCase() + result.name_last.slice(1);
-      UserStore.id = result.id;
+      UserStore.id = result.idAdmin;
 
-      console.log(result.name_first);
-      console.log(result.name_last);
-      console.log(result.id);
       //result && result.success
       if (result) {
         UserStore.isLoggedIn = true;
 
         console.log(UserStore.isLoggedIn);
+        console.log(result);
         //temporary code
-        // if (result.idAdmin == 6) {
-        // UserStore.username = result.username;
-        //go to admin page
-        // } else if (result.idAdmin == 7) {
-        //UserStore.username = result.username;
-
+        if (result.idAdmin == 6) {
+          alert("organizer");
+          console.log("go to the organizer page");
+          // UserStore.username = result.username;
+          //go to admin page
+        } else if (result.idAdmin == 7) {
+          alert("admin");
+          console.log("go to the admin page");
+          //UserStore.username = result.username;
+        }
         //go to organizer page
         // } else {
         // alert("You are not registered!");

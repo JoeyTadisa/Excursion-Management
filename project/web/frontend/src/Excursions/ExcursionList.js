@@ -5,17 +5,19 @@ import "./ExcursionList.css";
 import Card from "../UI/Card";
 
 const ExcursionList = (props) => {
-  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredYear, setFilteredYear] = useState("9999");
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
+
   // new array will be returned (filtered year), original is not touched
   // filter method that filteres the array
   const filteredExcursions = props.items.filter((excursion) => {
     // excursion_date is a date object, not a string (initial state of the filteredYear is a string)
     // need to convert to string object
-    return excursion.excursion_date.getFullYear().toString() === filteredYear;
+
+    return excursion.reg_deadline.getFullYear().toString() === filteredYear;
   });
 
   return (
