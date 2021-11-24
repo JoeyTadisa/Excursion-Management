@@ -15,7 +15,7 @@ const ExcursionsList = (props) => {
         <ExcursionItem
           key={excursion.id}
           title={excursion.title}
-          date={excursion.excursion_date}
+          date={excursion.reg_deadline}
         />
       ))}
     </ul>

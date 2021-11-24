@@ -1,0 +1,17 @@
+/* .excursions-detailed-list {
+  list-style: none;
+  padding: 1rem;
+  background-color: rgb(85, 88, 90);
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 100%;
+} */
+
+.excursions-detailed-list {
+  color: white;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  width: 50rem;
+  max-width: 100%;
+}
