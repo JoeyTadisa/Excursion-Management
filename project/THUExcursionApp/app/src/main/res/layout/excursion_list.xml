@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
 
+
     <TextView
         android:id="@+id/availableExcursionText"
         android:layout_width="wrap_content"
@@ -13,6 +14,7 @@
         android:text="Available excursions"
         android:textSize="28dp"
         android:textStyle="bold"/>
+
 
     <Spinner
         android:id="@+id/filterSpinner"
