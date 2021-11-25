@@ -53,18 +53,37 @@
 			<version>3.0.0</version> <!--TODO Vulnerability raised by this dependancy: Solution to be researched-->
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-test</artifactId>
-    <version>5.5.3</version>
-    <scope>test</scope>
-</dependency>
-<dependency> <!--swagger UI dependancy-->
-    <groupId>org.springdoc</groupId>
-    <artifactId>springdoc-openapi-ui</artifactId>
-    <version>1.5.2</version>
-</dependency>
-	</dependencies>
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-test</artifactId>
+		<version>5.5.3</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency> <!--swagger UI dependancy-->
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-ui</artifactId>
+		<version>1.5.2</version>
+	</dependency>
+
+<!-- email dependencies begin -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+		<version>2.5.6</version>
+	</dependency>
+	 <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+ 	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <scope>runtime</scope>
+        <optional>true</optional>
+    </dependency>
+<!-- email dependencies end -->
+
+</dependencies>
 
 	<build>
 		<plugins>
