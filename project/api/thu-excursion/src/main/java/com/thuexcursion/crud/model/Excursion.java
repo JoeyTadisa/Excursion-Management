@@ -83,6 +83,10 @@ public class Excursion {
 	@Basic
 	private Date date_of_excursion;
 
+	@Column(name = "excursion_fee")
+	@Basic
+	private double excursion_fee;
+
 
 
 	
@@ -105,7 +109,7 @@ public class Excursion {
 	
 	public Excursion(int id, String description, Date date_written, int max_participants, Date reg_deadline,
 			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved,
-			String destination, Date date_of_excursion) {
+			String destination, Date date_of_excursion, double excursion_fee) {
 
 		
 			this.id = id;
@@ -119,7 +123,7 @@ public class Excursion {
 			this.requested_by = 1;
 			this.destination = destination;
 			this.date_of_excursion = date_of_excursion;
-			
+			this.excursion_fee = excursion_fee;
 			
 			
 			this.is_approved = false;
@@ -273,15 +277,30 @@ public class Excursion {
 	/**
 	 * @return the destination
 	 */
-	public Date getDateOfExcursion() {
+	public Date getDate_of_excursion() {
 		return date_of_excursion;
 	}
 
 	/**
 	 * @param requested_by the requested_by to set
 	 */
-	public void setDateOfExcursion(Date date_of_excursion) {
+	public void setDate_of_excursion(Date date_of_excursion) {
 		this.date_of_excursion = date_of_excursion;
+	}
+	
+
+	/**
+	 * @return the excursion_fee
+	 */
+	public double getExcursion_fee() {
+		return excursion_fee;
+	}
+
+	/**
+	 * @param requested_by the requested_by to set
+	 */
+	public void setExcursion_fee(double excursion_fee) {
+		this.excursion_fee = excursion_fee;
 	}
 	
 	
