@@ -74,11 +74,21 @@ public class Excursion {
 	@Column(name = "requestedby")
 	@Basic
 	private int requested_by;
+
+	@Column(name = "destination")
+	@Basic
+	private String destination;
+
+	@Column(name = "date_of_excursion")
+	@Basic
+	private Date date_of_excursion;
+
+
+
 	
 	/*@Embedded
 	ExcursionApproval excursionapprovals;*/
 	
-	 
 	@Column(name = "is_approved", table="excursionapproval",columnDefinition = "TINYINT default 0")
 	private boolean is_approved; 
 	
@@ -94,7 +104,8 @@ public class Excursion {
 	}
 	
 	public Excursion(int id, String description, Date date_written, int max_participants, Date reg_deadline,
-			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved) {
+			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved,
+			String destination, Date date_of_excursion) {
 
 		
 			this.id = id;
@@ -106,6 +117,8 @@ public class Excursion {
 			this.meeting_details = meeting_details;
 			this.title = title;
 			this.requested_by = 1;
+			this.destination = destination;
+			this.date_of_excursion = date_of_excursion;
 			
 			
 			
@@ -242,6 +255,35 @@ public class Excursion {
 	public void setRequested_by(int requested_by) {
 		this.requested_by = requested_by;
 	}
+
+	/**
+	 * @return the destination
+	 */
+	public String getDestination() {
+		return destination;
+	}
+
+	/**
+	 * @param requested_by the requested_by to set
+	 */
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	/**
+	 * @return the destination
+	 */
+	public Date getDateOfExcursion() {
+		return date_of_excursion;
+	}
+
+	/**
+	 * @param requested_by the requested_by to set
+	 */
+	public void setDateOfExcursion(Date date_of_excursion) {
+		this.date_of_excursion = date_of_excursion;
+	}
+	
 	
 	
 	@Column(table="excursionapproval")
