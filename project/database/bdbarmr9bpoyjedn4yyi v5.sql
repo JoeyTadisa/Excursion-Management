@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: bdbarmr9bpoyjedn4yyi-mysql.services.clever-cloud.com:3306
--- Generation Time: Nov 26, 2021 at 03:38 PM
+-- Generation Time: Nov 26, 2021 at 08:51 PM
 -- Server version: 8.0.22-13
 -- PHP Version: 7.2.34
 
@@ -87,24 +87,25 @@ CREATE TABLE `excursion` (
   `Title` varchar(45) DEFAULT NULL,
   `RequestedBy` int DEFAULT NULL,
   `date_of_excursion` date DEFAULT NULL,
-  `destination` varchar(45) DEFAULT NULL
+  `destination` varchar(45) DEFAULT NULL,
+  `excursion_fee` double DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `excursion`
 --
 
-INSERT INTO `excursion` (`idExcursion`, `Description`, `dateadded`, `MaxParticipants`, `RegDeadline`, `DeregDeadline`, `MeetingDetails`, `Title`, `RequestedBy`, `date_of_excursion`, `destination`) VALUES
-(12, 'Neuschwanstein Castle and Linderhof Palace Day Tour from Munich', '2021-01-01', 25, '2021-01-15', '2021-01-30', 'Ulm HBF', 'Neuschwanstein Castle and Linderhof Palace', 1, '2021-02-02', 'Munich'),
-(13, 'Exclusive and Unique Romantic Road Tour from Munich to Rothenberg', '2021-08-01', 25, '2021-08-15', '2021-08-30', 'Ulm HBF', 'Romantic Road in Rothenberg', 1, '2021-09-04', 'Rothenberg'),
-(14, 'Private Scenic Transfer from Frankfurt to Munich with 4h of Sightseeing', '2021-11-01', 25, '2021-11-15', '2021-11-27', 'Ulm HBF', 'Sightseeing in Munich', 1, '2021-12-06', 'Munich'),
-(18, 'Dachau Concentration Camp Memorial Site Tour from Munich by Train', '2022-01-01', 25, '2022-01-15', '2022-01-31', 'Ulm HBF', 'Concentration Camp', 1, '2022-02-08', 'Munich'),
-(19, 'Heidelberg Half-Day Trip from Frankfurt', '2022-02-01', 25, '2022-02-01', '2022-02-15', 'Ulm HBF', 'Heidelberg Half-day Trip', 1, '2022-02-18', 'Heidelberg'),
-(20, 'Private Rhine Valley Day Trip from Frankfurt With Wine Tasting', '2022-03-03', 25, '2022-03-15', '2022-03-25', 'Ulm HBF', 'Rhine Valley Day Trip', 1, '2022-03-28', 'Frankfurt'),
-(21, 'Berlin Complete History All Day Tour', '2023-06-02', 25, '2023-06-17', '2023-06-27', 'Ulm HBF', 'Berlin History Tour', 1, '2023-06-29', 'Berlin'),
-(22, 'Sachsenhausen Concentration Camp Memorial Tour from Berlin', '2023-08-01', 25, '2023-08-15', '2023-08-29', 'Ulm HBF', 'Sachsenhausen Camp', 1, '2023-09-02', 'Berlin'),
-(23, 'City Tour Cologne', '2023-09-01', 25, '2023-09-15', '2023-09-25', 'Ulm HBF', 'City Tour in Cologne', 1, '2023-09-26', 'Cologne'),
-(24, 'Day Trip from Munich to Salzburg', '2023-10-01', 25, '2023-10-15', '2023-10-21', 'Ulm Hbf', 'Day Trip Salzburg', 1, '2023-10-25', 'Salzburg');
+INSERT INTO `excursion` (`idExcursion`, `Description`, `dateadded`, `MaxParticipants`, `RegDeadline`, `DeregDeadline`, `MeetingDetails`, `Title`, `RequestedBy`, `date_of_excursion`, `destination`, `excursion_fee`) VALUES
+(12, 'Neuschwanstein Castle and Linderhof Palace Day Tour from Munich', '2021-01-01', 25, '2021-01-15', '2021-01-30', 'Ulm HBF', 'Neuschwanstein Castle and Linderhof Palace', 1, '2021-02-02', 'Munich', 60),
+(13, 'Exclusive and Unique Romantic Road Tour from Munich to Rothenberg', '2021-08-01', 25, '2021-08-15', '2021-08-30', 'Ulm HBF', 'Romantic Road in Rothenberg', 1, '2021-09-04', 'Rothenberg', 25),
+(14, 'Private Scenic Transfer from Frankfurt to Munich with 4h of Sightseeing', '2021-11-01', 25, '2021-11-15', '2021-11-27', 'Ulm HBF', 'Sightseeing in Munich', 1, '2021-12-06', 'Munich', 50),
+(18, 'Dachau Concentration Camp Memorial Site Tour from Munich by Train', '2022-01-01', 25, '2022-01-15', '2022-01-31', 'Ulm HBF', 'Concentration Camp', 1, '2022-02-08', 'Munich', 90),
+(19, 'Heidelberg Half-Day Trip from Frankfurt', '2022-02-01', 25, '2022-02-01', '2022-02-15', 'Ulm HBF', 'Heidelberg Half-day Trip', 1, '2022-02-18', 'Heidelberg', 35),
+(20, 'Private Rhine Valley Day Trip from Frankfurt With Wine Tasting', '2022-03-03', 25, '2022-03-15', '2022-03-25', 'Ulm HBF', 'Rhine Valley Day Trip', 1, '2022-03-28', 'Frankfurt', 32),
+(21, 'Berlin Complete History All Day Tour', '2023-06-02', 25, '2023-06-17', '2023-06-27', 'Ulm HBF', 'Berlin History Tour', 1, '2023-06-29', 'Berlin', 25),
+(22, 'Sachsenhausen Concentration Camp Memorial Tour from Berlin', '2023-08-01', 25, '2023-08-15', '2023-08-29', 'Ulm HBF', 'Sachsenhausen Camp', 1, '2023-09-02', 'Berlin', 36),
+(23, 'City Tour Cologne', '2023-09-01', 25, '2023-09-15', '2023-09-25', 'Ulm HBF', 'City Tour in Cologne', 1, '2023-09-26', 'Cologne', 65),
+(24, 'Day Trip from Munich to Salzburg', '2023-10-01', 25, '2023-10-15', '2023-10-21', 'Ulm Hbf', 'Day Trip Salzburg', 1, '2023-10-25', 'Salzburg', 20);
 
 -- --------------------------------------------------------
 
