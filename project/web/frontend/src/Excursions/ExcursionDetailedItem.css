@@ -1,25 +1,31 @@
 .excursion-detailed-item {
   justify-content: space-between;
-  align-items: right;
-  padding: 1rem;
+  align-items: center;
+  padding: 0.5rem;
   margin: 1rem 0;
   border-radius: 12px;
-  background-color: #b6afaf;
+  background-color: #918f8f;
+  width: 50rem;
+  max-width: 100%;
 }
 
 .excursion-detailed-item h2 {
   margin: 0.5rem 0;
   color: white;
+  text-align: center;
 }
 .excursion-detailed-item h4 {
-  color: rgb(17, 82, 180);
+  color: rgb(66, 65, 65);
+  font-size: 1rem;
   margin: 0.5rem 0.5rem 0.5rem 0;
+  text-align: center;
 }
 .reg-and-dereg-dealines {
   display: flex;
   justify-content: space-between;
-  align-items: right;
+  align-items: center;
 }
+
 .reg-dealine {
   display: flex;
   flex-direction: column;
@@ -28,6 +34,13 @@
   flex-flow: column-reverse;
   justify-content: flex-start;
   flex: 1;
+  padding: 0 0 0 7rem;
+}
+.dereg-deadline-calender-only {
+  padding: 0 0 0 4rem;
+}
+.dereg-deadline-title-only {
+  padding: 0 0 0 3.5rem;
 }
 
 /* @media (min-width: 400px) {
@@ -38,7 +51,4 @@
     flex: 1;
   }
 
-  .excursion-item__title h2 {
-    font-size: 1.25rem;
-  }
 } */
