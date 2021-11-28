@@ -10,9 +10,5 @@ public class SpringBootThuexcursionCrudApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootThuexcursionCrudApplication.class, args);
-		
-		
-	}
-	
-	
+	}	
 }
