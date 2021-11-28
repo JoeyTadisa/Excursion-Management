@@ -5,7 +5,7 @@ import ExcursionDate from "./ExcursionDate";
 
 const ExcursionDetailedItem = (props) => {
   return (
-    <li className="excursion-detailed-item">
+    <li>
       <Card className="excursion-detailed-item">
         {/* <label>Excursion date</label>
         <ExcursionDate date={props.excursion_date} /> */}
@@ -13,7 +13,7 @@ const ExcursionDetailedItem = (props) => {
           <h4>Destination</h4>
           <h2>{props.title}</h2>
         </div>
-        <div>
+        <div className="excursion-detailed-item__description">
           <h4>Description</h4>
           <h2>{props.description}</h2>
         </div>
@@ -28,9 +28,13 @@ const ExcursionDetailedItem = (props) => {
             <ExcursionDate date={props.reg_deadline} />
           </div>
           <div className="dereg-deadline">
-            <h4>Deregistration</h4>
-            <h4>deadline</h4>
-            <ExcursionDate date={props.dereg_deadline} />
+            <div className="dereg-deadline-title-only">
+              <h4>Deregistration</h4>
+              <h4>deadline</h4>
+            </div>
+            <div className="dereg-deadline-calender-only">
+              <ExcursionDate date={props.dereg_deadline} />
+            </div>
           </div>
         </div>
         <div>

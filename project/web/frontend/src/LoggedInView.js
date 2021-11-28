@@ -147,9 +147,6 @@ const LoggedInView = () => {
 
             <h4>Available Excursions</h4>
 
-            <button className="btn btn-primary" onClick={fetchExcursions}>
-              Fetch Excursions
-            </button>
             <section>{content}</section>
             {/* <NewExcursionEntry onAddExcursion={addExcursionHandler} />*/}
             {/*{!isLoading && excursions.lenght > 0 && (
