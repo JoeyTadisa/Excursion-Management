@@ -3,9 +3,11 @@ package com.thuexcursion.crud.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.Excursion;
+import com.thuexcursion.crud.repository.ExcursionRepository;
 import com.thuexcursion.crud.service.ExcursionService;
 
 /*
@@ -53,6 +55,14 @@ public class ExcursionController {
 	@PutMapping("/updateExcursion")
 	public Excursion updateExcursion(@RequestBody Excursion excursion) {
 		return service.updateExcursion(excursion);
+	}
+
+	@PutMapping("/approveExcursion/{id}")
+	public ResponseEntity<Excursion> approveExcursion(@PathVariable(value = "id")int id){
+		Excursion excursion = getExcursionById(id);
+		excursion.setIs_approved(true);
+		final Excursion updatedExcursion = updateExcursion(excursion);
+		return ResponseEntity.ok(updatedExcursion);
 	}
 	
 	@PutMapping("/approveExcursion")
