@@ -17,7 +17,9 @@ const ExcursionList = (props) => {
     // excursion_date is a date object, not a string (initial state of the filteredYear is a string)
     // need to convert to string object
 
-    return excursion.reg_deadline.getFullYear().toString() === filteredYear;
+    return (
+      excursion.date_of_excursion.getFullYear().toString() === filteredYear
+    );
   });
 
   return (

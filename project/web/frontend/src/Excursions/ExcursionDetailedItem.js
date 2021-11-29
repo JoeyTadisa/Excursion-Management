@@ -7,8 +7,8 @@ const ExcursionDetailedItem = (props) => {
   return (
     <li>
       <Card className="excursion-detailed-item">
-        {/* <label>Excursion date</label>
-        <ExcursionDate date={props.excursion_date} /> */}
+        <h4>Excursion date</h4>
+        <ExcursionDate date={props.date_of_excursion} />
         <div className="excursion-detailed-item__title">
           <h4>Destination</h4>
           <h2>{props.title}</h2>
@@ -17,9 +17,17 @@ const ExcursionDetailedItem = (props) => {
           <h4>Description</h4>
           <h2>{props.description}</h2>
         </div>
-        <div className="max-num-participants">
-          <h4>Maximum number of participants</h4>
-          <h2>{props.max_participants}</h2>
+        <div className="max-num-participants-and-fee">
+          <div className="max-num-participants">
+            <h4>Maximum number </h4>
+            <h4>of participants </h4>
+            <h2>{props.max_participants}</h2>
+          </div>
+          <div className="excursion-fee">
+            <h4>Excursion </h4>
+            <h4>fee </h4>
+            <h2>{props.excursion_fee}</h2>
+          </div>
         </div>
         <div className="reg-and-dereg-dealines">
           <div className="reg-deadline">

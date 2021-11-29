@@ -57,9 +57,12 @@ const LoggedInView = () => {
       const transformedExcursions = data.map((excursionData) => {
         return {
           id: excursionData.id,
-          //excursion_date: excursionData.excursion_date,
+          title: excursionData.title,
+          date_of_excursion: new Date(excursionData.date_of_excursion),
+          excursion_fee: excursionData.excursion_fee,
           description: excursionData.description,
           max_participants: excursionData.max_participants,
+          destination: excursionData.destination,
           reg_deadline: new Date(excursionData.reg_deadline),
           dereg_deadline: new Date(excursionData.dereg_deadline),
           meeting_details: excursionData.meeting_details,
