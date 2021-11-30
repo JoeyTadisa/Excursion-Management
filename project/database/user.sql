@@ -49,7 +49,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,6,'admin','billcrawford','confidential','Bill','Crawford','crawford@thu.de','Craw Str. 211',1),(2,55512,'organizer','chrislawrence','complex','Chris','Lawrence','lawrence@thu.de','Law Str. 211',1),(3,313001,'student','shilogonzaga','complex','Shilo','Gonzaga','gonzaga@thu.de','Gonza Str. 211',1),(4,313002,'student','lunafox','confidential','Luna','Fox','fox@thu.de','Fox Str. 211',0),(9,69696969,'student','arod69','rod696969','alex','rod','rod@thu.de','heiden. Str. 69',1),(10,3143029,'admin','markrod','96markrod69','alex','mark','mark@thu.de','heiden. Str. 69',1),(12,3134729,'organizer','lisathompson','thompsonRules32','Lisa','Thompson','thompson@thu.de','Thompson Alle 52',1);
+INSERT INTO `user` VALUES (1,6,'a','billcrawford','confidential','Bill','Crawford','crawford@thu.de','Craw Str. 211',1),(2,55512,'o','chrislawrence','complex','Chris','Lawrence','lawrence@thu.de','Law Str. 211',1),(3,313001,'s','shilogonzaga','complex','Shilo','Gonzaga','gonzaga@thu.de','Gonza Str. 211',1),(4,313002,'s','lunafox','confidential','Luna','Fox','fox@thu.de','Fox Str. 211',0),(9,69696969,'s','arod69','rod696969','alex','rod','rod@thu.de','heiden. Str. 69',1),(10,3143029,'a','markrod','96markrod69','alex','mark','mark@thu.de','heiden. Str. 69',1),(12,3134729,'o','lisathompson','thompsonRules32','Lisa','Thompson','thompson@thu.de','Thompson Alle 52',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-28  3:15:11
+-- Dump completed on 2021-11-30 11:45:19

@@ -42,7 +42,7 @@ public class UserController {
 	}
 
     @GetMapping(value = "type/{user_type}")
-    public List<User> getUserByType(@PathVariable String user_type){
+    public List<User> getUserByType(@PathVariable char user_type){
         return service.getUsersByType(user_type);
     }
 
