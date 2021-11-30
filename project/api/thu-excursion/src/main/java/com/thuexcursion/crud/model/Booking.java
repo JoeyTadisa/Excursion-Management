@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
  * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
  * */
 
+ // Booking table has foreign key pointing to User table
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,25 +32,29 @@ public class Booking {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "idbooking")
+	@Column(name = "id_booking")
 	private int id;
 	
-	@Column(name = "bookingdate")
-	private Date booking_date;
+	@Column(name = "date_booked")
+	private Date date_booked;
 	
-	@Column(name = "bookedby")
+	@Column(name = "booked_by")
 	private int booked_by;
+
+	@Column(name = "id_excursion")
+	private int id_excursion;
 
 	
 	public Booking() {
 		
 	}
 	
-	public Booking(int id, Date booking_date, int booked_by) {
+	public Booking(int id, Date date_booked, int booked_by, int id_excursion) {
 		super();
 		this.id = id;
-		this.booking_date = booking_date;
+		this.date_booked = date_booked;
 		this.booked_by = booked_by;
+		this.id_excursion = id_excursion;
 	}
 
 	/**
@@ -69,15 +74,15 @@ public class Booking {
 	/**
 	 * @return the booking_date
 	 */
-	public Date getBooking_date() {
-		return booking_date;
+	public Date getDate_booked() {
+		return date_booked;
 	}
 
 	/**
 	 * @param booking_date the booking_date to set
 	 */
-	public void setBooking_date(Date booking_date) {
-		this.booking_date = booking_date;
+	public void setDate_booked(Date date_booked) {
+		this.date_booked = date_booked;
 	}
 
 	/**
@@ -92,6 +97,14 @@ public class Booking {
 	 */
 	public void setBooked_by(int booked_by) {
 		this.booked_by = booked_by;
+	}
+
+	public int getId_excursion() {
+		return id_excursion;
+	}
+
+	public void setId_excursion(int id_excursion) {
+		this.id_excursion = id_excursion;
 	}
 	
 	
