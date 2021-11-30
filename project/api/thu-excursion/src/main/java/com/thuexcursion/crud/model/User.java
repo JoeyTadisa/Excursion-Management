@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 //import lombok.Data;
 //import lombok.Getter;
@@ -26,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@GeneratedValue
+	@ApiModelProperty(required = false, hidden = true)
 	@Column(name = "user_id")
 	private int id;
 
@@ -35,7 +35,7 @@ public class User {
 
 	@Column(name = "user_type")
 	@Basic
-	private String user_type;
+	private char user_type;
 
 	@Column(name = "firstname")
 	@Basic
@@ -67,7 +67,7 @@ public class User {
 	
 	public User(int id,
 				int user_number,
-				String user_type,
+				char user_type,
 				String username,
 				String password,
 				String name_first,
@@ -100,10 +100,10 @@ public class User {
 	  public void setUser_no(int user_number) { 
 		  this.user_number = user_number;
 	  } 
-	  public String getUser_type() { 
+	  public char getUser_type() { 
 		return user_type;
 	}
-	public void setUser_type(String user_type) { 
+	public void setUser_type(char user_type) { 
 		this.user_type = user_type;
 	}  
 	  public String getName_first() { 

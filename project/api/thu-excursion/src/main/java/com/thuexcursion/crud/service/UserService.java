@@ -30,7 +30,7 @@ public class UserService {
 		return repository.findById(id).orElse(null);
 	}
 
-    public List<User> getUsersByType(String user_type){
+    public List<User> getUsersByType(char user_type){
         return repository.findByType(user_type);
     }
 

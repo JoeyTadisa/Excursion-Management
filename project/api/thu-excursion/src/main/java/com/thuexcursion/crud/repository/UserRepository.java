@@ -17,5 +17,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     User findLoginCredentials(String username, String password);
     
     @Query(value="select u.user_id, u.user_number, u.user_type, u.username, u.password, u.firstname, u.lastname, u.email, u.address, u.is_active from user u where user_type = :user_type", nativeQuery = true)
-    List<User> findByType(String user_type);
+    List<User> findByType(char user_type);
 }
