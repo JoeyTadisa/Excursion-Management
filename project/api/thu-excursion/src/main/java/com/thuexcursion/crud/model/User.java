@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 //import lombok.Data;
 //import lombok.Getter;
@@ -22,19 +21,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
-	
-	
-	
+@Table(name ="user")
+public class User {
 	@Id
 	@GeneratedValue
-	@Column(name = "idadmin")
+	@ApiModelProperty(required = false, hidden = true)
+	@Column(name = "user_id")
 	private int id;
 
-	@Column(name = "employeenumber")
+	@Column(name = "user_number")
 	@Basic
-	private int employee_no;
+	private int user_number;
+
+	@Column(name = "user_type")
+	@Basic
+	private char user_type;
 
 	@Column(name = "firstname")
 	@Basic
@@ -60,29 +61,29 @@ public class Admin {
 	@Basic
 	private String password;
 	
-	
-	public Admin() {
+	public User(){
 		
 	}
 	
-	public Admin(int id,
-				int employee_no,
-				 String name_first,
-				 String name_last,
-				 String email,
-				 String address,
-				 String username,
-				 String password) {
+	public User(int id,
+				int user_number,
+				char user_type,
+				String username,
+				String password,
+				String name_first,
+				String name_last, 
+				String email,
+				String address
+				) {
 		this.id = id;
-		this.employee_no = employee_no;
+		this.user_number = user_number;
+		this.user_type = user_type;
+		this.username = username;
+		this.password = password;
 		this.name_first = name_first;
 		this.name_last = name_last;
 		this.email = email;
 		this.address = address;
-		this.username = username;
-		this.password = password;
-		
-		
 	}
 
 	
@@ -93,13 +94,18 @@ public class Admin {
 	  public void setId(int id) { 
 		  this.id = id; 
 	  }
-	  public int getEmployee_no() { 
-		  return employee_no;
+	  public int getUser_no() { 
+		  return user_number;
 	  }
-	  public void setEmployee_no(int employee_no) { 
-		  this.employee_no = employee_no; 
+	  public void setUser_no(int user_number) { 
+		  this.user_number = user_number;
 	  } 
-	  
+	  public char getUser_type() { 
+		return user_type;
+	}
+	public void setUser_type(char user_type) { 
+		this.user_type = user_type;
+	}  
 	  public String getName_first() { 
 		  return name_first; 
 	  } 
