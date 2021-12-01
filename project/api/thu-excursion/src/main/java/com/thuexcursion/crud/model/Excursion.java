@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
-
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 //import lombok.Data;
@@ -35,6 +35,7 @@ import lombok.NoArgsConstructor;
 //@SecondaryTable(name="excursionapproval")
 public class Excursion {
 	
+
 /*
  * ======= EXCURSION TABLE: private variables ========
  * */
@@ -47,8 +48,9 @@ public class Excursion {
 	@Basic
 	private String description;
 	
-	@Column(name = "dateadded")
 	@Basic
+	@Column(nullable = false, name = "dateadded", insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date_added;
 	
 	@Column(name = "maxparticipants")
@@ -102,19 +104,20 @@ public class Excursion {
 	@Column(name = "reviewedby", table="excursionapproval")
 	private int reviewed_by;
 
+
 	
 	public Excursion() {
 		
 	}
 	
-	public Excursion(int id, String description, Date date_written, int max_participants, Date reg_deadline,
+	public Excursion(int id, String description, int max_participants, Date reg_deadline,
 			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved,
 			String destination, Date date_of_excursion, double excursion_fee) {
 
 		
 			this.id = id;
 			this.description = description;
-			this.date_added = date_written;
+			//this.date_added = date_written;
 			this.max_participants = max_participants;
 			this.reg_deadline = reg_deadline;
 			this.dereg_deadline = dereg_deadline;
@@ -172,9 +175,9 @@ public class Excursion {
 	/**
 	 * @param date_written the date_written to set
 	 */
-	public void setDate_written(Date date_written) {
+	/*public void setDate_written(Date date_written) {
 		this.date_added = date_written;
-	}
+	} */
 
 	/**
 	 * @return the max_participants
