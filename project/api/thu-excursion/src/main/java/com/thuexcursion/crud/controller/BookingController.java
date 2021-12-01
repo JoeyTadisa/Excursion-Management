@@ -7,7 +7,9 @@ import org.springframework.data.domain.ExampleMatcher.NoOpPropertyValueTransform
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.Booking;
+import com.thuexcursion.crud.model.StudentBookingExcursion;
 import com.thuexcursion.crud.service.BookingService;
+import com.thuexcursion.crud.service.StudentBookingExcursionService;
 
 
 /*
@@ -21,6 +23,9 @@ public class BookingController {
 
 	@Autowired
 	private BookingService service;
+
+	@Autowired
+	private StudentBookingExcursionService student_booking_excursion_service;
 
 	
 	@PostMapping("/bookAnExcursion")
@@ -40,8 +45,8 @@ public class BookingController {
 
 	//Get bookings by student id - which bookings does student x has? 
 	@GetMapping("bookingsbystudent/{user_id}")
-	public List<Booking> getBookingByUserId(@PathVariable int user_id) {
-		return service.getBookingByUserId(user_id);
+	public List<StudentBookingExcursion> getBookingByUserId(@PathVariable int user_id) {
+		return student_booking_excursion_service.getBookingsyPerStudent(user_id);
 	}
 
 
