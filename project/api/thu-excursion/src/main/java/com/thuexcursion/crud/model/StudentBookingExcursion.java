@@ -22,13 +22,7 @@ import lombok.NoArgsConstructor;
  * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
  * */
 
- // This class is mapped to a query
- // Booking table has foreign key pointing to User table
- // This class relies on Spring for default constructors
-/*@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "StudentBookingExcursion") */
+// This represents a native view
 public interface StudentBookingExcursion {
 
 	
