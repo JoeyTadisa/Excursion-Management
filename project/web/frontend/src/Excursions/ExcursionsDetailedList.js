@@ -1,7 +1,6 @@
 import React from "react";
 import ExcursionDetailedItem from "./ExcursionDetailedItem";
 import "./ExcursionsDetailedList.css";
-import Card from "../UI/Card";
 
 const ExcursionsDetailedList = (props) => {
   return (

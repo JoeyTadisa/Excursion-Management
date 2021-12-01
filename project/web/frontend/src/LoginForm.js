@@ -78,12 +78,12 @@ class LoginForm extends React.Component {
         console.log(UserStore.isLoggedIn);
         console.log(result);
         //temporary code
-        if (result.idAdmin == 6) {
+        if (result.idAdmin === 6) {
           alert("organizer");
           console.log("go to the organizer page");
           // UserStore.username = result.username;
           //go to admin page
-        } else if (result.idAdmin == 7) {
+        } else if (result.idAdmin === 7) {
           alert("admin");
           console.log("go to the admin page");
           //UserStore.username = result.username;

@@ -93,6 +93,14 @@ section {
   background-color: white;
   border-radius: 12px;
 }
+.pending-for-approval {
+  color: #d2691e;
+}
+
+.pending-for-approval-box {
+  border: 7px solid #d2691e;
+  margin: 1px auto;
+}
 
 /* max-width: 40rem; 
    padding: 2rem;

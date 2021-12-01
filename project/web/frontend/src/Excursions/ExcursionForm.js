@@ -14,6 +14,7 @@ const ExcursionForm = (props) => {
     useState("");
   const [enteredMaxNumParticipants, setEnteredMaxNumParticipants] =
     useState("");
+  const [enteredExcursionFee, setEnteredExcursionFee] = useState("");
   const [enteredRegistrDeadline, setEnteredRegistrDeadline] = useState("");
   const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState("");
   const [enteredMeetingDetails, setEnteredMeetingDetails] = useState("");
@@ -34,6 +35,9 @@ const ExcursionForm = (props) => {
   const maxNumParticipantsChangeHandler = (event) => {
     setEnteredMaxNumParticipants(event);
   };
+  const excursionFeeChangeHandler = (event) => {
+    setEnteredExcursionFee(event);
+  };
   const registrDeadlineChangeHandler = (event) => {
     setEnteredRegistrDeadline(event);
   };
@@ -50,10 +54,11 @@ const ExcursionForm = (props) => {
 
     const excursionData = {
       title: enteredExcursionName,
-      excursion_date: new Date(enteredExcursionDate),
-      //destination: enteredExcursionDestination,
+      date_of_excursion: new Date(enteredExcursionDate),
+      destination: enteredExcursionDestination,
       description: enteredExcursionDescription,
       max_participants: enteredMaxNumParticipants,
+      excursion_fee: enteredExcursionFee,
       reg_deadline: new Date(enteredRegistrDeadline),
       dereg_deadline: new Date(enteredDeregistrDeadline),
       meeting_details: enteredMeetingDetails,
@@ -70,6 +75,7 @@ const ExcursionForm = (props) => {
     setEnteredExcursionDestination("");
     setEnteredExcursionDescription("");
     setEnteredMaxNumParticipants("");
+    setEnteredExcursionFee("");
     setEnteredRegistrDeadline("");
     setEnteredDeregistrDeadline("");
     setEnteredMeetingDetails("");
@@ -81,7 +87,7 @@ const ExcursionForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className="excursionFormF">
           {/*<label for="meeting-details">Meeting details</label>*/}
-          <label>Excursion name</label>
+          <label>Excursion title</label>
           <InputField
             type="text"
             class="form-excursion"
@@ -127,6 +133,15 @@ const ExcursionForm = (props) => {
             placeholder="Maximum number of students"
             value={enteredMaxNumParticipants}
             onChange={maxNumParticipantsChangeHandler}
+          />
+          <label>Excursion fee</label>
+          <InputField
+            type="text"
+            className="form-excursion"
+            id="excursion-fee"
+            placeholder="Excursion fee"
+            value={enteredExcursionFee}
+            onChange={excursionFeeChangeHandler}
           />
           <label>Registration deadline</label>
           <InputField
