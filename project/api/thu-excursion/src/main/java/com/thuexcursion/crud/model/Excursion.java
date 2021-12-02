@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "excursion")
-@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
+//@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
 //@SecondaryTable(name="excursionapproval")
 public class Excursion {
 	
@@ -95,13 +95,13 @@ public class Excursion {
 	/*@Embedded
 	ExcursionApproval excursionapprovals;*/
 	
-	@Column(name = "is_approved", table="excursionapproval",columnDefinition = "TINYINT default 0")
+	@Column(name = "is_approved")
 	private boolean is_approved; 
 	
-	@Column(name = "datereviewed", table="excursionapproval")
+	@Column(name = "date_reviewed")
 	private Date date_reviewed;
 	
-	@Column(name = "reviewedby", table="excursionapproval")
+	@Column(name = "reviewed_by")
 	private int reviewed_by;
 
 
@@ -307,34 +307,26 @@ public class Excursion {
 	}
 	
 	
-	
-	@Column(table="excursionapproval")
 	public boolean getIs_approved() {
 		return is_approved;
 	}
 
-	
-	@Column(table="excursionapproval")
 	public void setIs_approved(boolean is_approved) {
 		this.is_approved = is_approved;
 	}
 	
-	@Column(table="excursionapproval")
 	public Date getDate_reviewed() {
 		return date_reviewed;
 	}
 	
-	@Column(table="excursionapproval")
 	public void setDate_reviewed(Date date_reviewed) {
 		this.date_reviewed = date_reviewed;
 	}
 	
-	@Column(table="excursionapproval")
 	public int getReviewed_by() {
 		return reviewed_by;
 	}
 	
-	@Column(table="excursionapproval")
 	public void setReviewed_by(int reviewed_by) {
 		this.reviewed_by = reviewed_by;
 	}
