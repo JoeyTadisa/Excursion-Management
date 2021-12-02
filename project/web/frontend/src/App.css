@@ -3,7 +3,7 @@ html,
 .app {
   background-color: whitesmoke;
   max-width: 960px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .container {
@@ -28,7 +28,7 @@ html,
 .excursionForm,
 .loggedInView {
   box-sizing: content-box;
-  width: 400px;
+  width: 460px;
   padding-left: 20px;
   padding-right: 20px;
   margin: 30px 0 15px 20px;
@@ -84,3 +84,30 @@ h4 {
   background: #fff;
   cursor: pointer;
 }
+
+section {
+  margin: 1rem auto;
+  min-width: 280px;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border-radius: 12px;
+}
+.pending-for-approval {
+  color: #d2691e;
+  font-weight: 600;
+}
+.pending-for-approval-box {
+  height: 80%;
+  border: 6px solid #d2691e;
+  background: #d2691e;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+/* max-width: 40rem; 
+   padding: 2rem;
+  
+  */

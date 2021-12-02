@@ -5,19 +5,30 @@ import UserStore from "./stores/UserStore";
 import LoginForm from "./LoginForm";
 import "./App.css";
 import LoggedInView from "./LoggedInView";
+import { configure } from "mobx";
 
 class App extends React.Component {
-  //fetching the data from the database for the login
+  // fetching the data from the database for the login
   async componentDidMount() {
+    // to remove MobX warning regarding - changing observable values without using actions
+    configure({
+      enforceActions: "never",
+    });
     try {
       //API call that expects json
-      let res = await fetch("http://localhost:9191/admin/6", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      let res = await fetch(
+        "http://localhost:9191/login/" +
+          this.state.username +
+          "/" +
+          this.state.password,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       let result = await res.json();
       console.log(result);
       //if the user loggedin successefully
@@ -25,6 +36,8 @@ class App extends React.Component {
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
+        UserStore.user_type = result.user_type;
+        UserStore.user_id = result.user_id;
       } else {
         UserStore.loading = false;
         UserStore.isLoggedIn = false;
@@ -48,6 +61,8 @@ class App extends React.Component {
       if (result && result.success) {
         UserStore.isLoggedIn = false;
         UserStore.username = "";
+        UserStore.user_type = "";
+        UserStore.user_id = "";
       }
     } catch (e) {
       console.log(e);
