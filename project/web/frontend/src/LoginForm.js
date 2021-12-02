@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
   //the password is no longer than 12 characters
   setInputValue(property, val) {
     val = val.trim();
-    if (val.length > 12) {
+    if (val.length > 16) {
       return;
     }
     //in property passing usermane/password, this way the method could be reused
@@ -71,36 +71,24 @@ class LoginForm extends React.Component {
         result.name_last.charAt(0).toUpperCase() + result.name_last.slice(1);
       UserStore.id = result.idAdmin;
 
+      UserStore.user_type = result.user_type;
+      UserStore.user_id = result.user_id;
+
       //result && result.success
       if (result) {
+        UserStore.loading = false;
         UserStore.isLoggedIn = true;
-
-        console.log(UserStore.isLoggedIn);
-        console.log(result);
-        //temporary code
-        if (result.idAdmin === 6) {
-          alert("organizer");
-          console.log("go to the organizer page");
-          // UserStore.username = result.username;
-          //go to admin page
-        } else if (result.idAdmin === 7) {
-          alert("admin");
-          console.log("go to the admin page");
-          //UserStore.username = result.username;
-        }
-        //go to organizer page
-        // } else {
-        // alert("You are not registered!");
-        // this.resetForm();
-        // }
-        //if admin id is 1 - go to admin page
-        // if admin id is 2 - go to organizer page
-        //UserStore.username = result.username;
-      } else if (result && result.success === false) {
+        UserStore.username = result.username;
+        UserStore.user_type = result.user_type;
+        UserStore.user_id = result.user_id;
+      } else if (result === false) {
         this.resetForm();
-        alert(result.msg);
+        UserStore.loading = false;
+        UserStore.isLoggedIn = false;
       }
     } catch (e) {
+      UserStore.loading = false;
+      UserStore.isLoggedIn = false;
       console.log(e);
       this.resetForm();
     }

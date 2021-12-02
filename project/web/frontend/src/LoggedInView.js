@@ -47,7 +47,9 @@ const LoggedInView = () => {
     // clear previous error
     setError(null);
     try {
-      const response = await fetch("http://localhost:9191/excursions");
+      const response = await fetch(
+        "http://localhost:9191/approvedExcursions/true"
+      );
 
       // need to check before parsing the response body
       // signals if the response was successful
@@ -106,22 +108,22 @@ const LoggedInView = () => {
       // need to check before parsing the response body
       // signals if the response was successful
       if (!response.ok) {
-        throw new Error("Something went wrong!");
+        throw new Error("*** Something went wrong! ***");
       }
       const data = await response.json();
 
-      const transformedNewExcursions = data.map((excursionData) => {
+      const transformedNewExcursions = data.map((newExcursionData) => {
         return {
-          id: excursionData.id,
-          title: excursionData.title,
-          date_of_excursion: new Date(excursionData.date_of_excursion),
-          excursion_fee: excursionData.excursion_fee,
-          description: excursionData.description,
-          max_participants: excursionData.max_participants,
-          destination: excursionData.destination,
-          reg_deadline: new Date(excursionData.reg_deadline),
-          dereg_deadline: new Date(excursionData.dereg_deadline),
-          meeting_details: excursionData.meeting_details,
+          id: newExcursionData.id,
+          title: newExcursionData.title,
+          date_of_excursion: new Date(newExcursionData.date_of_excursion),
+          excursion_fee: newExcursionData.excursion_fee,
+          description: newExcursionData.description,
+          max_participants: newExcursionData.max_participants,
+          destination: newExcursionData.destination,
+          reg_deadline: new Date(newExcursionData.reg_deadline),
+          dereg_deadline: new Date(newExcursionData.dereg_deadline),
+          meeting_details: newExcursionData.meeting_details,
         };
       });
       setNotApprovedExcursions(transformedNewExcursions);
@@ -176,7 +178,7 @@ const LoggedInView = () => {
   //organiser is loggedin, the excursion list & logout button is visible, greet the user by the name
   if (
     state.whichComponentToShow === "ExcursionList" &&
-    UserStore.name_last === "Crawford"
+    UserStore.user_type === "o"
   ) {
     return (
       <div className="loggedInView">
@@ -213,7 +215,7 @@ const LoggedInView = () => {
     );
     // Excursion form will be displayed with logout button for organiser
   } else if (
-    UserStore.name_last === "Crawford" &&
+    UserStore.user_type === "o" &&
     state.whichComponentToShow === "NewExcursionEntry"
   ) {
     return (
@@ -229,7 +231,7 @@ const LoggedInView = () => {
     );
     //
   } else if (
-    UserStore.name_last === "Scroggins" &&
+    UserStore.user_type === "a" &&
     state.whichComponentToShow === "ExcursionList"
   ) {
     return (

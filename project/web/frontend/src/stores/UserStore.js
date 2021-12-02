@@ -9,7 +9,8 @@ class UserStore {
       isLoggedIn: false,
       name_first: " ",
       name_last: " ",
-      id: " ",
+      user_type: " ",
+      user_id: " ",
     });
   }
 }

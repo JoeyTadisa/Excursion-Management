@@ -95,11 +95,16 @@ section {
 }
 .pending-for-approval {
   color: #d2691e;
+  font-weight: 600;
 }
-
 .pending-for-approval-box {
-  border: 7px solid #d2691e;
-  margin: 1px auto;
+  height: 80%;
+  border: 6px solid #d2691e;
+  background: #d2691e;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 100%;
+  box-sizing: content-box;
 }
 
 /* max-width: 40rem; 
