@@ -15,7 +15,7 @@ import com.thuexcursion.crud.model.Booking;
  * */
 public interface BookingRepository extends JpaRepository<Booking,Integer>{
 
-	@Query(value="select id_booking,date_booked,booked_by,id_excursion from booking where booked_by = :user_id", nativeQuery=true)
+	@Query(value="select id_booking,date_booked,booked_by,id_excursion,is_deregistered,date_deregistered from booking where booked_by = :user_id", nativeQuery=true)
 	List<Booking> findByUserId(int user_id);
 
 

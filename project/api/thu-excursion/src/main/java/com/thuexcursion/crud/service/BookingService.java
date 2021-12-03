@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import com.thuexcursion.crud.model.Booking;
 import com.thuexcursion.crud.repository.BookingRepository;
 
+/*import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;*/
+
 @Service
 public class BookingService {
 	
@@ -62,7 +66,13 @@ public class BookingService {
 	} */
 	
 	
-	
+	public Booking deregisterBooking(int id, boolean status) {		
+		Booking existingBooking = repository.findById(id).orElse(null);
+		existingBooking.setIs_deregistered(status);
+		//existingBooking.setDate_deregistered(null);
+		return repository.save(existingBooking);
+	}
+
 	
 
 

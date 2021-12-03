@@ -44,6 +44,14 @@ public class Booking {
 	@Column(name = "id_excursion")
 	private int id_excursion;
 
+	@Column(nullable = false, name = "is_deregistered", insertable = false, updatable = true)
+	private boolean is_deregistered;
+
+	@Column(name = "date_deregistered")
+	private Date date_deregistered;
+
+
+
 	
 	public Booking() {
 		
@@ -106,7 +114,27 @@ public class Booking {
 	public void setId_excursion(int id_excursion) {
 		this.id_excursion = id_excursion;
 	}
+
+	/*
+	* For deregistration
+	*/
 	
+	public boolean getIs_deregistered() {
+		return is_deregistered;
+	}
+
+	public void setIs_deregistered(boolean is_deregistered) {
+		this.is_deregistered = is_deregistered;
+	}
+
+	public Date getDate_deregistered() {
+		return date_deregistered;
+	}
+
+	public void setDate_deregistered(Date date_deregistered) {
+		this.date_deregistered = date_deregistered;
+	}
 	
+
 	
 }

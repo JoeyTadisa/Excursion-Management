@@ -49,7 +49,7 @@ public class ExcursionService {
 	public Excursion updateExcursion(Excursion excursion) {
 		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
 		 existingExcursion.setDescription(excursion.getDescription());
-		 existingExcursion.setDate_written(excursion.getDate_written());
+		 //existingExcursion.setDate_written(excursion.getDate_written());
 		 existingExcursion.setMax_participants(excursion.getMax_participants());
 		 existingExcursion.setReg_deadline(excursion.getReg_deadline());
 		 existingExcursion.setDereg_deadline(excursion.getDereg_deadline());

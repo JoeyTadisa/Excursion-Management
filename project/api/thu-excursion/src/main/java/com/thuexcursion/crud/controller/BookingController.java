@@ -50,25 +50,20 @@ public class BookingController {
 	}
 
 
-	
-
-	/*@GetMapping("/user/{username}")
-	public User getUserByUsername(@PathVariable String username) {
-		return service.getUserByUsername(username);
-	}*/
-
-
-
-
-
-	/*@PutMapping("/updateUser")
-	public Booking updateUser(@RequestBody User user) {
-		return service.updateUser(user);
+	@GetMapping("/booking/{id}")
+	public Booking getBookingById(@PathVariable int id) {
+		return service.getBookingById(id);
 	}
 
-	@DeleteMapping("/deleteUser/{id}")
-	public String deleteUser(@PathVariable int id) {
-		return service.deleteUser(id);
-	} */
+	/*
+		id - booking id
+		status - true for deregister, false for re-registration 
+	*/
+	@PutMapping("/deregisterBooking/{id}/{status}")
+	public Booking deregisterBooking(@PathVariable int id, boolean status) {
+		return service.deregisterBooking(id, status);
+	}
+
+	
 
 }
