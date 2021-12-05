@@ -8,10 +8,13 @@ import java.util.Optional;
 
 import com.thuexcursion.crud.model.User;
 
-/*
- * This interface extends JpaRepository which contains the api of basic CRUD operations, pagination and sorting
- * In this way, boilerplate code like sql statements do not need to be written explicitly 
- * */
+/**
+* UserRepository interface extends JpaRepository which contains the api of basic CRUD operations for User entity, pagination and sorting.
+* In this way, boilerplate code like sql statements do not need to be written explicitly.
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value="select u.user_id, u.user_number, u.user_type, u.username, u.password, u.firstname, u.lastname, u.email, u.address, u.is_active from user u where username = :username and password = :password", nativeQuery = true)
     User findLoginCredentials(String username, String password);

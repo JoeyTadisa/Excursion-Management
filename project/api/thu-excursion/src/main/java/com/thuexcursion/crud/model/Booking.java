@@ -18,11 +18,15 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
 
- // Booking table has foreign key pointing to User table
+/**
+* Booking class is an entity/model class which maps to mysql table. Each private variables maps to a field of booking table.
+* Booking class also contains the classic setters and getters for all the variables mapped to booking table fields
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -107,14 +111,26 @@ public class Booking {
 		this.booked_by = booked_by;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getId_excursion() {
 		return id_excursion;
 	}
 
+	
+	/** 
+	 * @param id_excursion
+	 */
 	public void setId_excursion(int id_excursion) {
 		this.id_excursion = id_excursion;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	/*
 	* For deregistration
 	*/
@@ -123,14 +139,26 @@ public class Booking {
 		return is_deregistered;
 	}
 
+	
+	/** 
+	 * @param is_deregistered
+	 */
 	public void setIs_deregistered(boolean is_deregistered) {
 		this.is_deregistered = is_deregistered;
 	}
 
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getDate_deregistered() {
 		return date_deregistered;
 	}
 
+	
+	/** 
+	 * @param date_deregistered
+	 */
 	public void setDate_deregistered(Date date_deregistered) {
 		this.date_deregistered = date_deregistered;
 	}

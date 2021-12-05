@@ -8,10 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.thuexcursion.crud.model.Excursion;
 
-/*
- * This interface extends JpaRepository which contains the api of basic CRUD operations, pagination and sorting
- * In this way, boilerplate code like sql statements do not need to be written explicitly 
- * */
+
+/**
+* ExcursionRepository interface extends JpaRepository which contains the api of basic CRUD operations for Excursion entity, pagination and sorting.
+* In this way, boilerplate code like sql statements do not need to be written explicitly.
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
+
 public interface ExcursionRepository extends JpaRepository<Excursion,Integer>{
 
 

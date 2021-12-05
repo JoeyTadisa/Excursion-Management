@@ -8,8 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.thuexcursion.crud.model.StudentBookingExcursion;
 import com.thuexcursion.crud.repository.BookingRepository;
-import com.thuexcursion.crud.repository.StudentBookingExcursionRepository;
+import com.thuexcursion.crud.repository.StudentBookingExcursionRepository
 
+/**
+* 
+* StudentBookingExcursionService class is part of Service Layer which main goal is to handle the details of the persistence mechanism.
+* StudentBookingExcursionService class handles business requirements related to student-booking and excursion relationship
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 @Service
 public class StudentBookingExcursionService {
 	

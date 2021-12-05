@@ -12,10 +12,13 @@ import com.thuexcursion.crud.service.BookingService;
 import com.thuexcursion.crud.service.StudentBookingExcursionService;
 
 
-/*
- * Controller contains all the endpoints related to the associated entity/model
- * 
- * */
+/**
+* BookingController class contains all the REST API endpoints for Booking functionality
+* 
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 
 @CrossOrigin
 @RestController
@@ -28,37 +31,65 @@ public class BookingController {
 	private StudentBookingExcursionService student_booking_excursion_service;
 
 	
+	
+	/** 
+	 * @param booking
+	 * @return Booking
+	 */
 	@PostMapping("/bookAnExcursion")
 	public Booking addBooking(@RequestBody Booking booking) {
 		return service.saveBooking(booking);
 	}
 
+	
+	/** 
+	 * @param bookings
+	 * @return List<Booking>
+	 */
 	@PostMapping("/bookExcursions")
 	public List<Booking> addBookings(@RequestBody List<Booking> bookings) {	
 		return service.saveBookings(bookings);
 	}
 
+	
+	/** 
+	 * @return List<Booking>
+	 */
 	@GetMapping("/bookings")
 	public List<Booking> findAllbBookings() {
 		return service.getBookings();
 	}
 
-	//Get bookings by student id - which bookings does student x has? 
-	@GetMapping("bookingsbystudent/{user_id}")
-	public List<StudentBookingExcursion> getBookingByUserId(@PathVariable int user_id) {
-		return student_booking_excursion_service.getBookingsyPerStudent(user_id);
+	
+	/** 
+	 * 
+	 * @param matriculation_number represents the matriculation number of a student
+	 * @return List<StudentBookingExcursion> returns list of excursions booked by a student
+	 */
+	
+	@GetMapping("bookingsbystudent/{matriculation_number}")
+	public List<StudentBookingExcursion> getBookingByUserId(@PathVariable int matriculation_number) {
+		return student_booking_excursion_service.getBookingsyPerStudent(matriculation_number);
 	}
 
 
+	
+	/** 
+	 * @param id
+	 * @return Booking
+	 */
 	@GetMapping("/booking/{id}")
 	public Booking getBookingById(@PathVariable int id) {
 		return service.getBookingById(id);
 	}
 
-	/*
-		id - booking id
-		status - true for deregister, false for re-registration 
-	*/
+	
+	/** 
+	 * @param id 
+	 * @param status
+	 * @return Booking
+	 */
+
 	@PutMapping("/deregisterBooking/{id}/{status}")
 	public Booking deregisterBooking(@PathVariable int id, boolean status) {
 		return service.deregisterBooking(id, status);

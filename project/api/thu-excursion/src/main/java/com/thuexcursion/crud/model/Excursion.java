@@ -23,9 +23,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+/**
+* Excursion class is an entity/model class which maps to mysql table. Each private variables maps to fields of Excursion table.
+* Excursion class also contains the classic setters and getters for all the variables mapped to booking table fields
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -307,26 +311,50 @@ public class Excursion {
 	}
 	
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getIs_approved() {
 		return is_approved;
 	}
 
+	
+	/** 
+	 * @param is_approved
+	 */
 	public void setIs_approved(boolean is_approved) {
 		this.is_approved = is_approved;
 	}
 	
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getDate_reviewed() {
 		return date_reviewed;
 	}
 	
+	
+	/** 
+	 * @param date_reviewed
+	 */
 	public void setDate_reviewed(Date date_reviewed) {
 		this.date_reviewed = date_reviewed;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getReviewed_by() {
 		return reviewed_by;
 	}
 	
+	
+	/** 
+	 * @param reviewed_by
+	 */
 	public void setReviewed_by(int reviewed_by) {
 		this.reviewed_by = reviewed_by;
 	}

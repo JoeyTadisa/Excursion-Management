@@ -13,29 +13,61 @@ import com.thuexcursion.crud.repository.BookingRepository;
 import java.util.Date;
 import java.text.SimpleDateFormat;*/
 
+/**
+* 
+* BookingService class is part of Service Layer which main goal is to handle the details of the persistence mechanism.
+* BookingService class handles business requirements related to booking functionality
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
+
 @Service
 public class BookingService {
 	
 	@Autowired
 	private BookingRepository repository;
 	
+	
+	/** 
+	 * @param booking
+	 * @return Booking
+	 */
 	public Booking saveBooking(Booking booking) {
 		return repository.save(booking);
 	}
 	
+	
+	/** 
+	 * @param bookings
+	 * @return List<Booking>
+	 */
 	public List<Booking> saveBookings(List<Booking> bookings) {
 		return repository.saveAll(bookings);
 	}
 	
+	
+	/** 
+	 * @return List<Booking>
+	 */
 	public List<Booking> getBookings(){
 		return repository.findAll();
 	}
 	
 	
+	
+	/** 
+	 * @param id
+	 * @return Booking
+	 */
 	public Booking getBookingById(int id){
 		return repository.findById(id).orElse(null);
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	//login
 	/*public Excursion getExcursionByUsername(String username){
 		return repository.findByUsername(username);
@@ -46,11 +78,20 @@ public class BookingService {
 		 return "excursion removed!" + id;
 	}
 
+	
+	/** 
+	 * @param user_id
+	 * @return List<Booking>
+	 */
 	public List<Booking> getBookingByUserId(int user_id) {
 		return repository.findByUserId(user_id);
 	}
 
 
+	
+	/** 
+	 * @return Booking
+	 */
 	/*public Booking updateExcursion(Booking booking) {
 		Booking existingExcursion = repository.findById(booking.getId()).orElse(booking);
 		 existingExcursion.setDescription(booking.getDescription());

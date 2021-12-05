@@ -18,9 +18,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+/**
+* StudentBookingExcursion interface is an entity/model which maps to student_booking_excursion view in mysql database. 
+* This interface only contains the getters as view also is only used for fetching the data
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 
 // This represents a native view
 public interface StudentBookingExcursion {
