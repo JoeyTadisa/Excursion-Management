@@ -14,9 +14,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+/**
+* User class is an entity/model class which maps to mysql table. Each private variables maps to fields of User table.
+* User class also contains the classic setters and getters for all the variables mapped to user table fields
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Joey Mafukidze
+* 
+*/
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -87,62 +91,134 @@ public class User {
 	}
 
 	
+	  
+	  /** 
+	   * @return int
+	   */
 	  public int getId() { 
 		  return id; 
 	  }
 	  
+	  
+	  /** 
+	   * @param id
+	   */
 	  public void setId(int id) { 
 		  this.id = id; 
 	  }
+	  
+	  /** 
+	   * @return int
+	   */
 	  public int getUser_no() { 
 		  return user_number;
 	  }
+	  
+	  /** 
+	   * @param user_number
+	   */
 	  public void setUser_no(int user_number) { 
 		  this.user_number = user_number;
 	  } 
+	  
+	  /** 
+	   * @return char
+	   */
 	  public char getUser_type() { 
 		return user_type;
 	}
+	
+	/** 
+	 * @param user_type
+	 */
 	public void setUser_type(char user_type) { 
 		this.user_type = user_type;
 	}  
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getName_first() { 
 		  return name_first; 
 	  } 
+	  
+	  /** 
+	   * @param name_first
+	   */
 	  public void setName_first(String name_first) { 
 		  this.name_first = name_first; 
 	  } 
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getName_last() { 
 		  return name_last; 
 	  } 
+	  
+	  /** 
+	   * @param name_last
+	   */
 	  public void setName_last(String name_last) { 
 		  this.name_last = name_last; 
 	  } 
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getEmail() { 
 		  return email; 
 	  } 
+	  
+	  /** 
+	   * @param email
+	   */
 	  public void setEmail(String email) { 
 		  this.email = email; 
 	  } 
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getAddress() { 
 		  return address; 
 	  } 
+	  
+	  /** 
+	   * @param address
+	   */
 	  public void setAddress(String address) { 
 		  this.address = address; 
 	  } 
 
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getUsername() { 
 		return username; 
 	  } 
 
+	  
+	  /** 
+	   * @param username
+	   */
 	  public void setUsername(String username) { 
 		this.username = username; 
 	  } 
 
+	  
+	  /** 
+	   * @return String
+	   */
 	  public String getPassword() { 
 		return password; 
 	  } 
 
+	  
+	  /** 
+	   * @param password
+	   */
 	  public void setPassword(String password) { 
 		this.password = password; 
 	  } 
