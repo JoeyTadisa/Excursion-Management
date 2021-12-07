@@ -1,19 +1,22 @@
 import React from "react";
 import ExcursionForm from "./Excursions/ExcursionForm";
 
-const newExcursionEntry = (props) => {
-  const saveExcursionDataHandler = (enteredExcursionData) => {
-    const excursionData = {
-      ...enteredExcursionData,
-      id: Math.random().toString(),
-    };
-    console.log(excursionData);
-    props.onAddExcursion(excursionData);
-  };
+const NewExcursionEntry = (props) => {
+  // newly created excursion is sent and saved in backend
+  async function saveExcursionDataHandler(excursion) {
+    const response = await fetch("http://localhost:9191/addExcursion", {
+      method: "POST",
+      body: JSON.stringify(excursion),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+  }
 
   return (
-    // once the excursionForm is submitted, new excursionData 
-    // the form is closed and the new excursion data is passed to 
+    // once the excursionForm is submitted, new excursionData
+    // the form is closed and the new excursion data is passed to
     <div className="new-excursion-entry">
       <ExcursionForm
         onSaveExcursionData={saveExcursionDataHandler}
@@ -23,4 +26,4 @@ const newExcursionEntry = (props) => {
   );
 };
 
-export default newExcursionEntry;
+export default NewExcursionEntry;

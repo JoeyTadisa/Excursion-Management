@@ -71,37 +71,23 @@ class LoginForm extends React.Component {
         result.name_last.charAt(0).toUpperCase() + result.name_last.slice(1);
       UserStore.id = result.idAdmin;
 
-      //result && result.success
+      UserStore.user_type = result.user_type;
+      UserStore.user_id = result.user_id;
+
+      //result success
       if (result) {
         UserStore.isLoggedIn = true;
-
-        console.log(UserStore.isLoggedIn);
-        console.log(result);
-        //temporary code
-        if (result.idAdmin == 6) {
-          alert("organizer");
-          console.log("go to the organizer page");
-          // UserStore.username = result.username;
-          //go to admin page
-        } else if (result.idAdmin == 7) {
-          alert("admin");
-          console.log("go to the admin page");
-          //UserStore.username = result.username;
-        }
-        //go to organizer page
-        // } else {
-        // alert("You are not registered!");
-        // this.resetForm();
-        // }
-        //if admin id is 1 - go to admin page
-        // if admin id is 2 - go to organizer page
-        //UserStore.username = result.username;
-      } else if (result && result.success === false) {
+        UserStore.username = result.username;
+        UserStore.user_type = result.user_type;
+        UserStore.user_id = result.user_id;
+        UserStore.user_no = result.user_no;
+      } else if (result === false) {
         this.resetForm();
         alert(result.msg);
       }
     } catch (e) {
-      console.log(e);
+      UserStore.loading = false;
+      UserStore.isLoggedIn = false;
       this.resetForm();
     }
   }

@@ -19,12 +19,14 @@ class App extends React.Component {
         },
       });
       let result = await res.json();
-      console.log(result);
       //if the user loggedin successefully
       if (result && result.success) {
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
+        UserStore.user_type = result.user_type;
+        UserStore.user_id = result.user_id;
+        UserStore.user_no = result.user_no;
       } else {
         UserStore.loading = false;
         UserStore.isLoggedIn = false;
@@ -48,10 +50,11 @@ class App extends React.Component {
       if (result && result.success) {
         UserStore.isLoggedIn = false;
         UserStore.username = "";
+        UserStore.user_type = "";
+        UserStore.user_id = "";
+        UserStore.user_no = "";
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
   render() {
     if (UserStore.loading) {
