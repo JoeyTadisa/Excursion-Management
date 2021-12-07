@@ -23,15 +23,19 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 //import lombok.Setter;
 
-/*
- * Model classes contains the mapping of mysql tables and the field definitions as well as setters, getters and constructors
- * */
+/**
+* Excursion class is an entity/model class which maps to mysql table. Each private variables maps to fields of Excursion table.
+* Excursion class also contains the classic setters and getters for all the variables mapped to booking table fields
+* Please see the {@link com.baeldung.javadoc.Person} class for true identity
+* @author Charissa Abegail Morales
+* 
+*/
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "excursion")
-@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
+//@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
 //@SecondaryTable(name="excursionapproval")
 public class Excursion {
 	
@@ -95,13 +99,13 @@ public class Excursion {
 	/*@Embedded
 	ExcursionApproval excursionapprovals;*/
 	
-	@Column(name = "is_approved", table="excursionapproval",columnDefinition = "TINYINT default 0")
+	@Column(name = "is_approved")
 	private boolean is_approved; 
 	
-	@Column(name = "datereviewed", table="excursionapproval")
+	@Column(name = "date_reviewed")
 	private Date date_reviewed;
 	
-	@Column(name = "reviewedby", table="excursionapproval")
+	@Column(name = "reviewed_by")
 	private int reviewed_by;
 
 
@@ -308,33 +312,49 @@ public class Excursion {
 	
 	
 	
-	@Column(table="excursionapproval")
+	/** 
+	 * @return boolean
+	 */
 	public boolean getIs_approved() {
 		return is_approved;
 	}
 
 	
-	@Column(table="excursionapproval")
+	/** 
+	 * @param is_approved
+	 */
 	public void setIs_approved(boolean is_approved) {
 		this.is_approved = is_approved;
 	}
 	
-	@Column(table="excursionapproval")
+	
+	/** 
+	 * @return Date
+	 */
 	public Date getDate_reviewed() {
 		return date_reviewed;
 	}
 	
-	@Column(table="excursionapproval")
+	
+	/** 
+	 * @param date_reviewed
+	 */
 	public void setDate_reviewed(Date date_reviewed) {
 		this.date_reviewed = date_reviewed;
 	}
 	
-	@Column(table="excursionapproval")
+	
+	/** 
+	 * @return int
+	 */
 	public int getReviewed_by() {
 		return reviewed_by;
 	}
 	
-	@Column(table="excursionapproval")
+	
+	/** 
+	 * @param reviewed_by
+	 */
 	public void setReviewed_by(int reviewed_by) {
 		this.reviewed_by = reviewed_by;
 	}
