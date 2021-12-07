@@ -11,13 +11,19 @@ class App extends React.Component {
   async componentDidMount() {
     try {
       //API call that expects json
-      let res = await fetch("http://localhost:9191/admin/6", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      let res = await fetch(
+        "http://localhost:9191/login/" +
+          this.state.username +
+          "/" +
+          this.state.password,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       let result = await res.json();
       //if the user loggedin successefully
       if (result && result.success) {
