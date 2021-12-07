@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thuexcursion.crud.model.StudentBookingExcursion;
 import com.thuexcursion.crud.repository.BookingRepository;
-import com.thuexcursion.crud.repository.StudentBookingExcursionRepository
+import com.thuexcursion.crud.repository.StudentBookingExcursionRepository;
 
 /**
 * 
