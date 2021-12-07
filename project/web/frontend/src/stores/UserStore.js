@@ -11,6 +11,7 @@ class UserStore {
       name_last: " ",
       user_type: " ",
       user_id: " ",
+      user_no: " ",
     });
   }
 }

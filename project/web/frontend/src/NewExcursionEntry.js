@@ -12,7 +12,6 @@ const NewExcursionEntry = (props) => {
       },
     });
     const data = await response.json();
-    console.log(data);
   }
 
   return (

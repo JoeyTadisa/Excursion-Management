@@ -13,10 +13,9 @@ const ExcursionsList = (props) => {
     <ul className="excursions-list">
       {props.items.map((excursion) => (
         <ExcursionItem
-          key={excursion.id}
+          id={excursion.id}
           title={excursion.title}
           date={excursion.date_of_excursion}
-          //date={excursion.reg_deadline}
         />
       ))}
     </ul>

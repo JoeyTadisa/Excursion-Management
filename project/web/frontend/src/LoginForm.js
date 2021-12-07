@@ -74,13 +74,14 @@ class LoginForm extends React.Component {
       UserStore.user_type = result.user_type;
       UserStore.user_id = result.user_id;
 
-      //result && result.success
+      //result success
       if (result) {
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
         UserStore.user_type = result.user_type;
         UserStore.user_id = result.user_id;
+        UserStore.user_no = result.user_no;
       } else if (result === false) {
         this.resetForm();
         UserStore.loading = false;
@@ -89,7 +90,6 @@ class LoginForm extends React.Component {
     } catch (e) {
       UserStore.loading = false;
       UserStore.isLoggedIn = false;
-      console.log(e);
       this.resetForm();
     }
   }

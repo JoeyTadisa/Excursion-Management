@@ -2,21 +2,34 @@ import React, { useState } from "react";
 import InputField from "../InputField";
 import SubmitButton from "../SubmitButton";
 
-const ExcursionForm = (props) => {
+const ExcursionFormPopulated = (props) => {
   //new enetered values will be stored in excursionData
 
-  const [enteredExcursionName, setEnteredExcursionName] = useState("");
-  const [enteredExcursionDate, setEnteredExcursionDate] = useState("");
+  const [enteredExcursionName, setEnteredExcursionName] = useState(
+    props.item.title
+  );
+  const [enteredExcursionDate, setEnteredExcursionDate] = useState(
+    props.item.date_of_excursion
+  );
   const [enteredExcursionDestination, setEnteredExcursionDestination] =
-    useState("");
+    useState(props.item.destination);
   const [enteredExcursionDescription, setEnteredExcursionDescription] =
-    useState("");
-  const [enteredMaxNumParticipants, setEnteredMaxNumParticipants] =
-    useState("");
-  const [enteredExcursionFee, setEnteredExcursionFee] = useState("");
-  const [enteredRegistrDeadline, setEnteredRegistrDeadline] = useState("");
-  const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState("");
-  const [enteredMeetingDetails, setEnteredMeetingDetails] = useState("");
+    useState(props.item.description);
+  const [enteredMaxNumParticipants, setEnteredMaxNumParticipants] = useState(
+    props.item.max_participants
+  );
+  const [enteredExcursionFee, setEnteredExcursionFee] = useState(
+    props.item.excursion_fee
+  );
+  const [enteredRegistrDeadline, setEnteredRegistrDeadline] = useState(
+    props.item.reg_deadline
+  );
+  const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState(
+    props.item.dereg_deadline
+  );
+  const [enteredMeetingDetails, setEnteredMeetingDetails] = useState(
+    props.item.meeting_details
+  );
 
   //a new value is past via event (user input)
   const excursionNameChangeHamdler = (event) => {
@@ -50,7 +63,6 @@ const ExcursionForm = (props) => {
   // the whole form is will react on submit
   const submitHandler = (event) => {
     event.preventDefault();
-    var dateReviewed = new Date();
 
     const excursionData = {
       title: enteredExcursionName,
@@ -62,13 +74,6 @@ const ExcursionForm = (props) => {
       reg_deadline: new Date(enteredRegistrDeadline),
       dereg_deadline: new Date(enteredDeregistrDeadline),
       meeting_details: enteredMeetingDetails,
-      date_reviewed: Date.parse(
-        dateReviewed.getFullYear() +
-          "-" +
-          (dateReviewed.getMonth() + 1) +
-          "-" +
-          dateReviewed.getDate()
-      ),
     };
 
     // pass generated here excursionData as argument and newExcursionEntry
@@ -201,4 +206,4 @@ const ExcursionForm = (props) => {
   );
 };
 
-export default ExcursionForm;
+export default ExcursionFormPopulated;
