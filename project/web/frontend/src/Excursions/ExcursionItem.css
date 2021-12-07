@@ -15,6 +15,7 @@
   flex-flow: column-reverse;
   justify-content: flex-start;
   flex: 1;
+  cursor: pointer;
 }
 
 .excursion-item__title h2 {
