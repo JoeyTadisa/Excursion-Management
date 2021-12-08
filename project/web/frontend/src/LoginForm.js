@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
   //the password is no longer than 12 characters
   setInputValue(property, val) {
     val = val.trim();
-    if (val.length > 12) {
+    if (val.length > 16) {
       return;
     }
     //in property passing usermane/password, this way the method could be reused
@@ -76,6 +76,7 @@ class LoginForm extends React.Component {
 
       //result success
       if (result) {
+        UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
         UserStore.user_type = result.user_type;
@@ -83,7 +84,8 @@ class LoginForm extends React.Component {
         UserStore.user_no = result.user_no;
       } else if (result === false) {
         this.resetForm();
-        alert(result.msg);
+        UserStore.loading = false;
+        UserStore.isLoggedIn = false;
       }
     } catch (e) {
       UserStore.loading = false;

@@ -5,10 +5,15 @@ import UserStore from "./stores/UserStore";
 import LoginForm from "./LoginForm";
 import "./App.css";
 import LoggedInView from "./LoggedInView";
+import { configure } from "mobx";
 
 class App extends React.Component {
-  //fetching the data from the database for the login
+  // fetching the data from the database for the login
   async componentDidMount() {
+    // to remove MobX warning regarding - changing observable values without using actions
+    configure({
+      enforceActions: "never",
+    });
     try {
       //API call that expects json
       let res = await fetch(

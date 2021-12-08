@@ -45,10 +45,6 @@ public class MavenWrapperDownloader {
      */
     private static final String PROPERTY_NAME_WRAPPER_URL = "wrapperUrl";
 
-    
-    /** 
-     * @param args[]
-     */
     public static void main(String args[]) {
         System.out.println("- Downloader started");
         File baseDirectory = new File(args[0]);
@@ -98,12 +94,6 @@ public class MavenWrapperDownloader {
         }
     }
 
-    
-    /** 
-     * @param urlString
-     * @param destination
-     * @throws Exception
-     */
     private static void downloadFileFromURL(String urlString, File destination) throws Exception {
         if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
             String username = System.getenv("MVNW_USERNAME");

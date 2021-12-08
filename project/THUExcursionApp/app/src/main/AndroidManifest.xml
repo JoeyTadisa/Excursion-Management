@@ -15,7 +15,7 @@
         android:theme="@style/Theme.THUExcursionApp"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ExcursionList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,6 @@
         </activity>
 
         <activity android:name=".RegistrationCompleted" />
-        <activity android:name=".ExcursionList" />
         <activity android:name=".ExcursionDetails"/>
 
     </application>

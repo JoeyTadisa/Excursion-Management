@@ -11,7 +11,8 @@ const ExcursionsDetailedList = (props) => {
           <ExcursionDetailedItem
             key={excursion.id}
             title={excursion.title}
-            //excursion_date={excursion.excursion_date}
+            date_of_excursion={excursion.date_of_excursion}
+            excursion_fee={excursion.excursion_fee}
             description={excursion.description}
             max_participants={excursion.max_participants}
             reg_deadline={excursion.reg_deadline}
