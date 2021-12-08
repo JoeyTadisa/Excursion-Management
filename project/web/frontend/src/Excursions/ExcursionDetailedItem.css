@@ -43,6 +43,30 @@
   padding: 0 0 0 3.5rem;
 }
 
+.footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reject,
+.approve {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: #ff8c00;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.reject {
+  background-color: rgb(220, 50, 20);
+}
+
 /* @media (min-width: 400px) {
   .excursion-item {
     flex-direction: row;
