@@ -2,25 +2,18 @@ package com.teamfive.thuexcursionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -28,11 +21,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
+
+/**
+ * @author Patrik Hanzséros
+ * ExcursionList class with the appropiate excursion_list.xml
+ */
 
 public class ExcursionList extends AppCompatActivity {
 
@@ -40,12 +34,18 @@ public class ExcursionList extends AppCompatActivity {
     ListView excursionListView;
     ArrayList<ExcursionEntry> excursionArrayList;
 
+
+
+    /**
+     * onCreate method is called when the Activity is running
+     * @param savedInstanceState is always null running the Activity for the first time
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_list);
 
-        TextView tv = findViewById(R.id.json);
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -57,13 +57,30 @@ public class ExcursionList extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        tv.setText("Response is: "+ response.substring(0,500));
                         try{
+                            /**
+                             * @param response has the JSON response from the API as a string
+                             * @param array -> from String response we made a JSONArray
+                             * @param excursionTitlesForListview Dynamic String array to store titles for ListView
+                             * @param excursionArrayList to store ExcursionEntry objects in the ArrayList
+                             */
                             JSONArray array = new JSONArray(response);
                             excursionTitlesForListview = new String[array.length()];
                             excursionArrayList = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
+                                /**
+                                 * @param array We go through the array
+                                 * @param jsonResponse as JSONObject
+                                 * @param description to get & store the value from jsonResponse by tag "description"
+                                 * @param maxParticipants to get & store value from jsonResponse by tag "max_participants"
+                                 * @param regDeadline to get & store value from jsonResponse by tag "reg_deadline"
+                                 * @param deregDeadline to get & store value from jsonResponse by tag "dereg_deadline"
+                                 * @param meetingDetails to get & store value from jsonResponse by tag "meeting_details"
+                                 * @param title to get & store value from jsonResponse by tag "title"
+                                 * @param dateOfExcursion to get & store value from jsonResponse by tag "date_of_excursion"
+                                 * @param destionation to get & store value from jsonResponse by tag "destination"
+                                 * @param fee to get & store value from jsonResponse by tag "excursion_fee"
+                                 */
                                 JSONObject jsonResponse = array.getJSONObject(i);
                                 String description = jsonResponse.getString("description");
                                 int maxParticipants = jsonResponse.getInt("max_participants");
@@ -72,12 +89,25 @@ public class ExcursionList extends AppCompatActivity {
                                 String meetingDetails = jsonResponse.getString("meeting_details");
                                 String title = jsonResponse.getString("title");
                                 String dateOfExcursion = jsonResponse.getString("date_of_excursion");
-                                excursionArrayList.add(new ExcursionEntry(description, maxParticipants,
-                                        regDeadline, deregDeadline, meetingDetails, title, dateOfExcursion));
+                                String destination = jsonResponse.getString("destination");
+                                double fee = jsonResponse.getDouble("excursion_fee");
 
+                                /**
+                                 * add ExcursionEntry objects with values we got to excursionArrayList
+                                 */
+                                excursionArrayList.add(new ExcursionEntry(description, maxParticipants,
+                                        regDeadline, deregDeadline, meetingDetails, title, dateOfExcursion, destination, fee));
+
+                                /**
+                                 * add titles to show it later on in excursionListView
+                                 */
                                 excursionTitlesForListview[i] = title;
 
                             }
+                            /**
+                             * @param adapter By setting the adapter (ArrayAdapter) to excursionListView, we
+                             *                fill the listview with excursion titles to show them.
+                             */
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                                     getApplicationContext(),
                                     R.layout.excursion_listview_entry,
@@ -92,14 +122,20 @@ public class ExcursionList extends AppCompatActivity {
                             excursionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                                    /**
+                                     * By click on a listview item, it starts a new Activity -> ExcursionDetails
+                                     * Add extra details into the new intent by getting an ExcursionEntry object via position
+                                     */
                                     Intent excursionDetailsIntent = new Intent(ExcursionList.this, ExcursionDetails.class);
                                     excursionDetailsIntent.putExtra("Example item", excursionArrayList.get(pos));
                                     startActivity(excursionDetailsIntent);
                                 }
                             });
 
-
                         } catch (JSONException e) {
+                            /**
+                             * @exception JSONException
+                             */
                             e.printStackTrace();
                        }
                     }
@@ -109,13 +145,20 @@ public class ExcursionList extends AppCompatActivity {
             }
         });
 
-        //10000 is the time in milliseconds adn is equal to 10 sec
+
+        /**
+         * 10000ms = 10sec
+         * Set retry policy
+         */
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        // Add the request to the RequestQueue.
+
+        /**
+         * @param stringRequest is added to queue "RequestQueue"
+         */
         queue.add(stringRequest);
 
 
