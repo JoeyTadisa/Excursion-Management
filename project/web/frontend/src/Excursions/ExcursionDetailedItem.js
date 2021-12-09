@@ -38,6 +38,7 @@ const ExcursionDetailedItem = (props) => {
       const data = await response.json();
 
       onCloseView();
+      alert("✨The excursion was approved✨");
     }
   };
 
@@ -45,6 +46,8 @@ const ExcursionDetailedItem = (props) => {
 
   const onCloseView = () => {
     if (UserStore.user_type === "a")
+      props.setState({ whichComponentToShow: "ExcursionItem" });
+    if (UserStore.user_type === "o")
       props.setState({ whichComponentToShow: "ExcursionItem" });
   };
 
@@ -94,17 +97,28 @@ const ExcursionDetailedItem = (props) => {
           <h2>{props.item.meeting_details}</h2>
         </div>
         <div className="footer">
-          {buttonOkToShow === false && (
+          {buttonOkToShow === false && UserStore.user_type === "a" && (
             <button className="reject" onClick={rejectExcursionAndCloseView}>
               Reject
             </button>
           )}
-          {buttonOkToShow === false && (
+          {/* if admin, approve button is shown at the end of detailed view 
+              to approve & close details */}
+          {buttonOkToShow === false && UserStore.user_type === "a" && (
             <button className="approve" onClick={approveExcursionAndCloseView}>
               Approve
             </button>
           )}
+          {/* if it is approved excursion, close button is shown at the end 
+              of detailed view to close details for both admin & organiser */}
           {buttonOkToShow === true && (
+            <button className="close" onClick={onCloseView}>
+              Close
+            </button>
+          )}
+
+          {/* if organiser, close button is shown at the end of detailed view to close details */}
+          {buttonOkToShow === false && UserStore.user_type === "o" && (
             <button className="close" onClick={onCloseView}>
               Close
             </button>

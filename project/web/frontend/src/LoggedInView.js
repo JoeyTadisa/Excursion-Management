@@ -220,7 +220,9 @@ const LoggedInView = () => {
       <div className="loggedInView">
         <div className="app">
           <div className="container">
-            <NewExcursionEntry />
+            <NewExcursionEntry
+              onBackToExcursionView={BackToExcursionViewHandler}
+            />
           </div>
         </div>
       </div>

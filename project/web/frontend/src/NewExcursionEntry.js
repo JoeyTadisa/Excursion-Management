@@ -12,6 +12,7 @@ const NewExcursionEntry = (props) => {
       },
     });
     const data = await response.json();
+    alert("✨The excursion was added and pending for approval✨");
   }
 
   return (

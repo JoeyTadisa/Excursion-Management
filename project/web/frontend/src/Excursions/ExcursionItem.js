@@ -48,8 +48,8 @@ const ExcursionItem = (props) => {
       if (UserStore.user_type === "a")
         setState({ whichComponentToShow: "ExcursionDetailedItem" });
 
-      // if (UserStore.user_type === "o")
-      //   setState({ whichComponentToShow: "ExcursionFormPopulated" });
+      if (UserStore.user_type === "o")
+        setState({ whichComponentToShow: "ExcursionDetailedItem" });
     } catch (error) {
       setError(error.message);
     }
@@ -60,9 +60,9 @@ const ExcursionItem = (props) => {
   // for better user experience need to display to user
   // if the content is loading/error occured
   let content = <p>The excursion is not found.</p>;
-  let content1 = <p>The excursion is not found.</p>;
+  //let content1 = <p>The excursion is not found.</p>;
 
-  if (UserStore.user_type === "a") {
+  if (UserStore.user_type === "a" || UserStore.user_type === "o") {
     if (excursionByID !== null) {
       content = (
         <ExcursionDetailedItem item={excursionByID} setState={setState} />
@@ -76,17 +76,19 @@ const ExcursionItem = (props) => {
     }
   }
 
-  if (UserStore.user_type === "o") {
-    if (excursionByID !== null) {
-      content1 = <ExcursionFormPopulated item={excursionByID} />;
-    }
-    if (error) {
-      content1 = <p>{error}</p>;
-    }
-    if (isLoading) {
-      content1 = <p>Loading...</p>;
-    }
-  }
+  // if (UserStore.user_type === "o") {
+  //   if (excursionByID !== null) {
+  //     content1 = (
+  //       <ExcursionDetailedItem item={excursionByID} setState={setState} />
+  //     );
+  //   }
+  //   if (error) {
+  //     content1 = <p>{error}</p>;
+  //   }
+  //   if (isLoading) {
+  //     content1 = <p>Loading...</p>;
+  //   }
+  // }
 
   if (
     state.whichComponentToShow === "ExcursionItem" &&
@@ -132,12 +134,12 @@ const ExcursionItem = (props) => {
       </li>
     );
   } else if (
-    state.whichComponentToShow === "ExcursionFormPopulated" &&
+    state.whichComponentToShow === "ExcursionDetailedItem" &&
     UserStore.user_type === "o"
   ) {
     return (
       <div>
-        <section>{content1}</section>
+        <section>{content}</section>
       </div>
     );
   }

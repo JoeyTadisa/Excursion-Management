@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
   //the password is no longer than 12 characters
   setInputValue(property, val) {
     val = val.trim();
-    if (val.length > 12) {
+    if (val.length > 15) {
       return;
     }
     //in property passing usermane/password, this way the method could be reused
