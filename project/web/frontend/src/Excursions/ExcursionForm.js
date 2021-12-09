@@ -16,6 +16,7 @@ const ExcursionForm = (props) => {
   const [enteredRegistrDeadline, setEnteredRegistrDeadline] = useState("");
   const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState("");
   const [enteredMeetingDetails, setEnteredMeetingDetails] = useState("");
+  const [enteredExcursionFee, setEnteredExcursionFee] = useState("");
 
   //a new value is past via event (user input)
   const excursionNameChangeHamdler = (event) => {
@@ -42,6 +43,9 @@ const ExcursionForm = (props) => {
   const meetingDetailsChangeHandler = (event) => {
     setEnteredMeetingDetails(event);
   };
+  const excursionFeeChangeHandler = (event) => {
+    setEnteredExcursionFee(event);
+  };
 
   // the whole form is will react on submit
   const submitHandler = (event) => {
@@ -51,9 +55,10 @@ const ExcursionForm = (props) => {
     const excursionData = {
       title: enteredExcursionName,
       excursion_date: new Date(enteredExcursionDate),
-      //destination: enteredExcursionDestination,
+      destination: enteredExcursionDestination,
       description: enteredExcursionDescription,
       max_participants: enteredMaxNumParticipants,
+      excursion_fee: enteredExcursionFee,
       reg_deadline: new Date(enteredRegistrDeadline),
       dereg_deadline: new Date(enteredDeregistrDeadline),
       meeting_details: enteredMeetingDetails,
@@ -76,6 +81,7 @@ const ExcursionForm = (props) => {
     setEnteredExcursionDestination("");
     setEnteredExcursionDescription("");
     setEnteredMaxNumParticipants("");
+    setEnteredExcursionFee("");
     setEnteredRegistrDeadline("");
     setEnteredDeregistrDeadline("");
     setEnteredMeetingDetails("");
@@ -133,6 +139,15 @@ const ExcursionForm = (props) => {
             placeholder="Maximum number of students"
             value={enteredMaxNumParticipants}
             onChange={maxNumParticipantsChangeHandler}
+          />
+          <label>Excursion fee</label>
+          <InputField
+            type="text"
+            className="form-excursion"
+            id="excursion-fee"
+            placeholder="Excursion fee"
+            value={enteredExcursionFee}
+            onChange={excursionFeeChangeHandler}
           />
           <label>Registration deadline</label>
           <InputField
