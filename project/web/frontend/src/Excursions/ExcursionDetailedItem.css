@@ -76,7 +76,8 @@
 }
 
 .reject,
-.approve {
+.approve,
+.close {
   width: 150px;
   height: 45px;
   margin: 10px;
@@ -90,6 +91,9 @@
 
 .reject {
   background-color: rgb(220, 50, 20);
+}
+.close {
+  background-color: cornflowerblue;
 }
 
 /* @media (min-width: 400px) {

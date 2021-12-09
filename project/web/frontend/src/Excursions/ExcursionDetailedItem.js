@@ -36,10 +36,17 @@ const ExcursionDetailedItem = (props) => {
         },
       });
       const data = await response.json();
+
+      onCloseView();
     }
   };
 
   const rejectExcursionAndCloseView = () => {};
+
+  const onCloseView = () => {
+    if (UserStore.user_type === "a")
+      props.setState({ whichComponentToShow: "ExcursionItem" });
+  };
 
   return (
     <li>
@@ -95,6 +102,11 @@ const ExcursionDetailedItem = (props) => {
           {buttonOkToShow === false && (
             <button className="approve" onClick={approveExcursionAndCloseView}>
               Approve
+            </button>
+          )}
+          {buttonOkToShow === true && (
+            <button className="close" onClick={onCloseView}>
+              Close
             </button>
           )}
         </div>
