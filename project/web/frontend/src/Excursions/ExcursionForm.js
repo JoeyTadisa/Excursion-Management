@@ -54,7 +54,7 @@ const ExcursionForm = (props) => {
 
     const excursionData = {
       title: enteredExcursionName,
-      excursion_date: new Date(enteredExcursionDate),
+      date_of_excursion: new Date(enteredExcursionDate),
       destination: enteredExcursionDestination,
       description: enteredExcursionDescription,
       max_participants: enteredMaxNumParticipants,
