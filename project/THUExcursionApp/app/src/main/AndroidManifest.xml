@@ -25,7 +25,6 @@
         </activity>
 
         <activity android:name=".RegistrationCompleted" />
-        <activity android:name=".ExcursionList" />
         <activity android:name=".ExcursionDetails"/>
 
     </application>
