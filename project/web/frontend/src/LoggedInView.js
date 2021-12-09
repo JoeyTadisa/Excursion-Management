@@ -73,7 +73,6 @@ const LoggedInView = () => {
         };
       });
       setExcursions(transformedExcursions);
-      console.log(excursions);
     } catch (error) {
       setError(error.message);
     }
@@ -127,7 +126,6 @@ const LoggedInView = () => {
         };
       });
       setNotApprovedExcursions(transformedNewExcursions);
-      console.log(notApprovedExcursions);
     } catch (error) {
       setError1(error.message);
     }
@@ -222,9 +220,7 @@ const LoggedInView = () => {
       <div className="loggedInView">
         <div className="app">
           <div className="container">
-            <NewExcursionEntry
-              onBackToExcursionView={BackToExcursionViewHandler}
-            />
+            <NewExcursionEntry />
           </div>
         </div>
       </div>

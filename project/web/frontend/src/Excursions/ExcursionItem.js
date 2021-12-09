@@ -64,7 +64,9 @@ const ExcursionItem = (props) => {
 
   if (UserStore.user_type === "a") {
     if (excursionByID !== null) {
-      content = <ExcursionDetailedItem item={excursionByID} />;
+      content = (
+        <ExcursionDetailedItem item={excursionByID} setState={setState} />
+      );
     }
     if (error) {
       content = <p>{error}</p>;
