@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
@@ -26,7 +27,9 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-<TextView
+
+    <TextView
+
         android:id="@+id/availableExcursionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +45,16 @@
         android:text="@string/available_excursions"
         android:textSize="12sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/json"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available excursions"
+        android:textSize="12dp"
+        android:textStyle="bold"/>
+
+
 
     <Spinner
         android:id="@+id/filterSpinner"
