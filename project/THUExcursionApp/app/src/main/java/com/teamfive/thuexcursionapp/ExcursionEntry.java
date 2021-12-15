@@ -22,6 +22,7 @@ public class ExcursionEntry  implements Parcelable {
     public String dateOfExcursion;
     public String destination;
     public double fee;
+    public int id;
 
 
     /**
@@ -29,7 +30,7 @@ public class ExcursionEntry  implements Parcelable {
      */
     public ExcursionEntry(String description, int maxParticipants, String regDeadline,
                           String deregDeadline, String meetingDetails, String title,
-                          String dateOfExcursion, String destination, double fee){
+                          String dateOfExcursion, String destination, double fee, int id){
         this.description = description;
         this.maxParticipants = maxParticipants;
         this.regDeadline = regDeadline;
@@ -39,6 +40,7 @@ public class ExcursionEntry  implements Parcelable {
         this.dateOfExcursion = dateOfExcursion;
         this.destination = destination;
         this.fee = fee;
+        this.id = id;
     }
 
     /**
@@ -55,6 +57,7 @@ public class ExcursionEntry  implements Parcelable {
         dateOfExcursion = in.readString();
         destination = in.readString();
         fee = in.readDouble();
+        id = in.readInt();
     }
 
 
@@ -152,6 +155,14 @@ public class ExcursionEntry  implements Parcelable {
     }
 
 
+    /**
+     * Get id of excursion
+     * @return id
+     */
+    public int getId() {
+        return id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -171,6 +182,7 @@ public class ExcursionEntry  implements Parcelable {
         parcel.writeString(dateOfExcursion);
         parcel.writeString(destination);
         parcel.writeDouble(fee);
+        parcel.writeInt(id);
     }
 
 }

@@ -1,11 +1,29 @@
 package com.teamfive.thuexcursionapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 /**
  * @author Patrik Hanzséros
@@ -16,7 +34,10 @@ public class ExcursionDetails extends AppCompatActivity {
 
 
     Button registerButton;
+    int id;
+    String dateOfBook;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +48,9 @@ public class ExcursionDetails extends AppCompatActivity {
          */
         registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(v -> {
+
+
+
             Intent intent = new Intent(ExcursionDetails.this, RegistrationCompleted.class);
             startActivity(intent);
         });
@@ -84,6 +108,14 @@ public class ExcursionDetails extends AppCompatActivity {
         double fee = excursionEntry.getFee();
         String stringFee = Double.toString(fee);
 
+        id = excursionEntry.getId();
+
+        LocalDateTime now = LocalDateTime.now();
+        String dateOfBook = now.toString() + "+00:00";
+
+        Toast.makeText(ExcursionDetails.this, dateOfBook, Toast.LENGTH_LONG).show();
+
+
 
         /**
          * Setting text views with the correct excursion details
@@ -117,4 +149,38 @@ public class ExcursionDetails extends AppCompatActivity {
 
 
     }
+
+
+    public void bookPost(){
+        String postUrl = "http://10.0.2.2:9191/bookAnExcursion";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("date_booked", dateOfBook);
+            postData.put("booked_by", "?");
+            postData.put("id_excursion", id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData,
+                new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+
 }

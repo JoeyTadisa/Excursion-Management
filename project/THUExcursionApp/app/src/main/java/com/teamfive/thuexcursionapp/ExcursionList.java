@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +35,7 @@ public class ExcursionList extends AppCompatActivity {
     String[] excursionTitlesForListview;
     ListView excursionListView;
     ArrayList<ExcursionEntry> excursionArrayList;
+    Button refreshButton;
 
 
 
@@ -45,8 +48,26 @@ public class ExcursionList extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_list);
+        fill();
 
+        /**
+         * Whenever the refreshButton is clicked, fill() is called and refreshing the screen.
+         * For test purposes: Toast shows it is clicked.
+         */
+        refreshButton = findViewById(R.id.refreshList);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fill();
+                Toast.makeText(ExcursionList.this, "Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
+    /**
+     * fill() method contains everything to get and work on json & to show it on UI and called in onCreate()
+     */
+    private void fill(){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:9191/excursions";
@@ -80,8 +101,10 @@ public class ExcursionList extends AppCompatActivity {
                                  * @param dateOfExcursion to get & store value from jsonResponse by tag "date_of_excursion"
                                  * @param destionation to get & store value from jsonResponse by tag "destination"
                                  * @param fee to get & store value from jsonResponse by tag "excursion_fee"
+                                 * @param id to get & store excursion id
                                  */
                                 JSONObject jsonResponse = array.getJSONObject(i);
+
                                 String description = jsonResponse.getString("description");
                                 int maxParticipants = jsonResponse.getInt("max_participants");
                                 String regDeadline = jsonResponse.getString("reg_deadline");
@@ -91,12 +114,14 @@ public class ExcursionList extends AppCompatActivity {
                                 String dateOfExcursion = jsonResponse.getString("date_of_excursion");
                                 String destination = jsonResponse.getString("destination");
                                 double fee = jsonResponse.getDouble("excursion_fee");
+                                int id = jsonResponse.getInt("id");
 
                                 /**
                                  * add ExcursionEntry objects with values we got to excursionArrayList
                                  */
                                 excursionArrayList.add(new ExcursionEntry(description, maxParticipants,
-                                        regDeadline, deregDeadline, meetingDetails, title, dateOfExcursion, destination, fee));
+                                        regDeadline, deregDeadline, meetingDetails, title, dateOfExcursion,
+                                        destination, fee, id));
 
                                 /**
                                  * add titles to show it later on in excursionListView
@@ -137,7 +162,7 @@ public class ExcursionList extends AppCompatActivity {
                              * @exception JSONException
                              */
                             e.printStackTrace();
-                       }
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -160,9 +185,6 @@ public class ExcursionList extends AppCompatActivity {
          * @param stringRequest is added to queue "RequestQueue"
          */
         queue.add(stringRequest);
-
-
-
 
     }
 }
