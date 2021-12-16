@@ -6,7 +6,7 @@ import java.util.List;
 public interface SendMailService {
     void sendMail(Mail mail);
 
-    void sendMailToList(List<Mail> mail);
+    void sendMailToList(Mail mail);
 
     void sendMailWithAttachments(Mail mail) throws MessagingException;
 }

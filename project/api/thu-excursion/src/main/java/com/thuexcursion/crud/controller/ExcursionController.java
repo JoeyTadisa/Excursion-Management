@@ -145,17 +145,17 @@ public class ExcursionController {
 	 * this method set approval status to approved
 	 */
 
-	@PutMapping("/excursion/approve")
+	@PutMapping("/api/excursion/approve")
 	public Excursion excursionSetToApproved(@RequestBody Excursion excursion) {
 		return service.excursionSetToApproved(excursion);
 	}
 
-	@PutMapping("/excursion/disapprove")
+	@PutMapping("/api/excursion/disapprove")
 	public Excursion excursionSetToDisapproved(@RequestBody Excursion excursion) {
 		return service.excursionSetToDisapproved(excursion);
 	}
 
-	@PutMapping("/excursion/settopending")
+	@PutMapping("/api/excursion/settopending")
 	public Excursion excursionSetToPending(@RequestBody Excursion excursion) {
 		return service.excursionSetToPending(excursion);
 	}

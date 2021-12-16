@@ -28,7 +28,8 @@ public class EmailController {
     }
 
 	@PostMapping("/sendtolist")
-    public ResponseEntity<String> sendMailToList(@RequestBody List<Mail> mail) {
+    public ResponseEntity<String> sendMailToList(@RequestBody Mail mail) {
+        System.out.println("****** send to list ******");
         service.sendMailToList(mail);
         return new ResponseEntity<>("Email Sent successfully", HttpStatus.OK);
     }
