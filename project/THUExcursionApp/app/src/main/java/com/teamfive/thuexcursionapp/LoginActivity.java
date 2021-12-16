@@ -1,6 +1,7 @@
 package com.teamfive.thuexcursionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -29,10 +30,17 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordInput;
     Button loginButton;
 
+    SharedPreferences rememberUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        rememberUser = getSharedPreferences("login",MODE_PRIVATE);
+        if(rememberUser.getBoolean("logged_IN",false)==true){
+            goToExcursionList();
+        }
 
         usernameInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
@@ -47,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
          * endpoint and a JSON response is used to verify that the user exists in the database.
          */
         loginButton.setOnClickListener(v -> {
-            String url = "http://10.0.2.2:9191/login/" + usernameInput.getText() + "/" + passwordInput.getText();
+            String url = "http://10.0.2.2:9191/login/" + usernameInput.getText().toString().trim() + "/" + passwordInput.getText().toString().trim();
             StringRequest credentialsRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -57,12 +65,18 @@ public class LoginActivity extends AppCompatActivity {
                         String username = studentUser.getString("username");
                         String password = studentUser.getString("password");
                         String userType = studentUser.getString("user_type");
+                        String userID = studentUser.getString("id");
+
+                        SharedPreferences.Editor editor = rememberUser.edit();
+                        editor.clear();
+                        editor.putString("user_id", userID);
+                        editor.apply();
 
                         //accepntance criteria: the user must be of type student and have the correct credentials
-                        if(usernameInput.getText().toString().equals(username) && passwordInput.getText().toString().equals(password) && userType.equals("s")){
+                        if(usernameInput.getText().toString().trim().equals(username) && passwordInput.getText().toString().trim().equals(password) && userType.equals("s")){
                             Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_LONG).show();
-                            Intent intentExcursion = new Intent(LoginActivity.this,ExcursionList.class);
-                            startActivity(intentExcursion); //start the excursion list activity.
+                            rememberUser.edit().putBoolean("logged_IN",true).apply();
+                            goToExcursionList();
                         }else{
                             Toast.makeText(LoginActivity.this, "Wrong Credentials! Please verify your details and try again.", Toast.LENGTH_LONG).show();
                         }
@@ -85,4 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         //invoke the scan login activity when the icon is clicked
         scanLink.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, ScanLoginActivity.class)));
     }
+    public void goToExcursionList(){
+        Intent startExcursionList = new Intent(LoginActivity.this,ExcursionList.class);
+        startActivity(startExcursionList); //start the excursion list activity.
+    }
+
 }

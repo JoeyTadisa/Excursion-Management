@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -21,6 +26,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/excursionDestinationTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        android:text="Destination" />
+
+    <TextView
+        android:id="@+id/excursionDestinationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Example destination"
+        android:textSize="19dp" />
+
+    <TextView
         android:id="@+id/excursionDescriptionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,8 +55,25 @@
     <TextView
         android:id="@+id/excursionDescriptionText"
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="wrap_content"
         android:text="You will learn about: Augsburg’s golden age in the 16th and 17th century ...\nCost: Euro 20 (Payable to International Office latest 07.11.21)..."
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/excursionFeeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        android:text="Excursion fee" />
+
+    <TextView
+        android:id="@+id/excursionFeeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Example fee"
         android:textSize="19dp" />
 
     <TextView
@@ -105,9 +144,11 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="#0054a3"
         android:paddingStart="40dp"
-
         android:paddingEnd="40dp"
+        android:layout_marginBottom="40dp"
         android:text="Register" />
 
 
 </LinearLayout>
+
+</ScrollView>
