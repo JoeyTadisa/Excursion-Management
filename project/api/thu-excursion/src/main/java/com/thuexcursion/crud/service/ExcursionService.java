@@ -155,5 +155,12 @@ public class ExcursionService {
 		 return repository.save(existingExcursion);
 	}
 	
+	/**
+	 * Fetch excursions based on approval_status
+	 */
+
+	public List<Excursion> getExcursionByApprovalStatus(String status){
+		return repository.findExcursionByApprovalStatus(status);
+	}
 
 }

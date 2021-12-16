@@ -159,4 +159,17 @@ public class ExcursionController {
 	public Excursion excursionSetToPending(@RequestBody Excursion excursion) {
 		return service.excursionSetToPending(excursion);
 	}
+
+	/**
+	 * These endpoints are for fetching the excursions depending on the approval_status
+	 * approval_status: pending, approved, disapproved
+	 */
+
+
+	@GetMapping("/api/excursion/approvalstatus/{status}")
+	public List<Excursion> getExcursionByApprovalStatus(@PathVariable String status) {
+		return service.getExcursionByApprovalStatus(status);
+	}
+
+
 }
