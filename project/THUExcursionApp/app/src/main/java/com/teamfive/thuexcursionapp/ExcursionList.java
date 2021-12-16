@@ -65,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 public class ExcursionList extends AppCompatActivity {
 
@@ -76,12 +77,13 @@ public class ExcursionList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_list);
+        //Objects.requireNonNull(getSupportActionBar()).hide();
 //initialize the main toolbar
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
 
-        TextView tv = findViewById(R.id.json);
+        /*TextView tv = findViewById(R.id.json);
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -151,8 +153,8 @@ public class ExcursionList extends AppCompatActivity {
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        TextView tv = findViewById(R.id.json);
+*/
+       // TextView tv = findViewById(R.id.json);
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -165,7 +167,7 @@ public class ExcursionList extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        tv.setText("Response is: "+ response.substring(0,500));
+                       // tv.setText("Response is: "+ response.substring(0,500));
                         try{
                             JSONArray array = new JSONArray(response);
                             excursionTitlesForListview = new String[array.length()];
