@@ -122,4 +122,41 @@ public class ExcursionController {
 	public String deleteExcursion(@PathVariable int id) {
 		return service.deleteExcursion(id);
 	}
+
+
+	@PutMapping("/disapproveExcursion/{id}")
+	public ResponseEntity<Excursion> disapproveExcursion(@PathVariable(value = "id")int id){
+		Excursion excursion = getExcursionById(id);
+		excursion.setIs_approved(false);
+		final Excursion updatedExcursion = updateExcursion(excursion);
+		return ResponseEntity.ok(updatedExcursion);
+	}
+
+	@PutMapping("/disapproveExcursion")
+	public Excursion disapproveExcursion(@RequestBody Excursion excursion) {
+		return service.disapproveExcursion(excursion);
+	}
+
+
+	//new version of approve and disapprove by approval_status
+
+	/**
+	 * initial status of excursion once created is "pending"
+	 * this method set approval status to approved
+	 */
+
+	@PutMapping("/excursion/approve")
+	public Excursion excursionSetToApproved(@RequestBody Excursion excursion) {
+		return service.excursionSetToApproved(excursion);
+	}
+
+	@PutMapping("/excursion/disapprove")
+	public Excursion excursionSetToDisapproved(@RequestBody Excursion excursion) {
+		return service.excursionSetToDisapproved(excursion);
+	}
+
+	@PutMapping("/excursion/settopending")
+	public Excursion excursionSetToPending(@RequestBody Excursion excursion) {
+		return service.excursionSetToPending(excursion);
+	}
 }
