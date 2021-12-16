@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class ExcursionDetails extends AppCompatActivity {
 
-
+//initialize Button
     Button registerButton;
 
     @Override
