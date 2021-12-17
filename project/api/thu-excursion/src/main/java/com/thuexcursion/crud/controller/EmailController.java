@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import javax.mail.MessagingException;
 
+/**
+ * This is a controller class for notification by mail functionality. This class, in the future, might also include all
+ * forms of notification aside from email
+ */
 @RestController
 @RequestMapping("/api/v1/mail/")
 public class EmailController {
@@ -21,18 +25,34 @@ public class EmailController {
         this.service = service;
     }
 
+    /**
+     * 
+     * @param mail an object which contains: sender, receiver and message
+     * @return returns http status and a message if successfully sent
+     */
     @PostMapping("/send")
     public ResponseEntity<String> sendMail(@RequestBody Mail mail) {
         service.sendMail(mail);
         return new ResponseEntity<>("Email Sent successfully", HttpStatus.OK);
     }
 
+     /**
+     * 
+     * @param mail an object which contains: sender, receiver and message which sends to mailing list in user table
+     * @return returns http status and a message if successfully sent
+     */
+
 	@PostMapping("/sendtolist")
     public ResponseEntity<String> sendMailToList(@RequestBody Mail mail) {
-        System.out.println("****** send to list ******");
         service.sendMailToList(mail);
         return new ResponseEntity<>("Email Sent successfully", HttpStatus.OK);
     }
+
+     /**
+     * Not completely implemented yet. (For the future)
+     * @param mail an object which contains: sender, receiver and message.
+     * @return returns http status and a message if successfully sent
+     */
 
     @PostMapping("/attachment")
     public ResponseEntity<String> sendAttachmentEmail(@RequestBody Mail mail) throws MessagingException {

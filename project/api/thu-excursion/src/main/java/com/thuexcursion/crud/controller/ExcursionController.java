@@ -138,9 +138,10 @@ public class ExcursionController {
 	}
 
 
-	//new version of approve and disapprove by approval_status
+	
 
 	/**
+	 * For the new approach in approval_status
 	 * initial status of excursion once created is "pending"
 	 * this method set approval status to approved
 	 */
@@ -161,7 +162,7 @@ public class ExcursionController {
 	}
 
 	/**
-	 * These endpoints are for fetching the excursions depending on the approval_status
+	 * This endpoint is for fetching excursions based on approval_status
 	 * approval_status: pending, approved, disapproved
 	 */
 
