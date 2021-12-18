@@ -36,6 +36,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //Objects.requireNonNull(getSupportActionBar()).hide();
+
+        rememberUser = getSharedPreferences("login",MODE_PRIVATE);
+        if(rememberUser.getBoolean("logged_IN",false)==true){
+            goToExcursionList();
+        }
 
         rememberUser = getSharedPreferences("login",MODE_PRIVATE);
         if(rememberUser.getBoolean("logged_IN",false)==true){
@@ -49,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        //Objects.requireNonNull(getSupportActionBar()).hide();
         /*
          * When the sign in button is pressed, the data entered in the EditText fields is passed through the API's
          * endpoint and a JSON response is used to verify that the user exists in the database.
@@ -80,9 +89,9 @@ public class LoginActivity extends AppCompatActivity {
                         }else{
                             Toast.makeText(LoginActivity.this, "Wrong Credentials! Please verify your details and try again.", Toast.LENGTH_LONG).show();
                         }
-                        }  catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    }  catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }, error -> Toast.makeText(LoginActivity.this, "Some error occurred -> "+ error, Toast.LENGTH_LONG).show()){
                 @Override

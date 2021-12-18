@@ -1,7 +1,11 @@
 package com.teamfive.thuexcursionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -37,8 +42,6 @@ public class ExcursionList extends AppCompatActivity {
     ArrayList<ExcursionEntry> excursionArrayList;
     Button refreshButton;
 
-
-
     /**
      * onCreate method is called when the Activity is running
      * @param savedInstanceState is always null running the Activity for the first time
@@ -49,6 +52,10 @@ public class ExcursionList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_list);
         fill();
+
+        //initialize the main toolbar
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
 
         /**
          * Whenever the refreshButton is clicked, fill() is called and refreshing the screen.
@@ -70,7 +77,7 @@ public class ExcursionList extends AppCompatActivity {
     private void fill(){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:9191/excursions";
+        String url = "http://10.0.2.2:9191/approvedExcursions/true";
 
 
         // Request a string response from the provided URL.
@@ -187,4 +194,41 @@ public class ExcursionList extends AppCompatActivity {
         queue.add(stringRequest);
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item) {
+//menu option account, goes to the account Info page
+        int id =item.getItemId();
+        if(id== R.id.studentaccount){
+            Intent accountIntent = new Intent(ExcursionList.this, AccountInfo.class);
+            startActivity(accountIntent);
+            return false;
+        }
+        //menu option about us, directs to wiki page about the app
+        if(id== R.id.aboutus) {
+            Intent aboutusIntent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://github.com/JoeyTadisa/Excursion-Management/wiki/Welcome-to-the-THU-excursion-App!"));
+            startActivity(aboutusIntent);
+            return false;
+        }
+
+       if(id==R.id.logout){
+           logout();
+           Intent startLoginActivity = new Intent(ExcursionList.this, LoginActivity.class);
+           startActivity(startLoginActivity);
+       }
+
+        return super.onOptionsItemSelected(item);
+    }
+    public void logout(){
+        SharedPreferences rememberUser = getSharedPreferences("login",MODE_PRIVATE);
+        SharedPreferences.Editor editor = rememberUser.edit();
+        editor.clear();
+        editor.putBoolean("Logged_IN", false);
+        editor.apply();
+    }
 }
+

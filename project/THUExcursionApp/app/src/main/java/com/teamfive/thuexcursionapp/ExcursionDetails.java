@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class ExcursionDetails extends AppCompatActivity {
     Button registerButton;
     int id;
     String dateOfBook;
+    SharedPreferences userId;
+    String stringUserId;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -48,9 +51,7 @@ public class ExcursionDetails extends AppCompatActivity {
          */
         registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(v -> {
-
-
-
+            bookPost();
             Intent intent = new Intent(ExcursionDetails.this, RegistrationCompleted.class);
             startActivity(intent);
         });
@@ -110,12 +111,10 @@ public class ExcursionDetails extends AppCompatActivity {
 
         id = excursionEntry.getId();
 
-        LocalDateTime now = LocalDateTime.now();
-        String dateOfBook = now.toString() + "+00:00";
+        userId = getSharedPreferences("login", MODE_PRIVATE);
+        stringUserId = userId.getString("user_no", "Default");
 
-        Toast.makeText(ExcursionDetails.this, dateOfBook, Toast.LENGTH_LONG).show();
-
-
+        //Toast.makeText(ExcursionDetails.this, dateOfBook, Toast.LENGTH_LONG).show();
 
         /**
          * Setting text views with the correct excursion details
@@ -144,21 +143,19 @@ public class ExcursionDetails extends AppCompatActivity {
 
         TextView excursionFeeText = findViewById(R.id.excursionFeeText);
         excursionFeeText.setText(stringFee + "€");
-
-
-
-
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void bookPost(){
         String postUrl = "http://10.0.2.2:9191/bookAnExcursion";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JSONObject postData = new JSONObject();
+        LocalDateTime now = LocalDateTime.now();
+        String dateOfBook = now.toString();
         try {
             postData.put("date_booked", dateOfBook);
-            postData.put("booked_by", "?");
+            postData.put("booked_by", stringUserId);
             postData.put("id_excursion", id);
 
         } catch (JSONException e) {
