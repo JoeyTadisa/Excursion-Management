@@ -37,14 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+      /*  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
         //Objects.requireNonNull(getSupportActionBar()).hide();
-
-        rememberUser = getSharedPreferences("login",MODE_PRIVATE);
-        if(rememberUser.getBoolean("logged_IN",false)==true){
-            goToExcursionList();
-        }
 
         rememberUser = getSharedPreferences("login",MODE_PRIVATE);
         if(rememberUser.getBoolean("logged_IN",false)==true){
@@ -75,10 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                         String password = studentUser.getString("password");
                         String userType = studentUser.getString("user_type");
                         String userID = studentUser.getString("id");
+                        String matriculation_no = studentUser.getString("user_no");
 
                         SharedPreferences.Editor editor = rememberUser.edit();
                         editor.clear();
                         editor.putString("user_id", userID);
+                        editor.putString("user_no", matriculation_no);
                         editor.apply();
 
                         //accepntance criteria: the user must be of type student and have the correct credentials
