@@ -1,0 +1,27 @@
+.excursion-date {
+  display: flex;
+  flex-direction: column;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 1px solid #cac9c9;
+  background-color: rgb(17, 82, 180);
+  color: white;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5px;
+}
+
+.excursion-date__month {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.excursion-date__year {
+  font-size: 0.75rem;
+}
+
+.excursion-date__day {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

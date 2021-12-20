@@ -1,0 +1,89 @@
+.excursion-detailed-item-frame {
+  border-radius: 12px;
+  padding: 0.1rem;
+  background-color: rgb(92, 92, 92);
+  margin: 0 auto;
+  max-width: 460px;
+}
+
+.excursion-detailed-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  background-color: #918f8f;
+  max-width: 80%;
+}
+
+.excursion-detailed-item h2 {
+  margin: 0.5rem 0;
+  color: white;
+  text-align: center;
+}
+.excursion-detailed-item h4 {
+  color: rgb(66, 65, 65);
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  text-align: center;
+}
+.reg-and-dereg-dealines {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-dealine {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-flow: column-reverse;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 0 0 0 7rem;
+}
+.dereg-deadline-calender-only {
+  padding: 0 0 0 4rem;
+}
+.dereg-deadline-title-only {
+  padding: 0 0 0 3.5rem;
+}
+
+.footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reject,
+.approve,
+.close {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: #ff8c00;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.reject {
+  background-color: rgb(220, 50, 20);
+}
+.close {
+  background-color: cornflowerblue;
+}
+
+/* @media (min-width: 400px) {
+  .excursion-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+  }
+} */
