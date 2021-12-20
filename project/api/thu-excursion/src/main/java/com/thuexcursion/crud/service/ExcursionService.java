@@ -94,6 +94,10 @@ public class ExcursionService {
 		 existingExcursion.setMax_participants(excursion.getMax_participants());
 		 existingExcursion.setReg_deadline(excursion.getReg_deadline());
 		 existingExcursion.setDereg_deadline(excursion.getDereg_deadline());
+
+		 existingExcursion.setDate_of_excursion(excursion.getDate_of_excursion());
+		 existingExcursion.setExcursion_fee(excursion.getExcursion_fee());
+
 		 existingExcursion.setMeeting_details(excursion.getMeeting_details());
 		 existingExcursion.setTitle(excursion.getTitle());
 		 existingExcursion.setMeeting_details(excursion.getMeeting_details());
