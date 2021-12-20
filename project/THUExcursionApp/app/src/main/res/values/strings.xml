@@ -9,4 +9,7 @@
     <string name="sign_in">sign in</string>
     <string name="scan_login">Scan_login</string>
     <string name="txt_message">Scan</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete">Delete</string>
+    <string name="available_excursions">Available Excursions</string>
 </resources>
