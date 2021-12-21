@@ -1,5 +1,3 @@
-const FIREBASE_DOMAIN = "https://react-prep-default-rtdb.firebaseio.com";
-
 export async function getAllExcursions() {
   const response = await fetch("http://localhost:9191/approvedExcursions/true");
   const data = await response.json();
@@ -62,24 +60,6 @@ export async function getAllNotApprovedExcursions() {
   }
 
   return transformedExcursions;
-}
-
-export async function getExcursionById(excursionId) {
-  const response = await fetch(
-    `${FIREBASE_DOMAIN}/excursions/${excursionId}.json`
-  );
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Could not fetch excursion.");
-  }
-
-  const loadedExcursion = {
-    id: excursionId,
-    ...data,
-  };
-
-  return loadedExcursion;
 }
 
 export async function addExcursion(excursion) {

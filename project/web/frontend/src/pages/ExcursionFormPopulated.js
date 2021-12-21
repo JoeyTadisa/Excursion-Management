@@ -7,19 +7,19 @@ import { updateExcursion } from "../lib/api";
 import useHttp from "../hooks/use-http";
 
 const ExcursionFormPopulated = () => {
-  const { sendRequest, status } = useHttp(updateExcursion);
+  const { sendRequest, status, error } = useHttp(updateExcursion);
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
 
   const convertDate = (rawDate) => {
-    const month = new Date(state.date_of_excursion).toLocaleString("en-US", {
+    const month = new Date(rawDate).toLocaleString("en-US", {
       month: "2-digit",
     });
-    const day = new Date(state.date_of_excursion).toLocaleString("en-US", {
+    const day = new Date(rawDate).toLocaleString("en-US", {
       day: "2-digit",
     });
-    const year = new Date(state.date_of_excursion).getFullYear().toString();
+    const year = new Date(rawDate).getFullYear().toString();
     return year + "-" + month + "-" + day;
   };
 
@@ -127,12 +127,17 @@ const ExcursionFormPopulated = () => {
   };
 
   useEffect(() => {
-    if (status === "completed") {
-      alert("✨ The excursion was updateded ✨");
+    if (status === "completed" && !error) {
+      alert("✨ The excursion was updated ✨");
       history.push("/login/excursions");
     }
+    if (status === "completed" && error) {
+      alert(error);
+      history.push("/login/excursions");
+    }
+
     return () => {};
-  }, [status, history]);
+  }, [status, history, error]);
 
   const closeView = () => {
     history.goBack();
@@ -227,11 +232,13 @@ const ExcursionFormPopulated = () => {
             Update Excursion
           </button>
 
-          <SubmitButton
+          <button
             className="btn btn-primary"
-            text={"Back to Excursions"}
+            id="back-to-excursion"
             onClick={closeView}
-          />
+          >
+            Back to Excursions
+          </button>
         </div>
       </form>
 

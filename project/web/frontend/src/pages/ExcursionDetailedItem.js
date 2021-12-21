@@ -9,7 +9,9 @@ const ExcursionDetailedItem = () => {
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
-  // the button will be shown only if it meets the
+  // passing the approval status for the button
+  // that will be shown only to the admin
+  // const buttonOkToShow = state.approval_status;
   const buttonOkToShow = state.is_approved;
 
   if (!state) {
@@ -29,6 +31,7 @@ const ExcursionDetailedItem = () => {
     const dataForExcursionApproval = {
       id: state.id,
       is_approved: true,
+      // approval_status: "a",
       date_reviewed: date_reviewed,
       reviewed_by: UserStore.user_no,
     };
@@ -36,6 +39,7 @@ const ExcursionDetailedItem = () => {
     changeToApprovedExcursion(dataForExcursionApproval);
 
     // data for excursion a aspproval sent to backend
+    // http://localhost:9191/api/excursion/approve
     async function changeToApprovedExcursion(dataForExcursionApproval) {
       const response = await fetch("http://localhost:9191/approveExcursion", {
         method: "PUT",
@@ -48,15 +52,49 @@ const ExcursionDetailedItem = () => {
         throw new Error("Could not approve the excursion.");
       }
       //const data = await response.json();
-
       onCloseView();
       alert("✨ The excursion was approved ✨");
     }
   };
 
   const rejectExcursionAndCloseView = () => {
-    //TODO
-    onCloseView();
+    let dateReviewed = new Date();
+    const date_reviewed = Date.parse(
+      dateReviewed.getFullYear() +
+        "-" +
+        (dateReviewed.getMonth() + 1) +
+        "-" +
+        dateReviewed.getDate()
+    );
+
+    const dataForExcursionDisapproval = {
+      id: state.id,
+      date_reviewed: date_reviewed,
+      reviewed_by: UserStore.user_no,
+    };
+
+    changeToDisapprovedExcursion(dataForExcursionDisapproval);
+
+    // data for excursion a aspproval sent to backend
+    // http://localhost:9191/api/excursion/disapprove
+    async function changeToDisapprovedExcursion(dataForExcursionDisapproval) {
+      const response = await fetch(
+        "http://localhost:9191/api/excursion/disapprove",
+        {
+          method: "PUT",
+          body: JSON.stringify(dataForExcursionDisapproval),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Could not disapprove the excursion.");
+      }
+      //const data = await response.json();
+      onCloseView();
+      alert("✨ The excursion was disapproved ✨");
+    }
   };
 
   const onCloseView = () => {
@@ -111,14 +149,16 @@ const ExcursionDetailedItem = () => {
           </div>
           <div className="footer">
             {/* only if admin, reject button is shown at the end of detailed view 
-              to reject & close details */}
+              to reject & close details 
+              buttonOkToShow === "p"   */}
             {buttonOkToShow === false && UserStore.user_type === "a" && (
               <button className="reject" onClick={rejectExcursionAndCloseView}>
                 Reject
               </button>
             )}
-            {/* only if admin, approve button is shown at the end of detailed view 
-              to approve & close details */}
+            {/* only if admin and excursion has a pending status, approve button is shown 
+            at the end of detailed view to approve & close details 
+            buttonOkToShow === "p"    */}
             {buttonOkToShow === false && UserStore.user_type === "a" && (
               <button
                 className="approve"
@@ -128,7 +168,8 @@ const ExcursionDetailedItem = () => {
               </button>
             )}
             {/* if it is approved excursion, close button is shown at the end 
-              of detailed view to close details for admin */}
+              of detailed view to close details for admin 
+              buttonOkToShow === "a"   */}
             {buttonOkToShow === true && (
               <button className="close" onClick={onCloseView}>
                 Close
