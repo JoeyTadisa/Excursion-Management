@@ -112,11 +112,59 @@ public class ExcursionService {
 	 */
 	public Excursion approveExcursion(Excursion excursion) {
 		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
-		  existingExcursion.setIs_approved(excursion.getIs_approved());
+		  existingExcursion.setIs_approved(true);
 		 return repository.save(existingExcursion);
 	}
 	
+	public Excursion disapproveExcursion(Excursion excursion) {
+		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
+		  existingExcursion.setIs_approved(false);
+		 return repository.save(existingExcursion);
+	}
 	
 
+	/** 
+	 * New version of approval/disapproval function
+	 * the initial status of excursion once created is "pending"
+	 * this method will set approval_status to approved or value 1
+	 */
+
+	public Excursion excursionSetToApproved(Excursion excursion) {
+		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
+		  existingExcursion.setApproval_status("a");
+		 return repository.save(existingExcursion);
+	}
+
+	/** 
+	 * New version of approval/disapproval function
+	 * initial status of excursion once created is "pending"
+	 * this method will set approval_status (int) to disapproved or value 2
+	 */
+
+	public Excursion excursionSetToDisapproved(Excursion excursion) {
+		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
+		  existingExcursion.setApproval_status("d");
+		 return repository.save(existingExcursion);
+	}
+
+	/** 
+	 * New version of approval/disapproval function
+	 * initial status of excursion once created is "pending"
+	 * this method will set approval_status (int) to pending or value 0
+	 */
+
+	public Excursion excursionSetToPending(Excursion excursion) {
+		Excursion existingExcursion = repository.findById(excursion.getId()).orElse(excursion);
+		  existingExcursion.setApproval_status("p");
+		 return repository.save(existingExcursion);
+	}
+	
+	/**
+	 * Fetch excursions based on approval_status
+	 */
+
+	public List<Excursion> getExcursionByApprovalStatus(String status){
+		return repository.findExcursionByApprovalStatus(status);
+	}
 
 }

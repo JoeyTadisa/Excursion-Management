@@ -20,8 +20,11 @@ import com.thuexcursion.crud.model.Excursion;
 public interface ExcursionRepository extends JpaRepository<Excursion,Integer>{
 
 
-	@Query(value="select distinct idExcursion,dateadded,maxparticipants,regdeadline,deregdeadline,meetingdetails,title,requestedby,description, is_approved,reviewed_by,date_reviewed,destination,date_of_excursion, excursion_fee from excursion where is_approved = :is_approved", nativeQuery=true)
+	@Query(value="select distinct idExcursion,dateadded,maxparticipants,regdeadline,deregdeadline,meetingdetails,title,requestedby,description, is_approved,reviewed_by,date_reviewed,destination,date_of_excursion, excursion_fee, approval_status from excursion where is_approved = :is_approved", nativeQuery=true)
     List<Excursion> findByApprovedExcursion(boolean is_approved);
+
+	@Query(value="select distinct idExcursion,dateadded,maxparticipants,regdeadline,deregdeadline,meetingdetails,title,requestedby,description, is_approved,reviewed_by,date_reviewed,destination,date_of_excursion, excursion_fee, approval_status from excursion where approval_status = :approval_status", nativeQuery=true)
+    List<Excursion> findExcursionByApprovalStatus(String approval_status);
 
 	/*@Query( "select o from excursionapproval o where is_approved in :is_approved" );
 	List<Excursion> findByApprovalStatus(boolean is_approved);*/

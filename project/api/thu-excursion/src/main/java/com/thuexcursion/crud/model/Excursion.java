@@ -93,6 +93,9 @@ public class Excursion {
 	@Basic
 	private double excursion_fee;
 
+	@Column(name = "approval_status")
+	@Basic
+	private String approval_status;
 
 
 	
@@ -116,7 +119,7 @@ public class Excursion {
 	
 	public Excursion(int id, String description, int max_participants, Date reg_deadline,
 			Date dereg_deadline, String meeting_details,String title, int requested_by, boolean is_approved,
-			String destination, Date date_of_excursion, double excursion_fee) {
+			String destination, Date date_of_excursion, double excursion_fee, String approval_status) {
 
 		
 			this.id = id;
@@ -136,6 +139,8 @@ public class Excursion {
 			this.is_approved = false;
 			this.date_reviewed = null;
 			this.reviewed_by = requested_by;
+
+			this.approval_status = approval_status;
 			
 	}
 
@@ -358,6 +363,24 @@ public class Excursion {
 	public void setReviewed_by(int reviewed_by) {
 		this.reviewed_by = reviewed_by;
 	}
+
+	public Date getDate_added() {
+		return date_added;
+	}
+
+	public void setDate_added(Date date_added) {
+		this.date_added = date_added;
+	}
+
+	public String getApproval_status() {
+		return approval_status;
+	}
+
+	public void setApproval_status(String approval_status) {
+		this.approval_status = approval_status;
+	}
+
+	
 
 	
 }

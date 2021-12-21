@@ -16,3 +16,4 @@ public class SpringBootThuexcursionCrudApplication {
 		SpringApplication.run(SpringBootThuexcursionCrudApplication.class, args);
 	}	
 }
+
