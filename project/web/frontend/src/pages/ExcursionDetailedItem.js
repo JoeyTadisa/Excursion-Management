@@ -37,7 +37,6 @@ const ExcursionDetailedItem = () => {
     changeToApprovedExcursion(dataForExcursionApproval);
 
     // data for excursion a aspproval sent to backend
-    // http://localhost:9191/api/excursion/approve
     async function changeToApprovedExcursion(dataForExcursionApproval) {
       const response = await fetch(
         "http://localhost:9191/api/excursion/approve",
