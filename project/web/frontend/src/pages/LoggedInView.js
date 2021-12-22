@@ -42,8 +42,7 @@ const LoggedInView = () => {
     setError(null);
     try {
       const response = await fetch(
-        // http://localhost:9191/api/excursion/approvalstatus/a
-        "http://localhost:9191/approvedExcursions/true"
+        "http://localhost:9191/api/excursion/approvalstatus/a"
       );
 
       // need to check before parsing the response body
@@ -92,8 +91,7 @@ const LoggedInView = () => {
     setError1(null);
     try {
       const response = await fetch(
-        // http://localhost:9191/api/excursion/approvalstatus/p
-        "http://localhost:9191/approvedExcursions/false"
+        "http://localhost:9191/api/excursion/approvalstatus/p"
       );
 
       // need to check before parsing the response body
@@ -134,6 +132,17 @@ const LoggedInView = () => {
   useEffect(() => {
     fetchNotApprovedExcursions();
   }, [fetchNotApprovedExcursions]);
+
+  //define logout function
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
+  };
 
   // for better user experience need to display to user
   // if the content is loading/error occured
@@ -176,12 +185,14 @@ const LoggedInView = () => {
             </button>
           </Link>
         )}
-        <SubmitButton
-          className="logout-btn"
-          text={"Log out"}
-          disabled={false}
-          onClick={() => this.doLogout()}
-        />
+        <Link to="/login">
+          <SubmitButton
+            className="logout-btn"
+            text={"Log out"}
+            disabled={false}
+            onClick={doLogout}
+          />
+        </Link>
         <br />
         <h4 className="pending-for-approval">Pending for approval</h4>
         <section className="pending-for-approval-box">{content1}</section>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputField from "../components/UI/InputField";
 import UserStore from "../components/stores/UserStore";
 import SubmitButton from "../components/UI/SubmitButton";
-import { useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { updateExcursion } from "../lib/api";
 import useHttp from "../hooks/use-http";
 
@@ -132,15 +132,24 @@ const ExcursionFormPopulated = () => {
       history.push("/login/excursions");
     }
     if (status === "completed" && error) {
-      alert(error);
+      alert("😅 The excursion was not updated");
       history.push("/login/excursions");
     }
-
-    return () => {};
   }, [status, history, error]);
 
   const closeView = () => {
     history.goBack();
+  };
+
+  //define logout function
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
   };
 
   return (
@@ -242,12 +251,14 @@ const ExcursionFormPopulated = () => {
         </div>
       </form>
 
-      <SubmitButton
-        className="logout-btn"
-        text={"Log out"}
-        disabled={false}
-        onClick={() => this.doLogout()}
-      />
+      <Link to="/login">
+        <SubmitButton
+          className="logout-btn"
+          text={"Log out"}
+          disabled={false}
+          onClick={doLogout}
+        />
+      </Link>
     </div>
   );
 };

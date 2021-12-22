@@ -5,7 +5,7 @@ class UserStore {
   constructor() {
     //contains properties for this store
     extendObservable(this, {
-      loading: true,
+      loading: false,
       isLoggedIn: false,
       username: " ",
       name_first: " ",
