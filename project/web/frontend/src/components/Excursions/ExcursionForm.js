@@ -3,6 +3,7 @@ import InputField from "../UI/InputField";
 import SubmitButton from "../UI/SubmitButton";
 import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
+import UserStore from "../stores/UserStore";
 
 const ExcursionForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
@@ -100,6 +101,17 @@ const ExcursionForm = (props) => {
     setIsEntering(false);
   };
 
+  //define logout function
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
+  };
+
   return (
     <Fragment>
       {/* if the user tries to leave the page show a message */}
@@ -113,7 +125,6 @@ const ExcursionForm = (props) => {
         <h4>Excursion Form</h4>
         <form onFocus={formFocusedHandler} onSubmit={submitHandler}>
           <div className="excursionFormF">
-            {/*<label for="meeting-details">Meeting details</label>*/}
             <label>Excursion name</label>
             <InputField
               type="text"
@@ -224,12 +235,14 @@ const ExcursionForm = (props) => {
           <button className="btn btn-primary">Back to Excursions</button>
         </Link>
 
-        <SubmitButton
-          className="logout-btn"
-          text={"Log out"}
-          disabled={false}
-          onClick={() => this.doLogout()}
-        />
+        <Link to="/login">
+          <SubmitButton
+            className="logout-btn"
+            text={"Log out"}
+            disabled={false}
+            onClick={doLogout}
+          />
+        </Link>
       </div>
     </Fragment>
   );

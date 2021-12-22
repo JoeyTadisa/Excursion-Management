@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
   //both,the password & username is no longer than 15 characters
   setInputValue(property, val) {
     val = val.trim();
-    if (val.length > 15) {
+    if (val.length > 15 && val.length < 5) {
       return;
     }
 
@@ -72,18 +72,19 @@ class LoginForm extends React.Component {
         result.name_first.charAt(0).toUpperCase() + result.name_first.slice(1);
       UserStore.name_last =
         result.name_last.charAt(0).toUpperCase() + result.name_last.slice(1);
-      UserStore.id = result.idAdmin;
 
+      UserStore.id = result.user_id;
       UserStore.user_type = result.user_type;
-      UserStore.user_id = result.user_id;
 
       //result success
       if (result) {
+        UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
         UserStore.user_type = result.user_type;
         UserStore.user_id = result.user_id;
         UserStore.user_no = result.user_no;
+        <Link to={`/login/excursions`} className="excursion-item-link" />;
       } else if (result === false) {
         this.resetForm();
         alert(result.msg);
@@ -104,20 +105,21 @@ class LoginForm extends React.Component {
           placeholder="Username"
           value={this.state.username ? this.state.username : ""}
           onChange={(val) => this.setInputValue("username", val)}
+          required
         />
         <InputField
           type="password"
           placeholder="Password"
           value={this.state.password ? this.state.password : ""}
           onChange={(val) => this.setInputValue("password", val)}
+          required
         />
-        <Link to={`/login/excursions`} className="excursion-item-link">
-          <SubmitButton
-            text="Login"
-            disabled={this.state.buttonDisabled}
-            onClick={() => this.doLogin()}
-          />
-        </Link>
+        <SubmitButton
+          className="excursion-item-link"
+          text="Login"
+          disabled={this.state.buttonDisabled}
+          onClick={() => this.doLogin()}
+        />
       </div>
     );
   }

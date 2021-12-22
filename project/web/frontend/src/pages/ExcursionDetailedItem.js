@@ -9,8 +9,9 @@ const ExcursionDetailedItem = () => {
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
-  // the button will be shown only if it meets the
-  const buttonOkToShow = state.is_approved;
+  // passing the approval status for the button
+  // that will be shown only to the admin
+  const buttonOkToShow = state.approval_status;
 
   if (!state) {
     return <p>No excursion found!</p>;
@@ -28,7 +29,7 @@ const ExcursionDetailedItem = () => {
 
     const dataForExcursionApproval = {
       id: state.id,
-      is_approved: true,
+      approval_status: "a",
       date_reviewed: date_reviewed,
       reviewed_by: UserStore.user_no,
     };
@@ -37,26 +38,68 @@ const ExcursionDetailedItem = () => {
 
     // data for excursion a aspproval sent to backend
     async function changeToApprovedExcursion(dataForExcursionApproval) {
-      const response = await fetch("http://localhost:9191/approveExcursion", {
-        method: "PUT",
-        body: JSON.stringify(dataForExcursionApproval),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://localhost:9191/api/excursion/approve",
+        {
+          method: "PUT",
+          body: JSON.stringify(dataForExcursionApproval),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Could not approve the excursion.");
       }
+      if (response.ok) {
+        alert("✨ The excursion was approved ✨");
+      }
       //const data = await response.json();
-
       onCloseView();
-      alert("✨ The excursion was approved ✨");
     }
   };
 
   const rejectExcursionAndCloseView = () => {
-    //TODO
-    onCloseView();
+    let dateReviewed = new Date();
+    const date_reviewed = Date.parse(
+      dateReviewed.getFullYear() +
+        "-" +
+        (dateReviewed.getMonth() + 1) +
+        "-" +
+        dateReviewed.getDate()
+    );
+
+    const dataForExcursionDisapproval = {
+      id: state.id,
+      approval_status: "d",
+      date_reviewed: date_reviewed,
+      reviewed_by: UserStore.user_no,
+    };
+
+    changeToDisapprovedExcursion(dataForExcursionDisapproval);
+
+    // data for excursion a aspproval sent to backend
+    // http://localhost:9191/api/excursion/disapprove
+    async function changeToDisapprovedExcursion(dataForExcursionDisapproval) {
+      const response = await fetch(
+        "http://localhost:9191/api/excursion/disapprove",
+        {
+          method: "PUT",
+          body: JSON.stringify(dataForExcursionDisapproval),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Could not disapprove the excursion.");
+      }
+      if (response.ok) {
+        alert("✨ The excursion was disapproved ✨");
+      }
+      //const data = await response.json();
+      onCloseView();
+    }
   };
 
   const onCloseView = () => {
@@ -112,14 +155,15 @@ const ExcursionDetailedItem = () => {
           <div className="footer">
             {/* only if admin, reject button is shown at the end of detailed view 
               to reject & close details */}
-            {buttonOkToShow === false && UserStore.user_type === "a" && (
+            {buttonOkToShow === "p" && UserStore.user_type === "a" && (
               <button className="reject" onClick={rejectExcursionAndCloseView}>
                 Reject
               </button>
             )}
-            {/* only if admin, approve button is shown at the end of detailed view 
-              to approve & close details */}
-            {buttonOkToShow === false && UserStore.user_type === "a" && (
+            {/* only if admin and excursion has a pending status, approve button is shown 
+            at the end of detailed view to approve & close details 
+                */}
+            {buttonOkToShow === "p" && UserStore.user_type === "a" && (
               <button
                 className="approve"
                 onClick={approveExcursionAndCloseView}
@@ -128,8 +172,8 @@ const ExcursionDetailedItem = () => {
               </button>
             )}
             {/* if it is approved excursion, close button is shown at the end 
-              of detailed view to close details for admin */}
-            {buttonOkToShow === true && (
+              of detailed view to close details for admin  */}
+            {buttonOkToShow === "a" && (
               <button className="close" onClick={onCloseView}>
                 Close
               </button>
