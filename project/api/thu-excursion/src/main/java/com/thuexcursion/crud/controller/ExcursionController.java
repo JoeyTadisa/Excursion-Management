@@ -122,4 +122,55 @@ public class ExcursionController {
 	public String deleteExcursion(@PathVariable int id) {
 		return service.deleteExcursion(id);
 	}
+
+
+	@PutMapping("/disapproveExcursion/{id}")
+	public ResponseEntity<Excursion> disapproveExcursion(@PathVariable(value = "id")int id){
+		Excursion excursion = getExcursionById(id);
+		excursion.setIs_approved(false);
+		final Excursion updatedExcursion = updateExcursion(excursion);
+		return ResponseEntity.ok(updatedExcursion);
+	}
+
+	@PutMapping("/disapproveExcursion")
+	public Excursion disapproveExcursion(@RequestBody Excursion excursion) {
+		return service.disapproveExcursion(excursion);
+	}
+
+
+	
+
+	/**
+	 * For the new approach in approval_status
+	 * initial status of excursion once created is "pending"
+	 * this method set approval status to approved
+	 */
+
+	@PutMapping("/api/excursion/approve")
+	public Excursion excursionSetToApproved(@RequestBody Excursion excursion) {
+		return service.excursionSetToApproved(excursion);
+	}
+
+	@PutMapping("/api/excursion/disapprove")
+	public Excursion excursionSetToDisapproved(@RequestBody Excursion excursion) {
+		return service.excursionSetToDisapproved(excursion);
+	}
+
+	@PutMapping("/api/excursion/settopending")
+	public Excursion excursionSetToPending(@RequestBody Excursion excursion) {
+		return service.excursionSetToPending(excursion);
+	}
+
+	/**
+	 * This endpoint is for fetching excursions based on approval_status
+	 * approval_status: pending, approved, disapproved
+	 */
+
+
+	@GetMapping("/api/excursion/approvalstatus/{status}")
+	public List<Excursion> getExcursionByApprovalStatus(@PathVariable String status) {
+		return service.getExcursionByApprovalStatus(status);
+	}
+
+
 }
