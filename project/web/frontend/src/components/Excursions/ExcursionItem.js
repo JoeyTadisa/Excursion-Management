@@ -71,9 +71,7 @@ const ExcursionItem = (props) => {
     setIsLoading(false);
   }
 
-  useEffect(() => {
-    return () => {};
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <li>

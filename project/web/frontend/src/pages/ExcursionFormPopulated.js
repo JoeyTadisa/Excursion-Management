@@ -2,24 +2,24 @@ import React, { useState, useEffect } from "react";
 import InputField from "../components/UI/InputField";
 import UserStore from "../components/stores/UserStore";
 import SubmitButton from "../components/UI/SubmitButton";
-import { useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { updateExcursion } from "../lib/api";
 import useHttp from "../hooks/use-http";
 
 const ExcursionFormPopulated = () => {
-  const { sendRequest, status } = useHttp(updateExcursion);
+  const { sendRequest, status, error } = useHttp(updateExcursion);
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
 
   const convertDate = (rawDate) => {
-    const month = new Date(state.date_of_excursion).toLocaleString("en-US", {
+    const month = new Date(rawDate).toLocaleString("en-US", {
       month: "2-digit",
     });
-    const day = new Date(state.date_of_excursion).toLocaleString("en-US", {
+    const day = new Date(rawDate).toLocaleString("en-US", {
       day: "2-digit",
     });
-    const year = new Date(state.date_of_excursion).getFullYear().toString();
+    const year = new Date(rawDate).getFullYear().toString();
     return year + "-" + month + "-" + day;
   };
 
@@ -127,15 +127,29 @@ const ExcursionFormPopulated = () => {
   };
 
   useEffect(() => {
-    if (status === "completed") {
-      alert("✨ The excursion was updateded ✨");
+    if (status === "completed" && !error) {
+      alert("✨ The excursion was updated ✨");
       history.push("/login/excursions");
     }
-    return () => {};
-  }, [status, history]);
+    if (status === "completed" && error) {
+      alert("😅 The excursion was not updated");
+      history.push("/login/excursions");
+    }
+  }, [status, history, error]);
 
   const closeView = () => {
     history.goBack();
+  };
+
+  //define logout function
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
   };
 
   return (
@@ -227,20 +241,24 @@ const ExcursionFormPopulated = () => {
             Update Excursion
           </button>
 
-          <SubmitButton
+          <button
             className="btn btn-primary"
-            text={"Back to Excursions"}
+            id="back-to-excursion"
             onClick={closeView}
-          />
+          >
+            Back to Excursions
+          </button>
         </div>
       </form>
 
-      <SubmitButton
-        className="logout-btn"
-        text={"Log out"}
-        disabled={false}
-        onClick={() => this.doLogout()}
-      />
+      <Link to="/login">
+        <SubmitButton
+          className="logout-btn"
+          text={"Log out"}
+          disabled={false}
+          onClick={doLogout}
+        />
+      </Link>
     </div>
   );
 };

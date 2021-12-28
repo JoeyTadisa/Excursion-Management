@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import ExcursionList from "../components/Excursions/ExcursionList";
@@ -33,10 +33,6 @@ const LoggedInView = () => {
   const [isLoading1, setIsLoading1] = useState(false);
   const [error, setError] = useState(null);
   const [error1, setError1] = useState(null);
-  // for clean up function, when the component is unmount to stop the fetch
-  // example: go back arrow is pressed and fetch needs to be aborted
-  const abortController = useMemo(() => new AbortController(), []);
-  const abortController1 = useMemo(() => new AbortController(), []);
 
   // once loggedin the excursion list is displayed
 
@@ -46,8 +42,7 @@ const LoggedInView = () => {
     setError(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/approvedExcursions/true",
-        { signal: abortController.signal }
+        "http://localhost:9191/api/excursion/approvalstatus/a"
       );
 
       // need to check before parsing the response body
@@ -73,16 +68,11 @@ const LoggedInView = () => {
       });
       setExcursions(transformedExcursions);
     } catch (error) {
-      // when the component is unmount,the fetch is stopped and error state should not be updated
-      if (error.name === "AbortError") {
-        console.log("Fetch aborted");
-      } else {
-        setError1(error.message);
-      }
+      setError(error.message);
     }
     // done loading, no matter if we got successful or an error response
     setIsLoading(false);
-  }, [abortController.signal]);
+  }, []);
 
   /* useEffect is needed to load the content of the existing excursions on the load of LogedInView
      don't need to be called each time it is re-evaluated (hence, avoid infinite task)
@@ -92,10 +82,7 @@ const LoggedInView = () => {
    */
   useEffect(() => {
     fetchExcursions();
-    // clean up function will stop the fetch if the component is unmount
-    // to avoid memory leaks
-    return () => abortController.abort();
-  }, [fetchExcursions, abortController]);
+  }, [fetchExcursions]);
 
   // fetch all not approved excursions from backend and display
   const fetchNotApprovedExcursions = useCallback(async () => {
@@ -104,8 +91,7 @@ const LoggedInView = () => {
     setError1(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/approvedExcursions/false",
-        { signal: abortController1.signal }
+        "http://localhost:9191/api/excursion/approvalstatus/p"
       );
 
       // need to check before parsing the response body
@@ -131,15 +117,11 @@ const LoggedInView = () => {
       });
       setNotApprovedExcursions(transformedNewExcursions);
     } catch (error) {
-      if (error.name === "AbortError") {
-        console.log("Fetch aborted");
-      } else {
-        setError1(error.message);
-      }
+      setError1(error.message);
     }
     // done loading, no matter if we got successful or an error response
     setIsLoading1(false);
-  }, [abortController1.signal]);
+  }, []);
 
   /* useEffect is needed to load the content of the existing excursions on the load of LogedInView
      don't need to be called each time it is re-evaluated (hence, avoid infinite task)
@@ -149,10 +131,18 @@ const LoggedInView = () => {
    */
   useEffect(() => {
     fetchNotApprovedExcursions();
-    // clean up function will stop the fetch if the component is unmount
-    // to avoid memory leaks
-    return () => abortController1.abort();
-  }, [fetchNotApprovedExcursions, abortController1]);
+  }, [fetchNotApprovedExcursions]);
+
+  //define logout function
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
+  };
 
   // for better user experience need to display to user
   // if the content is loading/error occured
@@ -195,12 +185,14 @@ const LoggedInView = () => {
             </button>
           </Link>
         )}
-        <SubmitButton
-          className="logout-btn"
-          text={"Log out"}
-          disabled={false}
-          onClick={() => this.doLogout()}
-        />
+        <Link to="/login">
+          <SubmitButton
+            className="logout-btn"
+            text={"Log out"}
+            disabled={false}
+            onClick={doLogout}
+          />
+        </Link>
         <br />
         <h4 className="pending-for-approval">Pending for approval</h4>
         <section className="pending-for-approval-box">{content1}</section>

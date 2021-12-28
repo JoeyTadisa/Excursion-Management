@@ -59,6 +59,9 @@ h4 {
   background: #fff;
   cursor: pointer;
 }
+#back-to-excursion {
+  margin-top: 1rem;
+}
 
 section {
   margin: 1rem auto;

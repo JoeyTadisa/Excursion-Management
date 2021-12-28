@@ -93,7 +93,7 @@ public class Excursion {
 	@Basic
 	private double excursion_fee;
 
-	@Column(name = "approval_status")
+	@Column(nullable = false,name = "approval_status",insertable = false, updatable = true)
 	@Basic
 	private String approval_status;
 
