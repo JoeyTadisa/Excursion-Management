@@ -1,0 +1,49 @@
+.excursion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #918f8f;
+}
+.excursion-item-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.excursion-item-link a:hover {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+.excursion-item__title {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-flow: column-reverse;
+  justify-content: flex-start;
+  flex: 1;
+  cursor: pointer;
+}
+
+.excursion-item__title h2 {
+  font-size: 1rem;
+  flex: 1;
+  margin: 0 1rem;
+  color: white;
+}
+
+@media (min-width: 400px) {
+  .excursion-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  .excursion-item__title h2 {
+    font-size: 1.25rem;
+  }
+}

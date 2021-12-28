@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,18 +31,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * @author Patrik Hanzséros
  * ExcursionList class with the appropiate excursion_list.xml
  */
 
-public class ExcursionList extends AppCompatActivity {
+public class ExcursionList extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    String[] excursionTitlesForListview;
     ListView excursionListView;
     ArrayList<ExcursionEntry> excursionArrayList;
-    Button refreshButton;
+    Spinner spinner;
 
     /**
      * onCreate method is called when the Activity is running
@@ -51,36 +53,53 @@ public class ExcursionList extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_list);
-        fill();
+
+
+        /**
+         * @param adapter create an arrayadapter using the spinner_array and a default spinner layout
+         * Specify the layout to use when the list of choices appears
+         */
+        spinner = (Spinner) findViewById(R.id.filterSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+
+        /**
+         * @param defaultValue to get the default selection of spinner (which is index 0)
+         * @param defaultValueInt parsed the string into integer
+         * fill is called with the default selection when running onCreate
+         */
+        String defaultValue = spinner.getItemAtPosition(0).toString();
+        int defaultValueInt = Integer.parseInt(defaultValue);
+        fill(defaultValueInt);
 
         //initialize the main toolbar
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
-        /**
-         * Whenever the refreshButton is clicked, fill() is called and refreshing the screen.
-         * For test purposes: Toast shows it is clicked.
-         */
-        refreshButton = findViewById(R.id.refreshList);
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fill();
-                Toast.makeText(ExcursionList.this, "Clicked", Toast.LENGTH_LONG).show();
-            }
-        });
+
+
+
+
     }
 
     /**
      * fill() method contains everything to get and work on json & to show it on UI and called in onCreate()
      */
-    private void fill(){
-        // Instantiate the RequestQueue.
+    private void fill(int year){
+        /**
+         * @param queue Instantiate the RequestQueue
+         * @param url to store path of API url
+         */
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:9191/approvedExcursions/true";
 
-
-        // Request a string response from the provided URL.
+        /**
+         * Request a string response from the provided URL.
+         */
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -89,11 +108,12 @@ public class ExcursionList extends AppCompatActivity {
                             /**
                              * @param response has the JSON response from the API as a string
                              * @param array -> from String response we made a JSONArray
-                             * @param excursionTitlesForListview Dynamic String array to store titles for ListView
+                             * @param excursionTitlesForListview ArrayList to store excursion titles
                              * @param excursionArrayList to store ExcursionEntry objects in the ArrayList
                              */
                             JSONArray array = new JSONArray(response);
-                            excursionTitlesForListview = new String[array.length()];
+
+                            ArrayList<String> excursionTitlesForListview = new ArrayList<>();
                             excursionArrayList = new ArrayList<>();
                             for(int i = 0; i < array.length(); i++) {
                                 /**
@@ -131,9 +151,19 @@ public class ExcursionList extends AppCompatActivity {
                                         destination, fee, id));
 
                                 /**
+                                 * @param excursionYearString to get the year of dateOfExcursion
+                                 * @param excursionYear to parse into integer
+                                 */
+                                String excursionYearString = dateOfExcursion.substring(0,4);
+                                int excursionYear = Integer.parseInt(excursionYearString);
+
+                                /**
+                                 * If the year in the spinner == excursion year, then add to list view
                                  * add titles to show it later on in excursionListView
                                  */
-                                excursionTitlesForListview[i] = title;
+                                if(year == excursionYear) {
+                                    excursionTitlesForListview.add(title);
+                                }
 
                             }
                             /**
@@ -150,7 +180,9 @@ public class ExcursionList extends AppCompatActivity {
                             excursionListView.setAdapter(adapter);
 
 
-                            //Going to ExcursionDetails
+                            /**
+                             * Go to ExcursionDetails
+                             */
                             excursionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
@@ -178,6 +210,8 @@ public class ExcursionList extends AppCompatActivity {
         });
 
 
+
+
         /**
          * 10000ms = 10sec
          * Set retry policy
@@ -192,8 +226,12 @@ public class ExcursionList extends AppCompatActivity {
          * @param stringRequest is added to queue "RequestQueue"
          */
         queue.add(stringRequest);
+    } // fill end
 
-    }
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -229,6 +267,25 @@ public class ExcursionList extends AppCompatActivity {
         editor.clear();
         editor.putBoolean("Logged_IN", false);
         editor.apply();
+    }
+
+
+    /**
+     *  When selecting an item in spinner, we call this method
+     *  Parsing the value into integer, and calling fill method with this parameter
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String defaultValue = spinner.getItemAtPosition(i).toString();
+        int defaultValueInt = Integer.parseInt(defaultValue);
+        fill(defaultValueInt);
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
 
