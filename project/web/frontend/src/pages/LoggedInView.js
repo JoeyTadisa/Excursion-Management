@@ -81,7 +81,11 @@ const LoggedInView = () => {
      NEED TO BE CALLED AFTER fetchExcursions function !!!!!!!!!
    */
   useEffect(() => {
+    let abortController = new AbortController();
     fetchExcursions();
+    return () => {
+      abortController.abort();
+    };
   }, [fetchExcursions]);
 
   // fetch all not approved excursions from backend and display
@@ -130,7 +134,11 @@ const LoggedInView = () => {
      NEED TO BE CALLED AFTER fetchExcursions function !!!!!!!!!
    */
   useEffect(() => {
+    let abortController = new AbortController();
     fetchNotApprovedExcursions();
+    return () => {
+      abortController.abort();
+    };
   }, [fetchNotApprovedExcursions]);
 
   //define logout function

@@ -138,7 +138,7 @@ const ExcursionForm = (props) => {
             <label>Date of excursion</label>
             <InputField
               type="date"
-              min="01-01-2021"
+              min="01-01-2022"
               max="01-01-2025"
               class="form-excursion"
               id="excursionDate"
@@ -190,7 +190,7 @@ const ExcursionForm = (props) => {
             <label>Registration deadline</label>
             <InputField
               type="date"
-              min="01-01-2021"
+              min="01-01-2022"
               max="01-01-2025"
               className="form-excursion"
               id="register-deadline"
@@ -202,7 +202,7 @@ const ExcursionForm = (props) => {
             <label>Deregistration deadline</label>
             <InputField
               type="date"
-              min="01-01-2021"
+              min="01-01-2022"
               max="01-01-2025"
               className="form-excursion"
               id="deregister-deadline"
