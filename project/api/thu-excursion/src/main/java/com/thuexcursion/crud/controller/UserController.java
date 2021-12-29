@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.User;
 import com.thuexcursion.crud.service.UserService;
 
+import net.javaguides.springboot.exception.ResourceNotFoundException;
+
 /**
 * UserController class contains all the REST API endpoints for Booking functionality
 * 

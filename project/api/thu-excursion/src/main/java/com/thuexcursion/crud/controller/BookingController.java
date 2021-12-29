@@ -90,6 +90,7 @@ public class BookingController {
 
 	
 	/** 
+	 * This function is used for deregistering an already booked excursion
 	 * @param id 
 	 * @param status
 	 * @return Booking
