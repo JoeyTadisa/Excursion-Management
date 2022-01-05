@@ -48,18 +48,28 @@
             android:paddingLeft="10dp"
             android:paddingEnd="5dp"
             android:paddingRight="10dp"
-            android:hint="@string/email"
+            android:hint="@string/Username"
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@drawable/rounded_corner"
             android:textSize="17sp"
             android:inputType="textEmailAddress"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:maxLines="1"
+            android:maxLength="45"/>
+
+        <!--Password Input-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_toggle"
+            android:textColor="@color/white"
+            app:passwordToggleTint="@color/white"
+            android:textColorHint="@color/white"
+            app:passwordToggleEnabled="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/password"
-            android:textColor="#fff"
-            android:textColorHint="#eee"
             android:paddingStart="5dp"
             android:paddingLeft="10dp"
             android:paddingEnd="5dp"
@@ -71,7 +81,10 @@
             android:layout_height="?actionBarSize"
             android:background="@drawable/rounded_corner"
             android:textSize="17sp"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:maxLines="1"
+            android:maxLength="45"/>
+        </com.google.android.material.textfield.TextInputLayout><!--End Password Input-->
 
         <Button
             android:id="@+id/loginButton"
