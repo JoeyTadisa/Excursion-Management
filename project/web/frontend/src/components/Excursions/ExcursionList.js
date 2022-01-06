@@ -5,7 +5,7 @@ import "./ExcursionList.css";
 import Card from "../UI/Card";
 
 const ExcursionList = (props) => {
-  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredYear, setFilteredYear] = useState("2022");
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
