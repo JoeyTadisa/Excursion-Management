@@ -1,11 +1,16 @@
 package com.thuexcursion.crud.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -141,6 +146,13 @@ public class User {
 	  public String getName_first() { 
 		  return name_first; 
 	  } 
+
+	    /** 
+	   * @return HashSet
+	   */
+	public Set<String> getRoles(){
+		return new HashSet<>(Arrays.asList(String.valueOf(user_type)));
+	}
 	  
 	  /** 
 	   * @param name_first

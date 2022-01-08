@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(value="select u.email from user u", nativeQuery = true)
     List<String> fetchEmailingList();
+
+    Optional<User> findByUsername(String username);
 }
