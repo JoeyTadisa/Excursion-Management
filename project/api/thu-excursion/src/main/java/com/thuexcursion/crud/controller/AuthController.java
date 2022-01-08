@@ -49,7 +49,6 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    private static int i = 0;
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
     
@@ -65,10 +64,6 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-                i++;
-                System.out.println("***** ***** --- JWT --- ***** *****");
-                System.out.println(i);
-                System.out.println(jwt);
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUser_number(),
