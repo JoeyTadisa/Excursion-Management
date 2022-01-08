@@ -4,3 +4,4 @@
 .idea
 project/web/frontend/node_modules
 project/web/frontend/build
+project/api/thu-excursion/src/main/resources/application.properties
