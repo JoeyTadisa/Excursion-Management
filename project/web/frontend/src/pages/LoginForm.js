@@ -3,6 +3,7 @@ import InputField from "../components/UI/InputField";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import { Link } from "react-router-dom";
+import {AuthContext} from '../context/AuthContext'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -52,17 +53,18 @@ class LoginForm extends React.Component {
 
     try {
       let url =
-        "http://localhost:9191/login/" +
-        this.state.username +
-        "/" +
-        this.state.password;
+      "http://localhost:9191/api/auth/signin"
 
       let res = await fetch(url, {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          "username" : this.state.username,
+          "password" : this.state.password
+        })
       });
 
       let result = await res.json();
@@ -84,6 +86,7 @@ class LoginForm extends React.Component {
         UserStore.user_type = result.user_type;
         UserStore.user_id = result.user_id;
         UserStore.user_no = result.user_no;
+        this.context.login(result.accessToken, result.user_id);
         <Link to={`/login/excursions`} className="excursion-item-link" />;
       } else if (result === false) {
         this.resetForm();
@@ -124,5 +127,5 @@ class LoginForm extends React.Component {
     );
   }
 }
-
+LoginForm.contextType = AuthContext;
 export default LoginForm;
