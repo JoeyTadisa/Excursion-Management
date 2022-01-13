@@ -31,8 +31,8 @@ import lombok.NoArgsConstructor;
 * 
 */
 
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "excursion")
 //@SecondaryTable(name="excursionapproval",pkJoinColumns=@PrimaryKeyJoinColumn(name="excursion_idexcursion"))
