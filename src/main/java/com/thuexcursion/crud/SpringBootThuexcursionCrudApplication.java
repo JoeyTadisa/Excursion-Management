@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class SpringBootThuexcursionCrudApplication {
+public class SpringBootThuexcursionCrudApplication{
 
-	
 	/** 
 	 * @param args
 	 */
