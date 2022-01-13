@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
          * endpoint and a JSON response is used to verify that the user exists in the database.
          */
         loginButton.setOnClickListener(v -> {
-            String url = "http://10.0.2.2:9191/login/" + usernameInput.getText().toString().trim() + "/" + passwordInput.getText().toString().trim();
+            String url = "http://10.0.2.3:9191/login/" + usernameInput.getText().toString().trim() + "/" + passwordInput.getText().toString().trim();
             StringRequest credentialsRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

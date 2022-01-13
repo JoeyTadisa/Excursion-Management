@@ -2,7 +2,12 @@ package com.teamfive.thuexcursionapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -45,15 +50,34 @@ public class ExcursionDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.excursion_details);
+        CreateNotificationChannel();
 
         /**
          * By clicking on registerButton, the user goes to RegistrationCompleted Activity by creating a new intent
          */
         registerButton = findViewById(R.id.registerButton);
+   //creating an Intent for the notification
+        Intent notificationIntent= new Intent(this, RegistrationCompleted.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent. FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+   //create a Notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"THUExcursionsApp")
+                .setSmallIcon(R.drawable.ic_baseline_notifications_24)
+                .setContentTitle("Registration completed")
+                .setContentText("Thank you for your registration!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
         registerButton.setOnClickListener(v -> {
             bookPost();
             Intent intent = new Intent(ExcursionDetails.this, RegistrationCompleted.class);
             startActivity(intent);
+            notificationManager.notify(100,builder.build());
+
         });
 
         /**
@@ -143,6 +167,19 @@ public class ExcursionDetails extends AppCompatActivity {
 
         TextView excursionFeeText = findViewById(R.id.excursionFeeText);
         excursionFeeText.setText(stringFee + "€");
+    }
+
+    private void CreateNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "StudentChannel";
+            String description = "Channel for student notifications";
+            NotificationChannel channel = new NotificationChannel("THUExcursionApp", "show RegistrationCompleted",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

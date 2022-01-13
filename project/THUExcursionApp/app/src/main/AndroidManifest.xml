@@ -22,7 +22,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegistrationCompleted" />
+        <activity android:name=".RegistrationCompleted"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity android:name=".ExcursionDetails"/>
         <activity android:name=".ExcursionList"/>
         <activity android:name=".AccountInfo"/>

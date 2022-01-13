@@ -27,6 +27,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class AccountInfo extends AppCompatActivity {
+    String[] StudentInfo;
+    ListView accountListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

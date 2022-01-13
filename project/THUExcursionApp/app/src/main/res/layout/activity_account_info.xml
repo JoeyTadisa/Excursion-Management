@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ListView
-        android:id="@+id/accounListView"
+        android:id="@+id/accountListView"
         android:layout_width="412dp"
         android:layout_height="376dp"
         android:layout_marginTop="1dp"
