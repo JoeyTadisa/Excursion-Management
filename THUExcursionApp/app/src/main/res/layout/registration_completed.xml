@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/excursionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Explore Augsburg"
+        android:textSize="28dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/registrationFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="200dp"
+        android:paddingStart="1dp"
+        android:background="@drawable/registration_note_border"
+        android:gravity="center_horizontal"
+        android:text="Thank you!\n\nWe will notify you, when the registration request is approved."
+        android:textSize="22dp" />
+
+</LinearLayout>
