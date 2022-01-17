@@ -80,16 +80,13 @@ class LoginForm extends React.Component {
 
       //result success
       if (result) {
-        console.log("RESULT", result);
-        console.log("ROLE",result.roles[0]);
+        this.context.login(result.accessToken, result.id);  
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
         UserStore.user_type = result.roles[0];
         UserStore.user_id = result.id;
         UserStore.user_no = result.user_no;
-        console.log("LoginForm.js",result.accessToken,result.id);
-        this.context.login(result.accessToken, result.id);
         <Link to={`/login/excursions`} className="excursion-item-link" />;
       } else if (result === false) {
         this.resetForm();
