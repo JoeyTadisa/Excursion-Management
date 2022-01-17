@@ -201,7 +201,7 @@ const LoggedInView = () => {
         </h2>
         <br />
         {/* only if the user is organizer the button 'New Excursion Form' is displayed */}
-        {UserStore.user_type === "o" && (
+        {UserStore.user_type === "ROLE_o" && (
           <Link to={`/new-excursion`} className="excursion-item-link">
             <button className="btn btn-primary" type="button">
               New Excursion Form

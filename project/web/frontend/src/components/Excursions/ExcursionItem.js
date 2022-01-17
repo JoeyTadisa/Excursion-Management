@@ -57,11 +57,11 @@ const ExcursionItem = (props) => {
       }
       const data = await response.json();
       // if admin will link to ExcursionDetailedItem via detailsForAdmin function
-      if (UserStore.user_type === "a") {
+      if (UserStore.user_type === "ROLE_a") {
         detailsForAdmin(data);
       }
       // // if organizer will link to ExcursionFormPpulated via detailsForOrganizer function
-      if (UserStore.user_type === "o") {
+      if (UserStore.user_type === "ROLE_o") {
         detailsForOrganizer(data);
       }
     } catch (error) {
