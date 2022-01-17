@@ -4,6 +4,7 @@ import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import { Link } from "react-router-dom";
 import {AuthContext} from '../context/AuthContext'
+import configData from "../config.json";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class LoginForm extends React.Component {
 
     try {
       let url =
-      "http://localhost:9191/api/auth/signin"
+      configData.SERVER_URL+"auth/signin"
 
       let res = await fetch(url, {
         method: "POST",

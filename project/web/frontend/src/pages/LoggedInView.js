@@ -5,6 +5,7 @@ import ExcursionList from "../components/Excursions/ExcursionList";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import {AuthContext} from "../context/AuthContext";
+import configData from "../config.json";
 
 /* async doLogout() {
     try {
@@ -35,9 +36,8 @@ const LoggedInView = () => {
   const [error, setError] = useState(null);
   const [error1, setError1] = useState(null);
   const authContext = useContext(AuthContext);
-  console.log("LoggedInView.js",authContext.token);
+
   // once loggedin the excursion list is displayed
-  console.log(authContext.token);
   //alert(authContext.token);
 
   const fetchExcursions = useCallback(async () => {
@@ -46,7 +46,7 @@ const LoggedInView = () => {
     setError(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/api/excursion/approvalstatus/a",{
+        configData.SERVER_URL+"excursion/approvalstatus/a",{
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const LoggedInView = () => {
     setError1(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/api/excursion/approvalstatus/p",{
+        configData.SERVER_URL+"excursion/approvalstatus/p",{
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

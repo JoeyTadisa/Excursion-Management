@@ -19,7 +19,7 @@ const NewExcursion = (props) => {
 
   // the new excursion data from ExcursionForm will be passed to this component and sent to backend
   const onAddExcursionHandler = (excursion) => {
-    console.log(excursion);
+    //console.log(excursion);
     sendRequest(excursion);
   };
 
