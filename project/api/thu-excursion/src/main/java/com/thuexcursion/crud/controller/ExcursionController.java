@@ -52,7 +52,7 @@ public class ExcursionController {
 	/** 
 	 * @return List<Excursion>
 	 */
-	@PreAuthorize("hasRole('a') or hasRole('o') or hasRole('s')")
+	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")
 	@GetMapping("/excursions")
 	public List<Excursion> findAllExcursions() {
 		return service.getExcursions();
@@ -168,7 +168,7 @@ public class ExcursionController {
 	 * approval_status: pending, approved, disapproved
 	 */
 
-	@PreAuthorize("hasRole('a') or hasRole('o') or hasRole('s')")
+	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")
 	@GetMapping("/api/excursion/approvalstatus/{status}")
 	public List<Excursion> getExcursionByApprovalStatus(@PathVariable String status) {
 		return service.getExcursionByApprovalStatus(status);

@@ -44,7 +44,7 @@ public class User {
 
 	@Column(name = "user_type")
 	@Basic
-	private char user_type;
+	private String user_type;
 
 	@Column(name = "firstname")
 	@Basic
@@ -76,7 +76,7 @@ public class User {
 	
 	public User(int id,
 				int user_number,
-				char user_type,
+				String user_type,
 				String username,
 				String password,
 				String name_first,
@@ -129,14 +129,14 @@ public class User {
 	  /** 
 	   * @return char
 	   */
-	  public char getUser_type() { 
+	  public String getUser_type() { 
 		return user_type;
 	}
 	
 	/** 
 	 * @param user_type
 	 */
-	public void setUser_type(char user_type) { 
+	public void setUser_type(String user_type) { 
 		this.user_type = user_type;
 	}  
 	  

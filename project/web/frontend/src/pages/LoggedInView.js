@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {useContext, useState, useEffect, useCallback } from "react";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import ExcursionList from "../components/Excursions/ExcursionList";
@@ -35,8 +35,10 @@ const LoggedInView = () => {
   const [error, setError] = useState(null);
   const [error1, setError1] = useState(null);
   const authContext = useContext(AuthContext);
-
+  console.log("LoggedInView.js",authContext.token);
   // once loggedin the excursion list is displayed
+  console.log(authContext.token);
+  //alert(authContext.token);
 
   const fetchExcursions = useCallback(async () => {
     setIsLoading(true);
@@ -165,6 +167,7 @@ const LoggedInView = () => {
     UserStore.user_id = "";
     UserStore.user_no = "";
     authContext.logout();
+
   };
 
   // for better user experience need to display to user
@@ -197,7 +200,7 @@ const LoggedInView = () => {
       <div className="app">
         {/* welcome the user with the name of the user*/}
         <h2>
-          Welcome {UserStore.name_first} {UserStore.name_last}!
+          Welcome {UserStore.name_first} {UserStore.name_last} !
         </h2>
         <br />
         {/* only if the user is organizer the button 'New Excursion Form' is displayed */}
