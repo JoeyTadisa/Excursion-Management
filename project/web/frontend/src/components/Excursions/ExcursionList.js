@@ -4,18 +4,25 @@ import ExcursionFilter from "./ExcursionFilter";
 import "./ExcursionList.css";
 import Card from "../UI/Card";
 
+/**
+ * @component ExcursionList
+ * @param {Array<Object>|string|function} props
+ */
 const ExcursionList = (props) => {
   const [filteredYear, setFilteredYear] = useState("2022");
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
-
-  // new array will be returned (filtered year), original is not touched
-  // filter method that filteres the array
+  /**
+   * new array will be returned (filtered year), original is not touched
+   * filter method that filteres the array
+   */
   const filteredExcursions = props.items.filter((excursion) => {
-    // excursion_date is a date object, not a string (initial state of the filteredYear is a string)
-    // need to convert to string object
+    /**
+     * excursion_date is a date object, not a string (initial state of the filteredYear is a string)
+     * need to convert to string object
+     */
 
     return excursion.reg_deadline.getFullYear().toString() === filteredYear;
   });

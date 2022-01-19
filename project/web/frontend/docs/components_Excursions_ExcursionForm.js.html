@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Excursions/ExcursionForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Excursions/ExcursionForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Fragment, useState } from "react";
+import InputField from "../UI/InputField";
+import SubmitButton from "../UI/SubmitButton";
+import { Prompt } from "react-router-dom";
+import { Link } from "react-router-dom";
+import UserStore from "../stores/UserStore";
+
+/**
+ * @component ExcursionForm
+ * @param {function} props
+ */
+const ExcursionForm = (props) => {
+  const [isEntering, setIsEntering] = useState(false);
+  /**
+   * new enetered values will be stored in excursionData
+   */
+  const [enteredExcursionName, setEnteredExcursionName] = useState("");
+  const [enteredExcursionDate, setEnteredExcursionDate] = useState("");
+  const [enteredExcursionDestination, setEnteredExcursionDestination] =
+    useState("");
+  const [enteredExcursionDescription, setEnteredExcursionDescription] =
+    useState("");
+  const [enteredMaxNumParticipants, setEnteredMaxNumParticipants] =
+    useState("");
+  const [enteredRegistrDeadline, setEnteredRegistrDeadline] = useState("");
+  const [enteredDeregistrDeadline, setEnteredDeregistrDeadline] = useState("");
+  const [enteredMeetingDetails, setEnteredMeetingDetails] = useState("");
+  const [enteredExcursionFee, setEnteredExcursionFee] = useState("");
+
+  //a new value is past via event (user input)
+  const excursionNameChangeHamdler = (event) => {
+    setEnteredExcursionName(event);
+  };
+  const excursionDateChangeHandler = (event) => {
+    setEnteredExcursionDate(event);
+  };
+  const destionationChangeHandler = (event) => {
+    setEnteredExcursionDestination(event);
+  };
+  const descriptionChangeHandler = (event) => {
+    setEnteredExcursionDescription(event);
+  };
+  const maxNumParticipantsChangeHandler = (event) => {
+    setEnteredMaxNumParticipants(event);
+  };
+  const registrDeadlineChangeHandler = (event) => {
+    setEnteredRegistrDeadline(event);
+  };
+  const deregistrDeadlineChangeHandler = (event) => {
+    setEnteredDeregistrDeadline(event);
+  };
+  const meetingDetailsChangeHandler = (event) => {
+    setEnteredMeetingDetails(event);
+  };
+  const excursionFeeChangeHandler = (event) => {
+    setEnteredExcursionFee(event);
+  };
+  /**
+   * the whole form will react on submit
+   * @param {string|number|Object} event user entered data in the form
+   */
+  const submitHandler = (event) => {
+    event.preventDefault();
+    var dateReviewed = new Date();
+
+    const excursionData = {
+      title: enteredExcursionName,
+      date_of_excursion: new Date(enteredExcursionDate),
+      destination: enteredExcursionDestination,
+      description: enteredExcursionDescription,
+      max_participants: enteredMaxNumParticipants,
+      excursion_fee: enteredExcursionFee,
+      reg_deadline: new Date(enteredRegistrDeadline),
+      dereg_deadline: new Date(enteredDeregistrDeadline),
+      meeting_details: enteredMeetingDetails,
+      date_reviewed: Date.parse(
+        dateReviewed.getFullYear() +
+          "-" +
+          (dateReviewed.getMonth() + 1) +
+          "-" +
+          dateReviewed.getDate()
+      ),
+    };
+    /**
+     * pass generated here excursionData as argument and newExcursionEntry
+     * component (parent) will receive enteredExcursionData as a parameter
+     */
+    props.onAddExcursion(excursionData);
+    /**
+     * after submit form, reset the form with empty strings
+     */
+    setEnteredExcursionName("");
+    setEnteredExcursionDate("");
+    setEnteredExcursionDestination("");
+    setEnteredExcursionDescription("");
+    setEnteredMaxNumParticipants("");
+    setEnteredExcursionFee("");
+    setEnteredRegistrDeadline("");
+    setEnteredDeregistrDeadline("");
+    setEnteredMeetingDetails("");
+  };
+  /**
+   * watch if the user start entering the data into the form
+   */
+  const formFocusedHandler = () => {
+    setIsEntering(true);
+  };
+  /**
+   * if the user finished entering the data into the form, need to prevent
+   * showing message "Are you sure you want to leave..."
+   */
+  const finishEnteringHandler = () => {
+    setIsEntering(false);
+  };
+  /**
+   * define logout function
+   */
+  const doLogout = () => {
+    UserStore.isLoggedIn = false;
+    UserStore.username = "";
+    UserStore.name_first = "";
+    UserStore.name_last = "";
+    UserStore.user_type = "";
+    UserStore.user_id = "";
+    UserStore.user_no = "";
+  };
+
+  return (
+    &lt;Fragment>
+      {/**
+       * if the user tries to leave the page show a message
+       */}
+      &lt;Prompt
+        when={isEntering}
+        message={(location) =>
+          "Are you sure you want to leave? All the entered data will be lost!"
+        }
+      />
+      &lt;div className="excursionForm">
+        &lt;h4>Excursion Form&lt;/h4>
+        &lt;form onFocus={formFocusedHandler} onSubmit={submitHandler}>
+          &lt;div className="excursionFormF">
+            &lt;label>Excursion name&lt;/label>
+            &lt;InputField
+              type="text"
+              class="form-excursion"
+              id="excursionName"
+              placeholder="Excursion name"
+              value={enteredExcursionName}
+              onChange={excursionNameChangeHamdler}
+              required
+            />
+            &lt;label>Date of excursion&lt;/label>
+            &lt;InputField
+              type="date"
+              min="01-01-2022"
+              max="01-01-2025"
+              class="form-excursion"
+              id="excursionDate"
+              placeholder="Excursion date"
+              value={enteredExcursionDate}
+              onChange={excursionDateChangeHandler}
+              required
+            />
+            &lt;label>Destination&lt;/label>
+            &lt;InputField
+              type="text"
+              class="form-excursion"
+              id="destination"
+              placeholder="Destination"
+              value={enteredExcursionDestination}
+              onChange={destionationChangeHandler}
+              required
+            />
+            &lt;label>Description&lt;/label>
+            &lt;InputField
+              type="text"
+              className="form-excursion"
+              id="description"
+              placeholder="Description"
+              value={enteredExcursionDescription}
+              onChange={descriptionChangeHandler}
+              required
+            />
+            &lt;label>Max number of students&lt;/label>
+            &lt;InputField
+              type="text"
+              className="form-excursion"
+              id="max-num-participants"
+              placeholder="Maximum number of students"
+              value={enteredMaxNumParticipants}
+              onChange={maxNumParticipantsChangeHandler}
+              required
+            />
+            &lt;label>Excursion fee&lt;/label>
+            &lt;InputField
+              type="text"
+              className="form-excursion"
+              id="excursion-fee"
+              placeholder="Excursion fee"
+              value={enteredExcursionFee}
+              onChange={excursionFeeChangeHandler}
+              required
+            />
+            &lt;label>Registration deadline&lt;/label>
+            &lt;InputField
+              type="date"
+              min="01-01-2022"
+              max="01-01-2025"
+              className="form-excursion"
+              id="register-deadline"
+              placeholder="Registration deadline"
+              value={enteredRegistrDeadline}
+              onChange={registrDeadlineChangeHandler}
+              required
+            />
+            &lt;label>Deregistration deadline&lt;/label>
+            &lt;InputField
+              type="date"
+              min="01-01-2022"
+              max="01-01-2025"
+              className="form-excursion"
+              id="deregister-deadline"
+              placeholder="Deregistration deadline"
+              value={enteredDeregistrDeadline}
+              onChange={deregistrDeadlineChangeHandler}
+              required
+            />
+            &lt;label>Meeting details&lt;/label>
+            &lt;InputField
+              type="text"
+              className="form-excursion"
+              id="meeting-details"
+              placeholder="Meeting details"
+              value={enteredMeetingDetails}
+              onChange={meetingDetailsChangeHandler}
+              required
+            />
+            &lt;button
+              onClick={finishEnteringHandler}
+              className="btn btn-primary"
+              type="submit"
+            >
+              Add New Excursion
+            &lt;/button>
+          &lt;/div>
+        &lt;/form>
+        &lt;br />
+        &lt;Link to={"/login/excursions"} className="excursion-item-link">
+          &lt;button className="btn btn-primary">Back to Excursions&lt;/button>
+        &lt;/Link>
+
+        &lt;Link to="/login">
+          &lt;SubmitButton
+            className="logout-btn"
+            text={"Log out"}
+            disabled={false}
+            onClick={doLogout}
+          />
+        &lt;/Link>
+      &lt;/div>
+    &lt;/Fragment>
+  );
+};
+
+export default ExcursionForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">JS Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-api.html">api</a></li></ul><h3>Classes</h3><ul><li><a href="InputField.html">InputField</a></li><li><a href="Login.html">Login</a></li><li><a href="LoginForm.html">LoginForm</a></li><li><a href="SubmitButton.html">SubmitButton</a></li><li><a href="UserStore.html">UserStore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Card">Card</a></li><li><a href="global.html#doLogin">doLogin</a></li><li><a href="global.html#doLogouttheUserStoreisreset">doLogout the UserStore is reset</a></li><li><a href="global.html#ExcursionDate">ExcursionDate</a></li><li><a href="global.html#ExcursionDetailedItem">ExcursionDetailedItem</a></li><li><a href="global.html#ExcursionFilter">ExcursionFilter</a></li><li><a href="global.html#ExcursionForm">ExcursionForm</a></li><li><a href="global.html#ExcursionFormPopulated">ExcursionFormPopulated</a></li><li><a href="global.html#ExcursionItem">ExcursionItem</a></li><li><a href="global.html#ExcursionList">ExcursionList</a></li><li><a href="global.html#ExcursionsList">ExcursionsList</a></li><li><a href="global.html#fetchDetailedExcursionByID">fetchDetailedExcursionByID</a></li><li><a href="global.html#fetchExcursions">fetchExcursions</a></li><li><a href="global.html#fetchNotApprovedExcursions">fetchNotApprovedExcursions</a></li><li><a href="global.html#httpReducer">httpReducer</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#LoadingSpinner">LoadingSpinner</a></li><li><a href="global.html#LoggedInView">LoggedInView</a></li><li><a href="global.html#MainNavigation">MainNavigation</a></li><li><a href="global.html#NewExcursion">NewExcursion</a></li><li><a href="global.html#NoExcursionsFound">NoExcursionsFound</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#requestData">requestData</a></li><li><a href="global.html#useHttp">useHttp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Jan 19 2022 12:00:30 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -6,12 +6,23 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import { updateExcursion } from "../lib/api";
 import useHttp from "../hooks/use-http";
 
+/**
+ * the form with populated details of excursion is displayed for organiser
+ * purpose: to view or modify the details
+ * @component
+ */
+
 const ExcursionFormPopulated = () => {
   const { sendRequest, status, error } = useHttp(updateExcursion);
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
 
+  /**
+   *
+   * @param {Object} rawDate
+   * @returns {string} year-month-day
+   */
   const convertDate = (rawDate) => {
     const month = new Date(rawDate).toLocaleString("en-US", {
       month: "2-digit",
@@ -23,8 +34,9 @@ const ExcursionFormPopulated = () => {
     return year + "-" + month + "-" + day;
   };
 
-  //new enetered values will be stored in excursionData
-
+  /**
+   * new enetered values will be stored in excursionData
+   */
   const [enteredExcursionName, setEnteredExcursionName] = useState(state.title);
   const [enteredExcursionDate, setEnteredExcursionDate] = useState(
     convertDate(state.date_of_excursion)
@@ -49,8 +61,9 @@ const ExcursionFormPopulated = () => {
   const [enteredMeetingDetails, setEnteredMeetingDetails] = useState(
     state.meeting_details
   );
-
-  //a new value is past via event (user input)
+  /**
+   * a new value is past via event (user input)
+   */
   const excursionNameChangeHamdler = (event) => {
     setEnteredExcursionName(event);
   };
@@ -80,7 +93,9 @@ const ExcursionFormPopulated = () => {
     setEnteredMeetingDetails(event);
   };
 
-  // the whole form will react on submit
+  /**
+   * the whole form will react on submit
+   */
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -92,7 +107,6 @@ const ExcursionFormPopulated = () => {
         "-" +
         dateWritten.getDate()
     );
-
     const excursionData = {
       id: state.id,
       title: enteredExcursionName,
@@ -108,13 +122,13 @@ const ExcursionFormPopulated = () => {
       date_written: date_written,
       is_approved: state.is_approved,
     };
-
-    console.log(excursionData);
-
-    // pass modified here excursionData as argument
+    /**
+     * pass modified here excursionData as argument
+     */
     sendRequest(excursionData);
-
-    //after submit form, reset the form with empty strings
+    /**
+     * after submit form, reset the form with empty strings
+     */
     setEnteredExcursionName("");
     setEnteredExcursionDate("");
     setEnteredExcursionDestination("");
@@ -140,8 +154,9 @@ const ExcursionFormPopulated = () => {
   const closeView = () => {
     history.goBack();
   };
-
-  //define logout function
+  /**
+   * define logout function
+   */
   const doLogout = () => {
     UserStore.isLoggedIn = false;
     UserStore.username = "";
@@ -157,7 +172,9 @@ const ExcursionFormPopulated = () => {
       <h4>Excursion Form</h4>
       <form onSubmit={submitHandler}>
         <div className="excursionFormF">
-          {/*<label for="meeting-details">Meeting details</label>*/}
+          {/**
+           * <label for="meeting-details">Meeting details</label>
+           */}
           <label>Excursion title</label>
           <InputField
             type="text"

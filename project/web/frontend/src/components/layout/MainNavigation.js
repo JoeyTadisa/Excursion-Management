@@ -2,6 +2,10 @@
 import classes from "./MainNavigation.module.css";
 import logo from "../UI/thu_logo.png";
 
+/**
+ * @component MainNavigation, contains THU logo, a part of Layout component
+ * See {@link Layout}
+ */
 const MainNavigation = () => {
   return (
     <header className={classes.header}>

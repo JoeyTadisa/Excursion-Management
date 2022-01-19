@@ -10,17 +10,24 @@ import "./App.css";
 import {useAuth} from './hooks/auth.hook'
 import {AuthContext} from "./context/AuthContext";
 
+
 function App() {
   const {token, login, logout, userId, ready} = useAuth()
   const isAuthenticated = !!token
   return (
+     /**
+     * @component contain MainNavigation with THU logo as a header
+     * See {@link Layout}
+     */
     <AuthContext.Provider value={{
       token, login, logout, userId, isAuthenticated
     }}>
     // layout component contain MainNavigation with THU logo as a header
+   
     <Layout>
-      {/* Switch allows to display only one route at the time */}
-      {/* with 'exact', the path will be matched exactly */}
+      {/** Switch allows to display only one route at the time
+       * with 'exact', the path will be matched exactl
+       */}
       <Switch>
         <Route path="/" exact>
           <Redirect to="/login" />
@@ -41,7 +48,9 @@ function App() {
         <Route path="/login/modify" exact>
           <ExcursionFormPopulated />
         </Route>
-        {/* match all,fallback when invalid url is entered */}
+        {/**
+         * match all,fallback when invalid url is entered
+         */}
         <Route path="*">
           <NotFound />
         </Route>

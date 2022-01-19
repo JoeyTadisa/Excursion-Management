@@ -1,3 +1,8 @@
+/**
+ *
+ * @module api
+ */
+
 export async function getAllExcursions() {
   const response = await fetch("http://localhost:9191/approvedExcursions/true");
   const data = await response.json();
@@ -61,7 +66,11 @@ export async function getAllNotApprovedExcursions() {
 
   return transformedExcursions;
 }
-
+/**
+ * sending the excursion details to backend
+ * @param {Object} excursion adding a new excursion
+ * @returns {void}
+ */
 export async function addExcursion(excursion) {
   const response = await fetch(`http://localhost:9191/addExcursion`, {
     method: "POST",
@@ -79,6 +88,10 @@ export async function addExcursion(excursion) {
   return null;
 }
 
+/**
+ * sending the excursion details to backend
+ * @param {Object} excursion updating an existing excursion
+ */
 export async function updateExcursion(excursion) {
   const response = await fetch(`http://localhost:9191/updateExcursion`, {
     method: "PUT",
