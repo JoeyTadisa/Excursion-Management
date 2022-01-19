@@ -1,6 +1,8 @@
 import React from "react";
 import "./SubmitButton.css";
-
+/**
+ * @component SubmitButton could be used with any form
+ */
 class SubmitButton extends React.Component {
   render() {
     return (

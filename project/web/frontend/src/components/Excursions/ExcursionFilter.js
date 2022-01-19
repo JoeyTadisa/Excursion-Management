@@ -2,6 +2,10 @@ import React from "react";
 
 import "./ExcursionFilter.css";
 
+/**
+ * @component ExcursionFilter the year chosen by a user to display the excursions of that year
+ * @param {string|number} props
+ */
 const ExcursionFilter = (props) => {
   const dropDownChangeHandler = (event) => {
     props.onChangeFilter(event.target.value);

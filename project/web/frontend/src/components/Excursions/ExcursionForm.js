@@ -5,10 +5,15 @@ import { Prompt } from "react-router-dom";
 import { Link } from "react-router-dom";
 import UserStore from "../stores/UserStore";
 
+/**
+ * @component ExcursionForm
+ * @param {function} props
+ */
 const ExcursionForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
-  //new enetered values will be stored in excursionData
-
+  /**
+   * new enetered values will be stored in excursionData
+   */
   const [enteredExcursionName, setEnteredExcursionName] = useState("");
   const [enteredExcursionDate, setEnteredExcursionDate] = useState("");
   const [enteredExcursionDestination, setEnteredExcursionDestination] =
@@ -50,8 +55,10 @@ const ExcursionForm = (props) => {
   const excursionFeeChangeHandler = (event) => {
     setEnteredExcursionFee(event);
   };
-
-  // the whole form is will react on submit
+  /**
+   * the whole form will react on submit
+   * @param {string|number|Object} event user entered data in the form
+   */
   const submitHandler = (event) => {
     event.preventDefault();
     var dateReviewed = new Date();
@@ -74,12 +81,14 @@ const ExcursionForm = (props) => {
           dateReviewed.getDate()
       ),
     };
-
-    // pass generated here excursionData as argument and newExcursionEntry
-    // component (parent) will receive enteredExcursionData as a parameter
+    /**
+     * pass generated here excursionData as argument and newExcursionEntry
+     * component (parent) will receive enteredExcursionData as a parameter
+     */
     props.onAddExcursion(excursionData);
-
-    //after submit form, reset the form with empty strings
+    /**
+     * after submit form, reset the form with empty strings
+     */
     setEnteredExcursionName("");
     setEnteredExcursionDate("");
     setEnteredExcursionDestination("");
@@ -90,18 +99,22 @@ const ExcursionForm = (props) => {
     setEnteredDeregistrDeadline("");
     setEnteredMeetingDetails("");
   };
-  // watch if the user start entering the data into the form
+  /**
+   * watch if the user start entering the data into the form
+   */
   const formFocusedHandler = () => {
     setIsEntering(true);
   };
-
-  // if the user finished entering the data into the form, need to prevent
-  // showing message "Are you sure you want to leave..."
+  /**
+   * if the user finished entering the data into the form, need to prevent
+   * showing message "Are you sure you want to leave..."
+   */
   const finishEnteringHandler = () => {
     setIsEntering(false);
   };
-
-  //define logout function
+  /**
+   * define logout function
+   */
   const doLogout = () => {
     UserStore.isLoggedIn = false;
     UserStore.username = "";
@@ -114,7 +127,9 @@ const ExcursionForm = (props) => {
 
   return (
     <Fragment>
-      {/* if the user tries to leave the page show a message */}
+      {/**
+       * if the user tries to leave the page show a message
+       */}
       <Prompt
         when={isEntering}
         message={(location) =>
