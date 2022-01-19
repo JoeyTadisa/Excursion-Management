@@ -1,6 +1,9 @@
 import { extendObservable } from "mobx";
 
 //store some data for currently logged user
+/**
+ * @class UserStore saves the state of login and login details fetched from the backend
+ */
 class UserStore {
   constructor() {
     //contains properties for this store

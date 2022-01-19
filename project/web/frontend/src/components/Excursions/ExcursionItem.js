@@ -5,12 +5,21 @@ import Card from "../UI/Card";
 import UserStore from "../stores/UserStore";
 import { useHistory } from "react-router-dom";
 import LoadingSpinner from "../UI/LoadingSpinner";
-
+/**
+ * @component
+ * @param {Object} props
+ */
 const ExcursionItem = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
 
+  /**
+   * redirect to the component -> ExcursionDetailedItem for admin view
+   * where admin able to view an excursion or reject/approve a pending excursion
+   * See {@link ExcursionDetailedItem}
+   * @param {Object} excursion
+   */
   function detailsForAdmin(excursion) {
     // for better user experience need to display to user if error or still loading
     if (error) {
@@ -19,6 +28,10 @@ const ExcursionItem = (props) => {
     if (isLoading) {
       excursion = <LoadingSpinner />;
     }
+    /**
+     * redirect to the component -> ExcursionDetailedItem for admin view
+     * See {@link ExcursionDetailedItem}
+     */
     let path = `/login/excursions/${props.id}`;
     history.push({
       pathname: path,
@@ -26,6 +39,12 @@ const ExcursionItem = (props) => {
     });
   }
 
+  /**
+   * redirect to the component -> ExcursionFormPopulated for organizer view
+   * where organizer able to modify an excursion
+   * See {@link ExcursionFormPopulated}
+   * @param {Object} excursion
+   */
   function detailsForOrganizer(excursion) {
     // for better user experience need to display to user if error or still loading
     if (error) {
@@ -34,6 +53,10 @@ const ExcursionItem = (props) => {
     if (isLoading) {
       excursion = <LoadingSpinner />;
     }
+    /**
+     * redirect to the component -> ExcursionFormPopulated
+     * See {@link ExcursionFormPopulated}
+     */
     let path = `/login/modify`;
     history.push({
       pathname: path,
@@ -41,6 +64,13 @@ const ExcursionItem = (props) => {
     });
   }
 
+  /**
+   * Download data from http://localhost:9191/excursion/${props.id}
+   * download data of a particular excursion
+   * @async
+   * @function fetchDetailedExcursionByID
+   * @return {Promise<string>} The data from the URL.
+   */
   async function fetchDetailedExcursionByID() {
     setIsLoading(true);
     // clear previous error
@@ -49,9 +79,10 @@ const ExcursionItem = (props) => {
       const response = await fetch(
         `http://localhost:9191/excursion/${props.id}`
       );
-
-      // need to check before parsing the response body
-      // signals if the response was successful
+      /**
+       * need to check before parsing the response body
+       * signals if the response was successful
+       */
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -60,7 +91,7 @@ const ExcursionItem = (props) => {
       if (UserStore.user_type === "a") {
         detailsForAdmin(data);
       }
-      // // if organizer will link to ExcursionFormPpulated via detailsForOrganizer function
+      // if organizer will link to ExcursionFormPpulated via detailsForOrganizer function
       if (UserStore.user_type === "o") {
         detailsForOrganizer(data);
       }
@@ -71,7 +102,9 @@ const ExcursionItem = (props) => {
     setIsLoading(false);
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   return (
     <li>

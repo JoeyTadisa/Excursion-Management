@@ -1,6 +1,9 @@
 import React from "react";
 import "./InputField.css";
 
+/**
+ * @component input field for any form
+ */
 class InputField extends React.Component {
   render() {
     return (

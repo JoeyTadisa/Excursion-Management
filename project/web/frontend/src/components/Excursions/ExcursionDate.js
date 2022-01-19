@@ -1,6 +1,10 @@
 import React from "react";
 import "./ExcursionDate.css";
-
+/**
+ * @component ExcursionDate formating the passed in date
+ * @param {Object} props date object fetched from backend and passed to format
+ * @returns {void}
+ */
 const ExcursionDate = (props) => {
   const month = props.date.toLocaleString("en-US", {
     month: "2-digit",

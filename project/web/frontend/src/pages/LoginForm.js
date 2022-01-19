@@ -3,31 +3,54 @@ import InputField from "../components/UI/InputField";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import { Link } from "react-router-dom";
+// @ts-check
 
+/**
+ * @class that shows the Login Form
+ */
 class LoginForm extends React.Component {
+  /**
+   *
+   * @param {Object} props login details
+   */
   constructor(props) {
     super(props);
-    //to avoid double requests to API, initial state is empty for username/password
+    /**
+     * to avoid double requests to API, initial state is empty for username/password
+     */
     this.state = {
+      /**
+       * @property {string} username User username
+       */
       username: "",
+      /**
+       * @property {string} username User password
+       */
       password: "",
       buttonDisabled: false,
     };
   }
-
-  //both,the password & username is no longer than 15 characters
+  /**
+   * @property {Function} setInputValue both,the password & username is no longer than 15 characters
+   * @param {Object} property
+   * @param {string} val
+   * @returns {void}
+   */
   setInputValue(property, val) {
     val = val.trim();
     if (val.length > 15 && val.length < 5) {
       return;
     }
-
-    //in property passing usermane/password, this way the method could be reused
+    /**
+     * in property passing usermane/password, this way the method could be reused
+     */
     this.setState({
       [property]: val,
     });
   }
-  //the form will be reset if username/password is not correct
+  /**
+   * @property {Function} resetForm the form will be reset if username/password is not correct
+   */
   resetForm() {
     this.setState({
       username: "",
@@ -36,8 +59,15 @@ class LoginForm extends React.Component {
     });
   }
 
-  //if both the username and the password exist and matches,
-  //the login will happen and submit button will be disabled
+  /**
+   * Download data from the specified URL.
+   *
+   * @async
+   * @function doLogin
+   * @param {string} url - "http://localhost:9191/login/" + this.state.username + "/" + this.state.password;
+   * @return {Promise<string>} The data from the URL.
+   *
+   */
   async doLogin() {
     if (!this.state.username) {
       return;
@@ -49,7 +79,6 @@ class LoginForm extends React.Component {
       //so user won't be able double click
       buttonDisabled: true,
     });
-
     try {
       let url =
         "http://localhost:9191/login/" +
@@ -66,8 +95,9 @@ class LoginForm extends React.Component {
       });
 
       let result = await res.json();
-
-      //store the capitalized user name returned from database
+      /**
+       *store the capitalized user name returned from database
+       */
       UserStore.name_first =
         result.name_first.charAt(0).toUpperCase() + result.name_first.slice(1);
       UserStore.name_last =
@@ -75,8 +105,9 @@ class LoginForm extends React.Component {
 
       UserStore.id = result.user_id;
       UserStore.user_type = result.user_type;
-
-      //result success
+      /**
+       * if successful, store user info in UserStore component
+       */
       if (result) {
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
@@ -95,7 +126,10 @@ class LoginForm extends React.Component {
       this.resetForm();
     }
   }
-
+  /**
+   * renders the LoginForm for user to input the login details
+   * @function render
+   */
   render() {
     return (
       <div className="loginForm">

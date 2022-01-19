@@ -10,10 +10,14 @@ import "./App.css";
 
 function App() {
   return (
-    // layout component contain MainNavigation with THU logo as a header
+    /**
+     * @component contain MainNavigation with THU logo as a header
+     * See {@link Layout}
+     */
     <Layout>
-      {/* Switch allows to display only one route at the time */}
-      {/* with 'exact', the path will be matched exactly */}
+      {/** Switch allows to display only one route at the time
+       * with 'exact', the path will be matched exactl
+       */}
       <Switch>
         <Route path="/" exact>
           <Redirect to="/login" />
@@ -34,7 +38,9 @@ function App() {
         <Route path="/login/modify" exact>
           <ExcursionFormPopulated />
         </Route>
-        {/* match all,fallback when invalid url is entered */}
+        {/**
+         * match all,fallback when invalid url is entered
+         */}
         <Route path="*">
           <NotFound />
         </Route>

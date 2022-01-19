@@ -5,18 +5,28 @@ import ExcursionDate from "../components/Excursions/ExcursionDate";
 import UserStore from "../components/stores/UserStore";
 import { useLocation, useHistory } from "react-router-dom";
 
+/**
+ * The detailed view of an excursion for an admin to view, accept or reject a new excursion
+ * @component
+ */
 const ExcursionDetailedItem = () => {
   const location = useLocation();
   const history = useHistory();
   const state = location.state;
-  // passing the approval status for the button
-  // that will be shown only to the admin
+  /**
+   * passing the approval status for the button
+   * that will be shown only to the admin
+   */
   const buttonOkToShow = state.approval_status;
 
   if (!state) {
     return <p>No excursion found!</p>;
   }
-
+  /**
+   * formating the reviewed date to send to backend
+   * @property {Function} approveExcursionAndCloseView
+   * @returns {void}
+   */
   const approveExcursionAndCloseView = () => {
     let dateReviewed = new Date();
     const date_reviewed = Date.parse(
@@ -37,6 +47,9 @@ const ExcursionDetailedItem = () => {
     changeToApprovedExcursion(dataForExcursionApproval);
 
     // data for excursion a aspproval sent to backend
+    /**
+     * @param {Object} dataForExcursionApproval
+     */
     async function changeToApprovedExcursion(dataForExcursionApproval) {
       const response = await fetch(
         "http://localhost:9191/api/excursion/approve",
@@ -58,7 +71,11 @@ const ExcursionDetailedItem = () => {
       onCloseView();
     }
   };
-
+  /**
+   * formating the reviewed date to send to backend
+   * @property {Function} approveExcursionAndCloseView
+   * @returns {void}
+   */
   const rejectExcursionAndCloseView = () => {
     let dateReviewed = new Date();
     const date_reviewed = Date.parse(
@@ -77,9 +94,10 @@ const ExcursionDetailedItem = () => {
     };
 
     changeToDisapprovedExcursion(dataForExcursionDisapproval);
-
-    // data for excursion a aspproval sent to backend
-    // http://localhost:9191/api/excursion/disapprove
+    /**
+     * data for excursion a aspproval sent to backend
+     * @param {Object} dataForExcursionDisapproval
+     */
     async function changeToDisapprovedExcursion(dataForExcursionDisapproval) {
       const response = await fetch(
         "http://localhost:9191/api/excursion/disapprove",
@@ -101,7 +119,11 @@ const ExcursionDetailedItem = () => {
       onCloseView();
     }
   };
-
+  /**
+   * closing the view and back to excursion lists
+   * @property {Function} onCloseView
+   * @returns {void}
+   */
   const onCloseView = () => {
     history.goBack();
   };
@@ -153,16 +175,19 @@ const ExcursionDetailedItem = () => {
             <h2>{state.meeting_details}</h2>
           </div>
           <div className="footer">
-            {/* only if admin, reject button is shown at the end of detailed view 
-              to reject & close details */}
+            {/**
+             *  only if admin, reject button is shown at the end of detailed view
+             *  to reject & close details
+             */}
             {buttonOkToShow === "p" && UserStore.user_type === "a" && (
               <button className="reject" onClick={rejectExcursionAndCloseView}>
                 Reject
               </button>
             )}
-            {/* only if admin and excursion has a pending status, approve button is shown 
-            at the end of detailed view to approve & close details 
-                */}
+            {/**
+             * only if admin and excursion has a pending status, approve button is shown
+             * at the end of detailed view to approve & close details
+             */}
             {buttonOkToShow === "p" && UserStore.user_type === "a" && (
               <button
                 className="approve"
@@ -171,8 +196,10 @@ const ExcursionDetailedItem = () => {
                 Approve
               </button>
             )}
-            {/* if it is approved excursion, close button is shown at the end 
-              of detailed view to close details for admin  */}
+            {/**
+             * if it is approved excursion, close button is shown at the end
+             * of detailed view to close details for admin
+             */}
             {buttonOkToShow === "a" && (
               <button className="close" onClick={onCloseView}>
                 Close

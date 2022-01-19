@@ -1,7 +1,11 @@
 import React from "react";
 import ExcursionItem from "./ExcursionItem";
 import "./ExcursionsList.css";
-
+/**
+ * displays the list of excursions with only the title and date of excursion
+ * @component ExcursionsList
+ * @param {Array<Object>} props excursions data
+ */
 const ExcursionsList = (props) => {
   // if no excursions in the filtered year, a msg displayed
   if (props.items.length === 0) {

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/ExcursionDetailedItem.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/ExcursionDetailedItem.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./ExcursionDetailedItem.css";
+import Card from "../components/UI/Card";
+import ExcursionDate from "../components/Excursions/ExcursionDate";
+import UserStore from "../components/stores/UserStore";
+import { useLocation, useHistory } from "react-router-dom";
+
+/**
+ * The detailed view of an excursion for an admin to view, accept or reject a new excursion
+ * @component
+ */
+const ExcursionDetailedItem = () => {
+  const location = useLocation();
+  const history = useHistory();
+  const state = location.state;
+  /**
+   * passing the approval status for the button
+   * that will be shown only to the admin
+   */
+  const buttonOkToShow = state.approval_status;
+
+  if (!state) {
+    return &lt;p>No excursion found!&lt;/p>;
+  }
+  /**
+   * formating the reviewed date to send to backend
+   * @property {Function} approveExcursionAndCloseView
+   * @returns {void}
+   */
+  const approveExcursionAndCloseView = () => {
+    let dateReviewed = new Date();
+    const date_reviewed = Date.parse(
+      dateReviewed.getFullYear() +
+        "-" +
+        (dateReviewed.getMonth() + 1) +
+        "-" +
+        dateReviewed.getDate()
+    );
+
+    const dataForExcursionApproval = {
+      id: state.id,
+      approval_status: "a",
+      date_reviewed: date_reviewed,
+      reviewed_by: UserStore.user_no,
+    };
+
+    changeToApprovedExcursion(dataForExcursionApproval);
+
+    // data for excursion a aspproval sent to backend
+    /**
+     * @param {Object} dataForExcursionApproval
+     */
+    async function changeToApprovedExcursion(dataForExcursionApproval) {
+      const response = await fetch(
+        "http://localhost:9191/api/excursion/approve",
+        {
+          method: "PUT",
+          body: JSON.stringify(dataForExcursionApproval),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Could not approve the excursion.");
+      }
+      if (response.ok) {
+        alert("✨ The excursion was approved ✨");
+      }
+      //const data = await response.json();
+      onCloseView();
+    }
+  };
+  /**
+   * formating the reviewed date to send to backend
+   * @property {Function} approveExcursionAndCloseView
+   * @returns {void}
+   */
+  const rejectExcursionAndCloseView = () => {
+    let dateReviewed = new Date();
+    const date_reviewed = Date.parse(
+      dateReviewed.getFullYear() +
+        "-" +
+        (dateReviewed.getMonth() + 1) +
+        "-" +
+        dateReviewed.getDate()
+    );
+
+    const dataForExcursionDisapproval = {
+      id: state.id,
+      approval_status: "d",
+      date_reviewed: date_reviewed,
+      reviewed_by: UserStore.user_no,
+    };
+
+    changeToDisapprovedExcursion(dataForExcursionDisapproval);
+    /**
+     * data for excursion a aspproval sent to backend
+     * @param {Object} dataForExcursionDisapproval
+     */
+    async function changeToDisapprovedExcursion(dataForExcursionDisapproval) {
+      const response = await fetch(
+        "http://localhost:9191/api/excursion/disapprove",
+        {
+          method: "PUT",
+          body: JSON.stringify(dataForExcursionDisapproval),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Could not disapprove the excursion.");
+      }
+      if (response.ok) {
+        alert("✨ The excursion was disapproved ✨");
+      }
+      //const data = await response.json();
+      onCloseView();
+    }
+  };
+  /**
+   * closing the view and back to excursion lists
+   * @property {Function} onCloseView
+   * @returns {void}
+   */
+  const onCloseView = () => {
+    history.goBack();
+  };
+
+  return (
+    &lt;li>
+      &lt;div className="excursion-detailed-item-frame">
+        &lt;Card className="excursion-detailed-item">
+          &lt;h4>Excursion date&lt;/h4>
+          &lt;ExcursionDate date={new Date(state.date_of_excursion)} />
+          &lt;div className="excursion-detailed-item__title">
+            &lt;h4>Destination&lt;/h4>
+            &lt;h2>{state.title}&lt;/h2>
+          &lt;/div>
+          &lt;div className="excursion-detailed-item__description">
+            &lt;h4>Description&lt;/h4>
+            &lt;h2>{state.description}&lt;/h2>
+          &lt;/div>
+          &lt;div className="max-num-participants-and-fee">
+            &lt;div className="max-num-participants">
+              &lt;h4>Maximum number &lt;/h4>
+              &lt;h4>of participants &lt;/h4>
+              &lt;h2>{state.max_participants}&lt;/h2>
+            &lt;/div>
+            &lt;div className="excursion-fee">
+              &lt;h4>Excursion &lt;/h4>
+              &lt;h4>fee &lt;/h4>
+              &lt;h2>{state.excursion_fee}&lt;/h2>
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="reg-and-dereg-dealines">
+            &lt;div className="reg-deadline">
+              &lt;h4>Registration&lt;/h4>
+              &lt;h4>deadline&lt;/h4>
+              &lt;ExcursionDate date={new Date(state.reg_deadline)} />
+            &lt;/div>
+            &lt;div className="dereg-deadline">
+              &lt;div className="dereg-deadline-title-only">
+                &lt;h4>Deregistration&lt;/h4>
+                &lt;h4>deadline&lt;/h4>
+              &lt;/div>
+              &lt;div className="dereg-deadline-calender-only">
+                &lt;ExcursionDate date={new Date(state.dereg_deadline)} />
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+          &lt;div>
+            &lt;h4>Meeting point details&lt;/h4>
+            &lt;h2>{state.meeting_details}&lt;/h2>
+          &lt;/div>
+          &lt;div className="footer">
+            {/**
+             *  only if admin, reject button is shown at the end of detailed view
+             *  to reject &amp; close details
+             */}
+            {buttonOkToShow === "p" &amp;&amp; UserStore.user_type === "a" &amp;&amp; (
+              &lt;button className="reject" onClick={rejectExcursionAndCloseView}>
+                Reject
+              &lt;/button>
+            )}
+            {/**
+             * only if admin and excursion has a pending status, approve button is shown
+             * at the end of detailed view to approve &amp; close details
+             */}
+            {buttonOkToShow === "p" &amp;&amp; UserStore.user_type === "a" &amp;&amp; (
+              &lt;button
+                className="approve"
+                onClick={approveExcursionAndCloseView}
+              >
+                Approve
+              &lt;/button>
+            )}
+            {/**
+             * if it is approved excursion, close button is shown at the end
+             * of detailed view to close details for admin
+             */}
+            {buttonOkToShow === "a" &amp;&amp; (
+              &lt;button className="close" onClick={onCloseView}>
+                Close
+              &lt;/button>
+            )}
+          &lt;/div>
+        &lt;/Card>
+      &lt;/div>
+    &lt;/li>
+  );
+};
+
+export default ExcursionDetailedItem;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">JS Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-api.html">api</a></li></ul><h3>Classes</h3><ul><li><a href="InputField.html">InputField</a></li><li><a href="Login.html">Login</a></li><li><a href="LoginForm.html">LoginForm</a></li><li><a href="SubmitButton.html">SubmitButton</a></li><li><a href="UserStore.html">UserStore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Card">Card</a></li><li><a href="global.html#doLogin">doLogin</a></li><li><a href="global.html#doLogouttheUserStoreisreset">doLogout the UserStore is reset</a></li><li><a href="global.html#ExcursionDate">ExcursionDate</a></li><li><a href="global.html#ExcursionDetailedItem">ExcursionDetailedItem</a></li><li><a href="global.html#ExcursionFilter">ExcursionFilter</a></li><li><a href="global.html#ExcursionForm">ExcursionForm</a></li><li><a href="global.html#ExcursionFormPopulated">ExcursionFormPopulated</a></li><li><a href="global.html#ExcursionItem">ExcursionItem</a></li><li><a href="global.html#ExcursionList">ExcursionList</a></li><li><a href="global.html#ExcursionsList">ExcursionsList</a></li><li><a href="global.html#fetchDetailedExcursionByID">fetchDetailedExcursionByID</a></li><li><a href="global.html#fetchExcursions">fetchExcursions</a></li><li><a href="global.html#fetchNotApprovedExcursions">fetchNotApprovedExcursions</a></li><li><a href="global.html#httpReducer">httpReducer</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#LoadingSpinner">LoadingSpinner</a></li><li><a href="global.html#LoggedInView">LoggedInView</a></li><li><a href="global.html#MainNavigation">MainNavigation</a></li><li><a href="global.html#NewExcursion">NewExcursion</a></li><li><a href="global.html#NoExcursionsFound">NoExcursionsFound</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#requestData">requestData</a></li><li><a href="global.html#useHttp">useHttp</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Jan 19 2022 12:00:30 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

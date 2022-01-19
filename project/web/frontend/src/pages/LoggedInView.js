@@ -5,27 +5,10 @@ import ExcursionList from "../components/Excursions/ExcursionList";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 
-/* async doLogout() {
-    try {
-      let res = await fetch("/logout", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      });
-      let result = await res.json();
-      if (result && result.success) {
-        UserStore.isLoggedIn = false;
-        UserStore.username = "";
-        
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }*/
-
-//fetching excursions from database
+/**
+ * fetching excursions from database
+ * @component
+ */
 const LoggedInView = () => {
   const [excursions, setExcursions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +18,12 @@ const LoggedInView = () => {
   const [error1, setError1] = useState(null);
 
   // once loggedin the excursion list is displayed
+  /**
+   * Download data from http://localhost:9191/api/excursion/approvalstatus/a
+   * @async
+   * @function fetchExcursions
+   * @param {string} response - The result of fetch is stored in response
+   */
 
   const fetchExcursions = useCallback(async () => {
     setIsLoading(true);
@@ -44,13 +33,21 @@ const LoggedInView = () => {
       const response = await fetch(
         "http://localhost:9191/api/excursion/approvalstatus/a"
       );
-
-      // need to check before parsing the response body
-      // signals if the response was successful
+      /**
+       * need to check before parsing the response body
+       * signals if the response was successful
+       */
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
       const data = await response.json();
+
+      /**
+       * the fetched data is transformed in appropriate format and stored in array of objects
+       * @type {Array<excursions>}
+       * @returns {{id: number, title: string, date_of_excursion: Object, excursion_fee: number, description: string,
+       *  max_participants: number, destination: string, reg_deadline: Object, dereg_deadline: Object, meeting_details: string}} excursions
+       */
 
       const transformedExcursions = data.map((excursionData) => {
         return {
@@ -66,11 +63,17 @@ const LoggedInView = () => {
           meeting_details: excursionData.meeting_details,
         };
       });
+      /**
+       *@param {Array.<excursions>} transformedExcursions
+       *@returns {void}
+       */
       setExcursions(transformedExcursions);
     } catch (error) {
       setError(error.message);
     }
-    // done loading, no matter if we got successful or an error response
+    /**
+     * done loading, no matter if we got successful or an error response
+     */
     setIsLoading(false);
   }, []);
 
@@ -88,23 +91,38 @@ const LoggedInView = () => {
     };
   }, [fetchExcursions]);
 
-  // fetch all not approved excursions from backend and display
+  /**
+   * Download data from http://localhost:9191/api/excursion/approvalstatus/p
+   * fetch all not approved excursions from backend and display
+   * @async
+   * @function fetchNotApprovedExcursions
+   * @param {string} response - The result of fetch is stored in response
+   */
+
   const fetchNotApprovedExcursions = useCallback(async () => {
     setIsLoading1(true);
-    // clear previous error
+    /**
+     * clear previous error
+     */
     setError1(null);
     try {
       const response = await fetch(
         "http://localhost:9191/api/excursion/approvalstatus/p"
       );
-
-      // need to check before parsing the response body
-      // signals if the response was successful
+      /**
+       * need to check before parsing the response body
+       * signals if the response was successful
+       */
       if (!response.ok) {
         throw new Error("*** Something went wrong! ***");
       }
       const data = await response.json();
-
+      /**
+       * the fetched data is transformed in appropriate format and stored in array of objects
+       * @type {Array.<excursions>}
+       * @returns {{id: number, title: string, date_of_excursion: Object, excursion_fee: number, description: string,
+       *  max_participants: number, destination: string, reg_deadline: Object, dereg_deadline: Object, meeting_details: string}} excursions
+       */
       const transformedNewExcursions = data.map((newExcursionData) => {
         return {
           id: newExcursionData.id,
@@ -123,7 +141,9 @@ const LoggedInView = () => {
     } catch (error) {
       setError1(error.message);
     }
-    // done loading, no matter if we got successful or an error response
+    /**
+     * done loading, no matter if we got successful or an error response
+     */
     setIsLoading1(false);
   }, []);
 
@@ -141,7 +161,9 @@ const LoggedInView = () => {
     };
   }, [fetchNotApprovedExcursions]);
 
-  //define logout function
+  /**
+   * @function doLogout the UserStore is reset
+   */
   const doLogout = () => {
     UserStore.isLoggedIn = false;
     UserStore.username = "";
@@ -151,9 +173,10 @@ const LoggedInView = () => {
     UserStore.user_id = "";
     UserStore.user_no = "";
   };
-
-  // for better user experience need to display to user
-  // if the content is loading/error occured
+  /**
+   * for better user experience need to display to user
+   * if the content is loading/error occured
+   */
   let content = <p>Found no excursions.</p>;
   if (excursions.length > 0) {
     content = <ExcursionList items={excursions} />;
@@ -175,17 +198,22 @@ const LoggedInView = () => {
   if (isLoading1) {
     content1 = <LoadingSpinner />;
   }
-
-  //user is loggedin, the excursion list & logout button is visible, greet the user by the name
+  /**
+   * user is loggedin, the excursion list & logout button is visible, greet the user by the name
+   */
   return (
     <div className="loggedInView">
       <div className="app">
-        {/* welcome the user with the name of the user*/}
+        {/**
+         * welcome the user with the name of the user
+         */}
         <h2>
           Welcome {UserStore.name_first} {UserStore.name_last}!
         </h2>
         <br />
-        {/* only if the user is organizer the button 'New Excursion Form' is displayed */}
+        {/**
+         * only if the user is organizer the button 'New Excursion Form' is displayed
+         */}
         {UserStore.user_type === "o" && (
           <Link to={`/new-excursion`} className="excursion-item-link">
             <button className="btn btn-primary" type="button">
