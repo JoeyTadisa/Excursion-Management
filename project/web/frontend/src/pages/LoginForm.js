@@ -3,7 +3,8 @@ import InputField from "../components/UI/InputField";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import { Link } from "react-router-dom";
-// @ts-check
+import {AuthContext} from '../context/AuthContext'
+import configData from "../config.json";
 
 /**
  * @class that shows the Login Form
@@ -81,17 +82,18 @@ class LoginForm extends React.Component {
     });
     try {
       let url =
-        "http://localhost:9191/login/" +
-        this.state.username +
-        "/" +
-        this.state.password;
+      configData.SERVER_URL+"auth/signin"
 
       let res = await fetch(url, {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          "username" : this.state.username,
+          "password" : this.state.password
+        })
       });
 
       let result = await res.json();
@@ -109,11 +111,12 @@ class LoginForm extends React.Component {
        * if successful, store user info in UserStore component
        */
       if (result) {
+        this.context.login(result.accessToken, result.id);  
         UserStore.loading = false;
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
-        UserStore.user_type = result.user_type;
-        UserStore.user_id = result.user_id;
+        UserStore.user_type = result.roles[0];
+        UserStore.user_id = result.id;
         UserStore.user_no = result.user_no;
         <Link to={`/login/excursions`} className="excursion-item-link" />;
       } else if (result === false) {
@@ -158,5 +161,5 @@ class LoginForm extends React.Component {
     );
   }
 }
-
+LoginForm.contextType = AuthContext;
 export default LoginForm;

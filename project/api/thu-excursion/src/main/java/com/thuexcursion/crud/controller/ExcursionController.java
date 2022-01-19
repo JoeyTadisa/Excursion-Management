@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.Excursion;
@@ -51,6 +52,7 @@ public class ExcursionController {
 	/** 
 	 * @return List<Excursion>
 	 */
+	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")
 	@GetMapping("/excursions")
 	public List<Excursion> findAllExcursions() {
 		return service.getExcursions();
@@ -166,7 +168,7 @@ public class ExcursionController {
 	 * approval_status: pending, approved, disapproved
 	 */
 
-
+	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")
 	@GetMapping("/api/excursion/approvalstatus/{status}")
 	public List<Excursion> getExcursionByApprovalStatus(@PathVariable String status) {
 		return service.getExcursionByApprovalStatus(status);

@@ -175,20 +175,17 @@ const ExcursionDetailedItem = () => {
             <h2>{state.meeting_details}</h2>
           </div>
           <div className="footer">
-            {/**
-             *  only if admin, reject button is shown at the end of detailed view
-             *  to reject & close details
-             */}
-            {buttonOkToShow === "p" && UserStore.user_type === "a" && (
+            {/* only if admin, reject button is shown at the end of detailed view 
+              to reject & close details */}
+            {buttonOkToShow === "p" && UserStore.user_type === "ROLE_a" && (
               <button className="reject" onClick={rejectExcursionAndCloseView}>
                 Reject
               </button>
             )}
-            {/**
-             * only if admin and excursion has a pending status, approve button is shown
-             * at the end of detailed view to approve & close details
-             */}
-            {buttonOkToShow === "p" && UserStore.user_type === "a" && (
+            {/* only if admin and excursion has a pending status, approve button is shown 
+            at the end of detailed view to approve & close details 
+                */}
+            {buttonOkToShow === "p" && UserStore.user_type === "ROLE_a" && (
               <button
                 className="approve"
                 onClick={approveExcursionAndCloseView}

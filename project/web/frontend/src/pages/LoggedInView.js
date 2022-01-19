@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useContext, useState, useEffect, useCallback } from "react";
 import SubmitButton from "../components/UI/SubmitButton";
 import UserStore from "../components/stores/UserStore";
 import ExcursionList from "../components/Excursions/ExcursionList";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
+import {AuthContext} from "../context/AuthContext";
+import configData from "../config.json";
 
 /**
  * fetching excursions from database
@@ -16,6 +18,7 @@ const LoggedInView = () => {
   const [isLoading1, setIsLoading1] = useState(false);
   const [error, setError] = useState(null);
   const [error1, setError1] = useState(null);
+  const authContext = useContext(AuthContext);
 
   // once loggedin the excursion list is displayed
   /**
@@ -31,7 +34,13 @@ const LoggedInView = () => {
     setError(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/api/excursion/approvalstatus/a"
+        configData.SERVER_URL+"excursion/approvalstatus/a",{
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authContext.token}`
+          }
+        }
       );
       /**
        * need to check before parsing the response body
@@ -107,7 +116,13 @@ const LoggedInView = () => {
     setError1(null);
     try {
       const response = await fetch(
-        "http://localhost:9191/api/excursion/approvalstatus/p"
+        configData.SERVER_URL+"excursion/approvalstatus/p",{
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authContext.token}`
+          }
+        }
       );
       /**
        * need to check before parsing the response body
@@ -172,6 +187,8 @@ const LoggedInView = () => {
     UserStore.user_type = "";
     UserStore.user_id = "";
     UserStore.user_no = "";
+    authContext.logout();
+
   };
   /**
    * for better user experience need to display to user
@@ -208,13 +225,11 @@ const LoggedInView = () => {
          * welcome the user with the name of the user
          */}
         <h2>
-          Welcome {UserStore.name_first} {UserStore.name_last}!
+          Welcome {UserStore.name_first} {UserStore.name_last} !
         </h2>
         <br />
-        {/**
-         * only if the user is organizer the button 'New Excursion Form' is displayed
-         */}
-        {UserStore.user_type === "o" && (
+        {/* only if the user is organizer the button 'New Excursion Form' is displayed */}
+        {UserStore.user_type === "ROLE_o" && (
           <Link to={`/new-excursion`} className="excursion-item-link">
             <button className="btn btn-primary" type="button">
               New Excursion Form
