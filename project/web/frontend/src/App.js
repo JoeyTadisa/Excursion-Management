@@ -22,7 +22,7 @@ function App() {
     <AuthContext.Provider value={{
       token, login, logout, userId, isAuthenticated
     }}>
-    // layout component contain MainNavigation with THU logo as a header
+
    
     <Layout>
       {/** Switch allows to display only one route at the time

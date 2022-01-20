@@ -149,6 +149,7 @@ const ExcursionFormPopulated = () => {
       alert("😅 The excursion was not updated");
       history.push("/login/excursions");
     }
+    return () => {};
   }, [status, history, error]);
 
   const closeView = () => {
