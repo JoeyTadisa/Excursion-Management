@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
+ * This class handles signup/login requests
  * This controller provides APIs for register and login actions.
  * /api/auth/signin:
  * 1. authenticates username and password
