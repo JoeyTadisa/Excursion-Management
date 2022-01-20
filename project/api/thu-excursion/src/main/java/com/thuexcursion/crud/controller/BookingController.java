@@ -7,9 +7,11 @@ import org.springframework.data.domain.ExampleMatcher.NoOpPropertyValueTransform
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.thuexcursion.crud.model.Booking;
+import com.thuexcursion.crud.model.MaxParticipantsVerification;
 import com.thuexcursion.crud.model.StudentBookingExcursion;
 import com.thuexcursion.crud.service.BookingService;
 import com.thuexcursion.crud.service.StudentBookingExcursionService;
+import com.thuexcursion.crud.service.MaxParticipantsVerificationService;
 
 
 /**
@@ -29,6 +31,9 @@ public class BookingController {
 
 	@Autowired
 	private StudentBookingExcursionService student_booking_excursion_service;
+
+	@Autowired
+	private MaxParticipantsVerificationService max_participants_verification_service;
 
 	
 	
@@ -70,7 +75,7 @@ public class BookingController {
 	 * @return List<StudentBookingExcursion> returns list of excursions booked by a student
 	 */
 	
-	@GetMapping("bookingsbystudent/{matriculation_number}")
+	@GetMapping("/bookingsbystudent/{matriculation_number}")
 	public List<StudentBookingExcursion> getBookingByUserId(@PathVariable int matriculation_number) {
 		return student_booking_excursion_service.getBookingsyPerStudent(matriculation_number);
 	}
@@ -99,6 +104,17 @@ public class BookingController {
 		return service.deregisterBooking(id, status);
 	}
 
+	/**
+	 * This function fetches maximum of participants allowed, actual number of bookings and available places left per excursion
+	 * @param excursion_id
+	 * @return number of bookings, max_participants, available places left
+	 * 
+	 */
+
+	@GetMapping("/api/checkavailableplaces/{excursion_id}")
+	public MaxParticipantsVerification getAvailablePlacesInformation(@PathVariable int excursion_id) {
+		return max_participants_verification_service.getAvailablePlaces(excursion_id);
+	}
 	
 
 }

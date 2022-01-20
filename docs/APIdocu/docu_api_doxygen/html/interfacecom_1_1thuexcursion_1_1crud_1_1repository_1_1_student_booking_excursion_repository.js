@@ -1,0 +1,4 @@
+var interfacecom_1_1thuexcursion_1_1crud_1_1repository_1_1_student_booking_excursion_repository =
+[
+    [ "getBookingsPerStudent", "interfacecom_1_1thuexcursion_1_1crud_1_1repository_1_1_student_booking_excursion_repository.html#a111761a611ba9af80706731957440abc", null ]
+];
