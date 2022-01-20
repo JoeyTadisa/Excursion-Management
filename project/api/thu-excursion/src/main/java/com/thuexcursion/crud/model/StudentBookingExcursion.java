@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 
 /**
 * StudentBookingExcursion interface is an entity/model which maps to student_booking_excursion view in mysql database. 
+* This is a class of student_booking_excursion query which combines student, booking and excursion  tables
 * This interface only contains the getters as view also is only used for fetching the data
 * Please see the {@link com.baeldung.javadoc.Person} class for true identity
 * @author Charissa Abegail Morales

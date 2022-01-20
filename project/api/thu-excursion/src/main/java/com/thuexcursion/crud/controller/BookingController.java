@@ -17,7 +17,7 @@ import com.thuexcursion.crud.service.StudentBookingExcursionService;
 * 
 * Please see the {@link com.baeldung.javadoc.Person} class for true identity
 * @author Charissa Abegail Morales
-* 
+* For more information about ExcursionController, check swagger documentatio for endpoints
 */
 
 @CrossOrigin
@@ -78,7 +78,7 @@ public class BookingController {
 
 	
 	/** 
-	 * 
+	 * This method fetch booking by id
 	 * @param id id 
 	 * @return Booking
 	 */

@@ -13,7 +13,7 @@ import com.thuexcursion.crud.service.UserService;
 * 
 * Please see the {@link com.baeldung.javadoc.Person} class for true identity
 * @author Joey Mafukidze
-* 
+* For more information about EmailController, check swagger documentatio for endpoints
 */
 
 @CrossOrigin
@@ -26,8 +26,10 @@ public class UserController {
 	
 	
 	/** 
-	 * @param user
-	 * @return User
+	 * This method is used for adding a single user record. 
+	 * The access for this function is designed for the administrator (Excursion portal). (NOT YET UI INTEGRATED)
+	 * @param user a user object
+	 * @return User a newly added user
 	 */
 	@PostMapping("/addUser")
 	public User addUser(@RequestBody User user) {
@@ -36,8 +38,9 @@ public class UserController {
 
 	
 	/** 
-	 * @param users
-	 * @return List<User>
+	 * This method is used for adding list of users. (NOT YET UI INTEGRATED)
+	 * @param user a user object
+	 * @return List<User> a newly added List of Users
 	 */
 	@PostMapping("/addUsers")
 	public List<User> addUsers(@RequestBody List<User> users) {	
@@ -46,7 +49,8 @@ public class UserController {
 
 	
 	/** 
-	 * @return List<User>
+	 * This method fetches all users from user table
+	 * @return List<User> returns list of users
 	 */
 	@GetMapping("/users")
 	public List<User> findAllUsers() {
@@ -55,8 +59,9 @@ public class UserController {
 
 	
 	/** 
-	 * @param id
-	 * @return User
+	 * This method fetches a specific user via user id
+	 * @param id an specific id of user that we want to fetch
+	 * @return List<User> returns a user
 	 */
 	@GetMapping("user/{id}")
 	public User getUserById(@PathVariable int id) {
@@ -65,6 +70,7 @@ public class UserController {
 
     
 	/** 
+	 * This method
 	 * @param user_type
 	 * @return List<User>
 	 */

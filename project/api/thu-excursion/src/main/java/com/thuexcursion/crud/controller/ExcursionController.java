@@ -16,7 +16,7 @@ import com.thuexcursion.crud.service.ExcursionService;
 * 
 * Please see the {@link com.baeldung.javadoc.Person} class for true identity
 * @author Charissa Abegail Morales
-* 
+* For more information about EmailController, check swagger documentatio for endpoints
 */
 
 
@@ -30,8 +30,9 @@ public class ExcursionController {
 	
 	
 	/** 
+	 * This method is used to add a single excursion record
 	 * @param excursion
-	 * @return Excursion
+	 * @return Excursion a newly added Excursion object
 	 */
 	@PostMapping("/addExcursion")
 	public Excursion addExcursion(@RequestBody Excursion excursion) {
@@ -40,8 +41,9 @@ public class ExcursionController {
 
 	
 	/** 
+	 * This method is used to add list of excursions (NOT YET UI-INTEGRATED)
 	 * @param excursions
-	 * @return List<Excursion>
+	 * @return List<Excursion> returns newly added list of excursions
 	 */
 	@PostMapping("/addExcursions")
 	public List<Excursion> addExcursions(@RequestBody List<Excursion> excursions) {
@@ -50,7 +52,9 @@ public class ExcursionController {
 
 	
 	/** 
-	 * @return List<Excursion>
+	 * This method fetches all excursion records in excursion table.
+	 * This method can only be accessed by admin, organizer and student as specified in @PreAuthorize annotation
+	 * @return List<Excursion> returns newly added list of excursions
 	 */
 	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")
 	@GetMapping("/excursions")
@@ -60,18 +64,20 @@ public class ExcursionController {
 	
 	
 	/** 
+	 * 
 	 * @param is_approved
 	 * @return List<Excursion>
 	 */
-	@GetMapping("/approvedExcursions/{is_approved}")
+	/*@GetMapping("/approvedExcursions/{is_approved}")
 	public List<Excursion> getApprovedExcursions(@PathVariable boolean is_approved) {
 		return service.getApprovedExcursions(is_approved);
-	}
+	}*/
 
 	
 	/** 
-	 * @param id
-	 * @return Excursion
+	 * This method fetches a specific excursion based on excursion id
+	 * @param id id of an excursion
+	 * @return Excursion returns an excursion object
 	 */
 	@GetMapping("/excursion/{id}")
 	public Excursion getExcursionById(@PathVariable int id) {
@@ -87,6 +93,11 @@ public class ExcursionController {
 		return service.getExcursionByUsername(username);
 	}*/
 
+	/** 
+	 * 	This method is used to update excursion record
+	 *  @param excursion excursion json object passed in @RequestBody
+	 *  @return Excursion returns a newly updated excursion object
+	 */
 	@PutMapping("/updateExcursion")
 	public Excursion updateExcursion(@RequestBody Excursion excursion) {
 		return service.updateExcursion(excursion);
@@ -94,30 +105,33 @@ public class ExcursionController {
 
 	
 	/** 
+	 * 
 	 * @param id
 	 * @return ResponseEntity<Excursion>
 	 */
-	@PutMapping("/approveExcursion/{id}")
+	/*@PutMapping("/approveExcursion/{id}")
 	public ResponseEntity<Excursion> approveExcursion(@PathVariable(value = "id")int id){
 		Excursion excursion = getExcursionById(id);
 		excursion.setIs_approved(true);
 		final Excursion updatedExcursion = updateExcursion(excursion);
 		return ResponseEntity.ok(updatedExcursion);
-	}
+	} */
 	
 	
 	/** 
-	 * @param excursion
-	 * @return Excursion
+	 * This method approves an excursion request. It sets approval_status to 'a'
+	 * @param excursion an excursion object 
+	 * @return Excursion 
 	 */
-	@PutMapping("/approveExcursion")
+	/*@PutMapping("/approveExcursion")
 	public Excursion approveExcursion(@RequestBody Excursion excursion) {
 		return service.approveExcursion(excursion);
-	}
+	}*/
 
 	
 	/** 
-	 * @param id
+	 * This method is used to delete an excursion (NOT YET UI INTEGRATED)
+	 * @param id id of an excursion to be deleted
 	 * @return String
 	 */
 	@DeleteMapping("/deleteExcursion/{id}")
@@ -126,14 +140,19 @@ public class ExcursionController {
 	}
 
 
-	@PutMapping("/disapproveExcursion/{id}")
+	/*@PutMapping("/disapproveExcursion/{id}")
 	public ResponseEntity<Excursion> disapproveExcursion(@PathVariable(value = "id")int id){
 		Excursion excursion = getExcursionById(id);
 		excursion.setIs_approved(false);
 		final Excursion updatedExcursion = updateExcursion(excursion);
 		return ResponseEntity.ok(updatedExcursion);
-	}
+	} */
 
+	/** 
+	 * This method is used to delete an excursion (NOT YET UI INTEGRATED)
+	 * @param id id of an excursion to be deleted
+	 * @return String
+	 */
 	@PutMapping("/disapproveExcursion")
 	public Excursion disapproveExcursion(@RequestBody Excursion excursion) {
 		return service.disapproveExcursion(excursion);
@@ -142,21 +161,34 @@ public class ExcursionController {
 
 	
 
-	/**
-	 * For the new approach in approval_status
-	 * initial status of excursion once created is "pending"
-	 * this method set approval status to approved
-	 */
 
+
+	/** 
+	 * This method approves an excursion request. It sets approval_status to 'a'
+	 * @param excursion an excursion object 
+	 * @return Excursion 
+	 */
 	@PutMapping("/api/excursion/approve")
 	public Excursion excursionSetToApproved(@RequestBody Excursion excursion) {
 		return service.excursionSetToApproved(excursion);
 	}
 
+	/** 
+	 * This method disapprove an excursion request. It sets approval_status to 'd'
+	 * @param excursion an excursion object 
+	 * @return Excursion 
+	 */
 	@PutMapping("/api/excursion/disapprove")
 	public Excursion excursionSetToDisapproved(@RequestBody Excursion excursion) {
 		return service.excursionSetToDisapproved(excursion);
 	}
+
+	/** 
+	 * By default, newly created excursion record is set to 'p' (pending).
+	 * This method set approved or disapproved excursion request to 'p' 
+	 * @param excursion an excursion object 
+	 * @return Excursion returns newly updated excursion with approval_status 'p'
+	 */
 
 	@PutMapping("/api/excursion/settopending")
 	public Excursion excursionSetToPending(@RequestBody Excursion excursion) {
@@ -166,6 +198,8 @@ public class ExcursionController {
 	/**
 	 * This endpoint is for fetching excursions based on approval_status
 	 * approval_status: pending, approved, disapproved
+	 * @param status approval_status (p, a, d)
+	 * @return List<Excursion> list of excursions with approval_status specified on parameter status
 	 */
 
 	@PreAuthorize("hasRole('ROLE_a') or hasRole('ROLE_o') or hasRole('ROLE_s')")

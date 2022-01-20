@@ -26,7 +26,7 @@ public class EmailController {
     }
 
     /**
-     * 
+     * This method is used to send a notification to a single email
      * @param mail an object which contains: sender, receiver and message
      * @return returns http status and a message if successfully sent
      */
@@ -37,7 +37,7 @@ public class EmailController {
     }
 
      /**
-     * 
+     * This method is used to send a notifications to list of emails
      * @param mail an object which contains: sender, receiver and message which sends to mailing list in user table
      * @return returns http status and a message if successfully sent
      */
