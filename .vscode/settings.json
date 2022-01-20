@@ -1,3 +1,6 @@
 {
-  "java.project.sourcePaths": ["project/web"]
+  "java.project.sourcePaths": [
+    "project/web"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
