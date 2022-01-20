@@ -24,6 +24,12 @@ public class JwtUtils {
     @Value("${jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    /**
+     * 
+     * This method generates JwtToken for authentication
+     * @param authentication
+     * @return String returns string with subject, date issued, expiration and digital signature built using jwt.build()
+     */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -36,10 +42,22 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * 
+     * This method generates JwtToken for authentication
+     * @param authentication
+     * @return
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * 
+     * This method validates JwtToken
+     * @param authentication
+     * @return boolean returns an error message
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
