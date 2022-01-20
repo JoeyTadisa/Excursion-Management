@@ -20,7 +20,7 @@ import com.thuexcursion.crud.model.MaxParticipantsVerification;
 */
 public interface MaxParticipantsVerificationRepository extends JpaRepository<Booking,Integer>{
 
-	@Query(nativeQuery = true, value = "SELECT id_excursion,bookings,max_participants,places_available,is_booking_allowed FROM max_participants_verification WHERE id_excursion = :id_excursion")
+	@Query(nativeQuery = true, value = "SELECT id_excursion,bookings,max_participants,places_available,is_booking_allowed FROM verify_max_participants WHERE id_excursion = :id_excursion")
 	MaxParticipantsVerification getAvailablePlaces(int id_excursion);
  
 

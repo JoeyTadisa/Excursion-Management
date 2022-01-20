@@ -15,6 +15,8 @@ import javax.mail.MessagingException;
 /**
  * This is a controller class for notification by mail functionality. This class, in the future, might also include all
  * forms of notification aside from email
+ * 
+ *  For more information about EmailController, check swagger documentatio for endpoints
  */
 @RestController
 @RequestMapping("/api/v1/mail/")
