@@ -7,3 +7,4 @@ THU Project CTS5 Group 5
 ## For The Documentation: 
 Please head over to
 - API Documentation : docs/APIdocu/docu_endpoints_swagger/index.html
+- Web: project/web/frontend/docs/index.html
